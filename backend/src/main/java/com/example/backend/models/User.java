@@ -1,6 +1,6 @@
 package com.example.backend.models;
 
-import com.example.backend.controllers.UserController;
+
 import com.example.backend.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -74,4 +74,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isActive;
     }
+
+
 }

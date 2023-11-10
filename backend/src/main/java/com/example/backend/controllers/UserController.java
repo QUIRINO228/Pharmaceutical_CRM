@@ -1,19 +1,28 @@
 package com.example.backend.controllers;
 
+import com.example.backend.dto.LoginDTO;
 import com.example.backend.models.User;
 import com.example.backend.sevices.UserService;
 import lombok.AllArgsConstructor;
 
 
-import org.springframework.ui.Model;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+import java.util.logging.Logger;
 
 
+
+@Slf4j
 @RestController
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 public class UserController {
     private final UserService userService;
+
 
     @GetMapping("/")
     public String index() {
@@ -26,23 +35,22 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(Model model) {
-        return "redirect:/main";
-    }
-
-
-    @GetMapping("/registration")
-    public String registration() {
-        return "registration";
+    public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO) {
+        log.info("Received login request: {}", loginDTO);
+        if (userService.authenticate(loginDTO)) {
+            return ResponseEntity.ok().body(Map.of("message", "Login successful"));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Login failed"));
+        }
     }
 
 
     @PostMapping("/registration")
-    public String createUser(@RequestBody User user) {
+    public ResponseEntity<Object> createUser(@RequestBody User user) {
         if (userService.createUser(user)) {
-            return "redirect:/login";
+            return ResponseEntity.ok().body(Map.of("message", "Registration successful"));
         } else {
-            return "registration";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Registration failed"));
         }
     }
 }
