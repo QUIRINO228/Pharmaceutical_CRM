@@ -5,14 +5,11 @@ import com.example.backend.models.User;
 import com.example.backend.sevices.UserService;
 import lombok.AllArgsConstructor;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
-
-
 
 @Slf4j
 @RestController
@@ -20,7 +17,6 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 public class UserController {
     private final UserService userService;
-
 
     @GetMapping("/")
     public String index() {
@@ -40,7 +36,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Login failed"));
         }
     }
-
 
     @PostMapping("/registration")
     public ResponseEntity<Object> createUser(@RequestBody User user) {
