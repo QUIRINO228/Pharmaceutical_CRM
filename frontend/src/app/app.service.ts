@@ -28,7 +28,4 @@ export class AppService {
     console.log(user);
     return this.http.post<User>(`${this.url}/login`, user, {headers});
   }
-
-
-
 }

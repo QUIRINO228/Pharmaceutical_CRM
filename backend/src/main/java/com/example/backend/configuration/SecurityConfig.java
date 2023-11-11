@@ -40,9 +40,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()))
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/registration","/login", "/", "/resources/**", "/products/*/bid", "/product/**", "/images/**", "/user/**").permitAll()
+                        .requestMatchers("/registration", "/login", "/", "/resources/**", "/products/*/bid", "/product/**", "/images/**", "/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -57,17 +57,5 @@ public class SecurityConfig {
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();
-    }
-
-    private CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*");
-        config.setAllowCredentials(true);
-        config.addAllowedHeader("X-Requested-With");
-        config.addAllowedHeader("Content-Type");
-        config.addAllowedMethod(HttpMethod.POST);
-        source.registerCorsConfiguration("/logout", config);
-        return source;
     }
 }
