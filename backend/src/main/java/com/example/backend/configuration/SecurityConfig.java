@@ -15,7 +15,9 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @Configuration
@@ -38,13 +40,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
+                .cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/registration", "/", "/resources/**", "/products/*/bid", "/product/**", "/images/**", "/user/**").permitAll()
+                        .requestMatchers("/registration","/login", "/", "/resources/**", "/products/*/bid", "/product/**", "/images/**", "/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("http://localhost:4200/login")
                         .failureHandler((request, response, exception) -> {
                             response.setStatus(HttpStatus.UNAUTHORIZED.value());
                             response.getWriter().println("Authentication failed: " + exception.getMessage());
@@ -55,5 +57,17 @@ public class SecurityConfig {
                 .logout(LogoutConfigurer::permitAll);
 
         return http.build();
+    }
+
+    private CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("*");
+        config.setAllowCredentials(true);
+        config.addAllowedHeader("X-Requested-With");
+        config.addAllowedHeader("Content-Type");
+        config.addAllowedMethod(HttpMethod.POST);
+        source.registerCorsConfiguration("/logout", config);
+        return source;
     }
 }
