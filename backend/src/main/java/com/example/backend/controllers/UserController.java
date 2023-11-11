@@ -7,12 +7,10 @@ import lombok.AllArgsConstructor;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
-import java.util.logging.Logger;
 
 
 
@@ -36,7 +34,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO) {
-        log.info("Received login request: {}", loginDTO);
         if (userService.authenticate(loginDTO)) {
             return ResponseEntity.ok().body(Map.of("message", "Login successful"));
         } else {
