@@ -13,10 +13,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/")
-    public String hello() {
-        return "hello";
-    }
     @PostMapping("/add")
     public Product createProduct(@RequestBody Product product){
       Product product1 = productService.createProduct(product);
