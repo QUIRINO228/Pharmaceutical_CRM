@@ -2,8 +2,7 @@ package com.example.backend.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
@@ -40,7 +39,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/registration", "/","/login","/resources/**", "/products/*/bid", "/product/**", "/images/**", "/user/**").permitAll()
+                        .requestMatchers("/registration", "/","/login","/resources/**", "/product/**", "/images/**", "/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
