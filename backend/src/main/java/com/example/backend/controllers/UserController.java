@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
@@ -44,5 +45,17 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Registration failed"));
         }
+    }
+
+    @GetMapping("/activate/{link}")
+    public ResponseEntity<Object> activate(@PathVariable String link) {
+        return ResponseEntity.ok().body(Map.of("message", "Activate link successful"));
+    }
+
+    @PostMapping("/activate/{link}")
+    public ResponseEntity<Object> activateUsers(@PathVariable String link,String code) {
+        if (userService.activateUsers(link, code)) {
+            return ResponseEntity.ok().body(Map.of("message", "Activate link successful"));
+        }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Activate failed"));
     }
 }

@@ -19,7 +19,6 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users")
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements UserDetails {
@@ -37,6 +36,10 @@ public class User implements UserDetails {
     private String phone;
     @Column(name = "password")
     private String password;
+    @Column(name = "activationLink")
+    private String activationLink;
+    @Column(name = "activationCode")
+    private String activationCode;
     @Column(name = "isActive")
     private Boolean isActive;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
