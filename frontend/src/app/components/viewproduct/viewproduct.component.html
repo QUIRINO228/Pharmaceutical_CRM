@@ -1,0 +1,44 @@
+<div class="mt-5">
+    <h1 class="text-center">View Products</h1>
+    <div class="container">
+        <div class="my-3">
+            <a href="/add"><button type="button" class="btn btn-primary">Add Products</button></a>
+        </div>
+        <table class="table border" >
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Photo</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Availability_quantity</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Expiration_date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.photo}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.availability_quantity}}</td>
+                <td>{{product.supplier}}</td>
+                <td>{{product.expiration_date}}</td>
+                <td>
+                    <div class="d-inline mx-2">
+                        <button class="btn btn-warning" (click)="updateProduct(product.id)" type="button">Update</button>
+                    </div>
+                    <div class="d-inline">
+                        <button class="btn btn-danger" (click)="deleteProduct(product.id)" type="button">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
