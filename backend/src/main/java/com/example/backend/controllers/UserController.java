@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
-@Slf4j
+
 @RestController
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")

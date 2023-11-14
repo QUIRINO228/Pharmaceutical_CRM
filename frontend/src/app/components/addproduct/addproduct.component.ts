@@ -25,11 +25,9 @@ export class AddproductComponent implements OnInit {
   }
   submit(){
     this.data = this.form.value
-    console.log(this.data)
-
-    this.service.addproduct(this.data).subscribe(data => {
-      console.log(data)
+    this.service.addProduct(this.data).subscribe(data => {
     })
-    this.router.navigate(['/']);
+    this.router.navigate(['/product']);
   }
+
 }

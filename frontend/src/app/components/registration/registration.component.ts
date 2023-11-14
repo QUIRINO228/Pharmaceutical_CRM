@@ -28,11 +28,9 @@ export class RegistrationComponent {
       const user = this.registrationForm.value;
       this.appService.registerUser(user).subscribe(
         (response) => {
-          console.log('Registration response:', response);
           this.router.navigate(['/login']);
         },
         (error) => {
-          console.error('Registration error:', error);
           this.registrationSuccess = false;
           this.registrationError = 'Registration failed. Please try again.';
         }

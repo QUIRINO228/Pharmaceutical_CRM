@@ -10,7 +10,7 @@ import { AppService } from 'src/app/app.service';
 export class ViewproductsComponent implements OnInit {
 
   products: any[] | undefined
-  url: string = "http://localhost:8080/";
+  url: string = "http://localhost:8080";
 
   constructor(private service: AppService, private router: Router) {
 
@@ -24,16 +24,10 @@ export class ViewproductsComponent implements OnInit {
 
   deleteProduct(id: number){
     this.service.deleteProduct(id).subscribe(() => {
-      this.products = this.products?.filter(product => product.id !== id);
     })
-
-    setTimeout(()=>{
-      window.location.reload();
-    }, 100);
-
+    window.location.reload()
   }
   updateProduct(id: number){
     this.router.navigate(['update', id]);
   }
-
 }
