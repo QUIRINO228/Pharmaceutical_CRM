@@ -38,9 +38,9 @@ public class UserService {
         user.setActivationCode(IntStream.range(0, 6)
                 .mapToObj(i -> String.valueOf(new Random().nextInt(10)))
                 .collect(Collectors.joining()));
-        user.setIsActive(false);
+        user.setIsActive(true);
         String message = message(user);
-        mailSender.send(user.getEmail(), "Activation code", message);
+//        mailSender.send(user.getEmail(), "Activation code", message);
         log.info("Saving new user with : {}", username);
         userRepository.save(user);
         return true;
@@ -82,10 +82,10 @@ public class UserService {
         log.info("Attempting to authenticate user: {}", username);
 
         User user = userRepository.findByEmail(username);
-        if (!user.getIsActive() ) {
-            log.info("Authentication failed for user. Visit your mail to activate your account: {}", username);
-            return false;
-        }
+//        if (!user.getIsActive() ) {
+//            log.info("Authentication failed for user. Visit your mail to activate your account: {}", username);
+//            return false;
+//        }
         if (passwordEncoder.matches(password, user.getPassword())) {
             log.info("Authentication successful for user: {}", username);
             return true;

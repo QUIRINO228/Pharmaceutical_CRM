@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { Product } from 'src/app/Product';
@@ -37,13 +37,12 @@ export class UpdateproductComponent implements OnInit {
 
   submit(){
     this.data = this.form.value
-    console.log(this.data)
 
     this.service.updateProduct(this.product?.id, this.data).subscribe(data => {
-      console.log(data)
     })
+    setTimeout(() => {
 
-    this.router.navigate(['/']);
+    }, 300);
+    this.router.navigate(['/product']);
   }
-
 }

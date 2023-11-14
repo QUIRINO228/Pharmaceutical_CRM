@@ -19,7 +19,7 @@ public class Product {
     private String name;
     private String photo;
     private String description;
-    private String price;
+    private Integer price;
     private String availability_quantity;
     private String supplier;
     private String expiration_date;

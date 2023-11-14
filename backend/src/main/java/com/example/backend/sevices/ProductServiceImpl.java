@@ -22,16 +22,16 @@ public class ProductServiceImpl implements ProductService{
         return (List<Product>) productRepository.findAll();
     }
     @Override
-    public Product getProductById(long id) {
+    public Product getProductById(Long id) {
         return productRepository.findById(id).get();
     }
     @Override
-    public void deleteProduct(long id) {
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
 
     }
     @Override
-    public Product updateProduct(Product product, long id) {
+    public Product updateProduct(Product product, Long id) {
         Product product1 = productRepository.findById(id).get();
         product1.setName(product.getName());
         product1.setPhoto(product.getPhoto());

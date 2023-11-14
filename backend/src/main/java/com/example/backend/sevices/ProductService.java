@@ -7,15 +7,15 @@ import java.util.List;
 
 @Service
 public interface ProductService {
-    public Product createProduct (Product product);
+    Product createProduct (Product product);
 
-    public List<Product> getProducts();
+    List<Product> getProducts();
 
-    public Product getProductById(long id);
+    Product getProductById(Long id);
 
-    public void deleteProduct(long id);
+    void deleteProduct(Long id);
 
-    public Product updateProduct (Product product, long id);
+    Product updateProduct (Product product, Long id);
 }
 
 
