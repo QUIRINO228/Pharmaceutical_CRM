@@ -21,7 +21,6 @@ export class UpdateproductComponent implements OnInit {
     let id = this.route.snapshot.params['id'];
     this.service.getProductById(id).subscribe(data => {
       this.product = data
-      console.log(this.product)
     })
   }
 

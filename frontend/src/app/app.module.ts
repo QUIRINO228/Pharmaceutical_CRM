@@ -22,14 +22,12 @@ import {ActivateAccountComponent} from "./components/activate-account/activate-a
     UpdateproductComponent,
     ViewproductsComponent,
     ActivateAccountComponent
-
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

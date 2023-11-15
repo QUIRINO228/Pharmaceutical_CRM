@@ -40,7 +40,7 @@ public class UserService {
                 .collect(Collectors.joining()));
         user.setIsActive(true);
         String message = message(user);
-//        mailSender.send(user.getEmail(), "Activation code", message);
+        mailSender.send(user.getEmail(), "Activation code", message);
         log.info("Saving new user with : {}", username);
         userRepository.save(user);
         return true;
@@ -79,13 +79,16 @@ public class UserService {
     }
 
     public boolean authenticateUser(String username, String password) {
-        log.info("Attempting to authenticate user: {}", username);
-
+        log.info("Attempting to authenticate user: {} {}", username, password);
         User user = userRepository.findByEmail(username);
-//        if (!user.getIsActive() ) {
-//            log.info("Authentication failed for user. Visit your mail to activate your account: {}", username);
-//            return false;
-//        }
+        if (user == null) {
+            log.info("User not found: {}", username);
+            return false;
+        }
+        if (!user.getIsActive() ) {
+            log.info("Authentication failed for user. Visit your mail to activate your account: {}", username);
+            return false;
+        }
         if (passwordEncoder.matches(password, user.getPassword())) {
             log.info("Authentication successful for user: {}", username);
             return true;

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError, Observable, tap, throwError} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { Observable} from "rxjs";
 import {User} from "./User";
 import {Product} from './Product';
 @Injectable({
@@ -16,10 +16,16 @@ export class AppService {
     return this.http.delete(`${this.url}/delete/${id}`);
   }
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.url}/registration`, user);
+      const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+      });
+    return this.http.post<User>(`${this.url}/registration`, user, {headers});
   }
   login(user: User): Observable<User> {
-    return this.http.post<User>(`${this.url}/login`, user);
+      const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+      });
+    return this.http.post<User>(`${this.url}/login`, user, {headers});
   }
 
   addProduct(product: Product){
@@ -38,12 +44,18 @@ export class AppService {
     return this.http.put<any>(`${this.url}/update/${id}`, product)
   }
 
-  activate(link : string): void{
-    this.http.get<string>(`${this.url}/activate/${link}`)
+  activateAccount(link: string | undefined, code: number | undefined): Observable<number> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<number>(`${this.url}/activate/${link}`, code, { headers });
   }
 
-  getActivateCode(link : string, code: number): number{
-    this.http.post<number>(`${this.url}/activate/${link}`, code)
-    return code;
+  getActivateCode(link: string | undefined, code: number | undefined): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<number>(`${this.url}/activate/${link}`, code, {headers})
+
   }
 }
