@@ -41,12 +41,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(Customizer.withDefaults())
+                .cors(withDefaults())
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/registration", "/", "/product", "/login", "/resources/**",
+                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/registration", "/", "/product", "/resources/**",
                                 "/products/**", "/add", "/update", "/delete", "/images/**", "/user/**").permitAll()
-                        .anyRequest().anonymous()
-                )
+                        .anyRequest().anonymous())
                 .formLogin(form -> form
                         .loginPage("http://localhost:4200/login")
                         .failureHandler((request, response, exception) -> {
