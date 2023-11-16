@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @Column(name = "activationLink")
     private String activationLink;
     @Column(name = "activationCode")
-    private String activationCode;
+    private Integer activationCode;
     @Column(name = "isActive")
     private Boolean isActive;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

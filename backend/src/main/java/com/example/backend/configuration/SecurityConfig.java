@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/registration", "/", "/product", "/resources/**",
-                                "/products/**", "/add", "/update", "/delete", "/images/**", "/user/**").permitAll()
+                                "/products/**", "/add", "/update", "/delete", "/images/**", "/user/**", "/activate/**").permitAll()
                         .anyRequest().anonymous())
                 .formLogin(form -> form
                         .loginPage("http://localhost:4200/login")

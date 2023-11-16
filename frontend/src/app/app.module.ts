@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { UpdateproductComponent } from './components/updateproduct/updateproduct.component';
 import { ViewproductsComponent } from './components/viewproduct/viewproduct.component';
-import {ActivateAccountComponent} from "./components/activate-account/activate-account.component";
+import { ActivateUserComponent } from './components/activate-user/activate-user.component';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import {ActivateAccountComponent} from "./components/activate-account/activate-a
     AddproductComponent,
     UpdateproductComponent,
     ViewproductsComponent,
-    ActivateAccountComponent
+    ActivateUserComponent,
   ],
   imports: [
     BrowserModule,

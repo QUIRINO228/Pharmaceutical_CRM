@@ -14,6 +14,7 @@ import java.util.Map;
 
 
 @RestController
+@Slf4j
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 public class UserController {
@@ -47,15 +48,12 @@ public class UserController {
         }
     }
 
-    @GetMapping("/activate/{link}")
-    public ResponseEntity<Object> activate(@PathVariable String link) {
-        return ResponseEntity.ok().body(Map.of("message", "Activate link successful"));
-    }
-
     @PostMapping("/activate/{link}")
-    public ResponseEntity<Object> activateUsers(@PathVariable String link,String code) {
+    public ResponseEntity<Object> activateUsers(@PathVariable String link, @RequestBody Integer code) {
         if (userService.activateUsers(link, code)) {
             return ResponseEntity.ok().body(Map.of("message", "Activate link successful"));
         }else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Activate failed"));
     }
+
+    
 }
