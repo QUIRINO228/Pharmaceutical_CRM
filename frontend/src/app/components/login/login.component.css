@@ -1,7 +1,26 @@
+.main-container {
+  display: flex;
+}
+.image-container {
+  flex: 1;
+}
 .container {
-  /*border: 2px solid #000;*/
-  width: 400px;
-  margin: 100px auto 0;
+  flex: 1;
   padding: 20px;
 }
-
+.photo1 {
+  max-width: 100%;
+  height: auto;
+}
+.btn-custom {
+  background-color: #97e1e4;
+  color: #fff;
+}
+input.form-control:focus {
+  border-color: #bfc0bf;
+  box-shadow: 0 0 0 0.2rem #bfc0bf;
+}
+.btn-custom1 {
+  background-color: #01aba8;
+  color: #fff;
+}

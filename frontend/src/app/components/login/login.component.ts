@@ -11,14 +11,19 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   loginError: string = '';
-
+  getPhotoPath(photoNumber: number): string {
+    return `/assets/images/photo${photoNumber}.jpg`;
+  }
   constructor(private fb: FormBuilder, private appService: AppService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+
     });
   }
-
+  goToAnotherPage() {
+    this.router.navigate(['/registration']); // Замініть '/your-route' на шлях до вашої сторінки
+  }
   onSubmit() {
     if (this.loginForm.valid) {
       const user = this.loginForm.value

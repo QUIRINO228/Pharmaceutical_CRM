@@ -11,6 +11,7 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
 import { UpdateproductComponent } from './components/updateproduct/updateproduct.component';
 import { ViewproductsComponent } from './components/viewproduct/viewproduct.component';
 import { ActivateUserComponent } from './components/activate-user/activate-user.component';
+import {NgOptimizedImage} from "@angular/common";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ActivateUserComponent } from './components/activate-user/activate-user.
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    NgOptimizedImage,
   ],
   providers: [],
   bootstrap: [AppComponent]
