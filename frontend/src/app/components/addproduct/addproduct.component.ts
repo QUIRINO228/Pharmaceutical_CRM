@@ -14,7 +14,7 @@ export class AddproductComponent implements OnInit {
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    photo: new FormControl('', [Validators.required]),
+    photo: new FormControl<File | null>(null, [Validators.required]),
     description: new FormControl('', [Validators.required]),
     price: new FormControl('', [Validators.required]),
     availability_quantity: new FormControl('', [Validators.required]),
@@ -23,6 +23,15 @@ export class AddproductComponent implements OnInit {
   })
   ngOnInit(): void {
   }
+
+  onFileChange(event: any): void {
+    const file = (event.target as HTMLInputElement).files?.[0] || null;
+    this.form.patchValue({
+      photo: file,
+    });
+    this.form.get('photo')?.updateValueAndValidity();
+  }
+
   submit(){
     this.data = this.form.value
     this.service.addProduct(this.data).subscribe(data => {
