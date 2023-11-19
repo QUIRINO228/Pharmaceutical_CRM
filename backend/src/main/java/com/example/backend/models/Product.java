@@ -19,10 +19,11 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String photo;
+    private byte[] photo;
     private String description;
     private BigDecimal price;
     private BigDecimal availability_quantity;
     private String supplier;
     private String expiration_date;
+
 }

@@ -21,12 +21,17 @@ export class ViewproductsComponent implements OnInit {
       this.products = data;
     })
   }
+  deleteProduct(id: number): void {
+    const isConfirmed = window.confirm('Are you sure you want to delete this product?');
 
-  deleteProduct(id: number){
-    this.service.deleteProduct(id).subscribe(() => {
-    })
-    window.location.reload()
+    if (isConfirmed) {
+      this.service.deleteProduct(id).subscribe(() => {
+
+        window.location.reload();
+      });
+    }
   }
+
   updateProduct(id: number){
     this.router.navigate(['update', id]);
   }

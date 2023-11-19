@@ -1,68 +1,55 @@
-
 <div class="my-5">
-    <div class="mx-auto w-25 " style="max-width:100%;">
-        <h2 class="text-center mb-3">Add Product</h2>
-        <form  [formGroup]="form" (ngSubmit)="submit()" >
+  <div class="mx-auto w-75" style="max-width:100%;">
+    <h2 class="text-center mb-3">Add Product</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-md-6 form-group mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input id="name" type="text" formControlName="name" name="name" class="form-control" required>
+        </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input id="name" type="text" formControlName="name" name="name" class="form-control" required>
-                </div>
-            </div>
+        <div class="col-md-6 form-group mb-3">
+          <label for="photo" class="form-label">Photo</label>
+          <input id="photo" type="file" (change)="onFileChange($event)" formControlName="photo" name="photo" class="form-control" accept="image/*" required>
+        </div>
+      </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="photo" class="form-label">Photo</label>
-                    <input id="photo" type="text" formControlName="photo" name="photo" class="form-control" required>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-md-12 form-group mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" formControlName="description" name="description" class="form-control" rows="3" required></textarea>
+        </div>
+      </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea id="description" formControlName="description" type="text" name="description"  class="form-control" rows="3" required></textarea>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-md-6 form-group mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input id="price" type="text" formControlName="price" name="price" class="form-control" required>
+        </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="price" class="form-label">Price</label>
-                    <input id="price" type="text" formControlName="price" name="price" class="form-control" required>
-                </div>
-            </div>
+        <div class="col-md-6 form-group mb-3">
+          <label for="availability_quantity" class="form-label">Availability_quantity</label>
+          <input id="availability_quantity" type="text" formControlName="availability_quantity" name="availability_quantity" class="form-control" required>
+        </div>
+      </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="availability_quantity" class="form-label">Availability_quantity</label>
-                    <input id="availability_quantity" type="text" formControlName="availability_quantity" name="availability_quantity" class="form-control" required>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-md-6 form-group mb-3">
+          <label for="supplier" class="form-label">Supplier</label>
+          <input id="supplier" type="text" formControlName="supplier" name="supplier" class="form-control" required>
+        </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="supplier" class="form-label">Supplier</label>
-                    <input id="supplier" type="text" formControlName="supplier" name="supplier" class="form-control" required>
-                </div>
-            </div>
+        <div class="col-md-6 form-group mb-3">
+          <label for="expiration_date" class="form-label">Expiration_date</label>
+          <input id="expiration_date" type="text" formControlName="expiration_date" name="expiration_date" class="form-control" required>
+        </div>
+      </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="expiration_date" class="form-label">Expiration_date</label>
-                    <input id="expiration_date" type="text" formControlName="expiration_date" name="expiration_date" class="form-control" required>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <button [disabled]="!form.valid" class="btn btn-primary w-100" type="submit" value="Submit">Button</button>
-                </div>
-            </div>
-
-            <div>
-
-            </div>
-        </form>
-
-    </div>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <button [disabled]="!form.valid" class="btn btn-primary w-100" type="submit">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

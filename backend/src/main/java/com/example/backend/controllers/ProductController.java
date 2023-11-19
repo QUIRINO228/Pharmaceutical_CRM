@@ -5,6 +5,7 @@ import com.example.backend.models.Product;
 import com.example.backend.sevices.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/add")
-    public Product createProduct(@RequestBody Product product) {
-        Product product1 = productService.createProduct(product);
+    public Product createProduct(@ModelAttribute Product product, @RequestParam("photo") MultipartFile photo) {
+        Product product1 = productService.createProduct(product, photo);
         return product1;
     }
 
@@ -26,8 +27,8 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    public Product updateProductById(@RequestBody Product product, @PathVariable Long id) {
-        return productService.updateProduct(product, id);
+    public Product updateProductById(@RequestBody Product product, @PathVariable Long id, @RequestParam("photo") MultipartFile photo) {
+        return productService.updateProduct(product, id, photo);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -41,4 +42,3 @@ public class ProductController {
         return productService.getProductById(id);
     }
 }
-

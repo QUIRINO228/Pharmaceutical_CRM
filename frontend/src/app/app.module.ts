@@ -12,6 +12,7 @@ import { UpdateproductComponent } from './components/updateproduct/updateproduct
 import { ViewproductsComponent } from './components/viewproduct/viewproduct.component';
 import { ActivateUserComponent } from './components/activate-user/activate-user.component';
 import {NgOptimizedImage} from "@angular/common";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {NgOptimizedImage} from "@angular/common";
     ReactiveFormsModule,
     AppRoutingModule,
     NgOptimizedImage,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
