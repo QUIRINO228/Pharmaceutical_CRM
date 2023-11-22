@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "./User";
 import {Product} from './Product';
+import {ProductDTO} from "./ProductDTO";
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +34,17 @@ export class AppService {
     return this.http.post<User>(`${this.url}/login`, user, {headers});
   }
 
-  addProduct(product: Product) {
-    return this.http.post<Product>(`${this.url}/add`, product)
+
+  addProduct(formData: FormData): Observable<Product> {
+
+    formData.forEach(console.log)
+
+    const headers = new HttpHeaders();
+
+    // Make the POST request
+    return this.http.post<Product>(`${this.url}/add`, formData, { headers });
   }
+
 
   getProduct(): Observable<any[]> {
     return this.http.get<any[]>(`${this.url}/products`)

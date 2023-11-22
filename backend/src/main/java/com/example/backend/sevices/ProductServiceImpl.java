@@ -1,12 +1,15 @@
 package com.example.backend.sevices;
 
+import com.example.backend.dto.ProductDTO;
 import com.example.backend.models.Product;
 import com.example.backend.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.example.backend.models.Image;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,14 +20,22 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Product createProduct(Product product, MultipartFile photo) {
-        try {
-            Image image = toImageEntity(photo);
-            product.setPhoto(image.getBytes());
-            productRepository.save(product);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Product createProduct(ProductDTO productDTO, List<MultipartFile> file) throws IOException {
+        Product product = new Product();
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setAvailability_quantity(productDTO.getAvailability_quantity());
+        product.setSupplier(productDTO.getSupplier());
+        product.setExpiration_date(productDTO.getExpiration_date());
+
+//        if (file != null && file.getSize() > 0) {
+//            Image image = toImageEntity(file);
+//            image.setPreviewImage(true);
+//            product.addImageToProduct(image);
+//        }
+
+        productRepository.save(product);
         return product;
     }
 
@@ -47,8 +58,7 @@ public class ProductServiceImpl implements ProductService {
     public Product updateProduct(Product product, Long id, MultipartFile photo) {
         try {
             Image image = toImageEntity(photo);
-            product.setPhoto(String.valueOf(image).getBytes());
-
+            product.addImageToProduct(image);
             Product existingProduct = productRepository.findById(id).orElse(null);
             if (existingProduct != null) {
                 existingProduct.setName(product.getName());
@@ -57,7 +67,6 @@ public class ProductServiceImpl implements ProductService {
                 existingProduct.setAvailability_quantity(product.getAvailability_quantity());
                 existingProduct.setSupplier(product.getSupplier());
                 existingProduct.setExpiration_date(product.getExpiration_date());
-
                 productRepository.save(existingProduct);
             }
         } catch (IOException e) {
