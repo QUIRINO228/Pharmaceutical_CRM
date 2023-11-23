@@ -1,5 +1,7 @@
 package com.example.backend.models;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +30,7 @@ public class Product {
     private String expiration_date;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "product")
+    @JsonManagedReference
     private List<Image> images = new ArrayList<>();
 
     public void addImageToProduct(Image image) {

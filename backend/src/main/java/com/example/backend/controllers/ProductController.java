@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -21,18 +22,32 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping(value = "/add",  consumes =  {MediaType.MULTIPART_FORM_DATA_VALUE ,MediaType.APPLICATION_JSON_VALUE} )
+    @PostMapping(value = "/add", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE})
     public String createProduct(
-            @ModelAttribute("productDTO") ProductDTO productDTO,
+            @ModelAttribute("name") String name,
+            @ModelAttribute("photoPath") String photoPath,
+            @ModelAttribute("description") String description,
+            @ModelAttribute("price") String price,
+            @ModelAttribute("availability_quantity") String availability_quantity,
+            @ModelAttribute("supplier") String supplier,
+            @ModelAttribute("expiration_date") String expiration_date,
             @ModelAttribute("files") List<MultipartFile> files
     ) throws IOException {
-
-        log.info("Product - {},Files - {}", productDTO, files);
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setName(name);
+        productDTO.setPhotoPath(photoPath);
+        productDTO.setDescription(description);
+        productDTO.setPrice(new BigDecimal(price));
+        productDTO.setAvailability_quantity(new BigDecimal(availability_quantity));
+        productDTO.setSupplier(supplier);
+        productDTO.setExpiration_date(expiration_date);
         Product product1 = productService.createProduct(productDTO, files);
         return "product";
     }
 
-    @GetMapping("/products")
+
+    @GetMapping(value = "/products")
+    @ResponseBody
     public List<Product> getProducts() {
         return productService.getProducts();
     }

@@ -36,18 +36,14 @@ export class AppService {
 
 
   addProduct(formData: FormData): Observable<Product> {
-
-    formData.forEach(console.log)
-
     const headers = new HttpHeaders();
-
-    // Make the POST request
     return this.http.post<Product>(`${this.url}/add`, formData, { headers });
   }
 
 
   getProduct(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.url}/products`)
+    const headers = new HttpHeaders();
+    return this.http.get<any[]>(`${this.url}/products`, { headers })
   }
 
   getProductById(id: number): Observable<Product> {

@@ -8,8 +8,8 @@
       <div class="col-md-2 mb-4" *ngFor="let product of products">
         <div class="card h-100">
           <div class="card-body">
-            <ng-container *ngIf="product.photo">
-              <img [src]="url + '/images/' + product.photo.id" alt="{{product.name}}" class="img-fluid">
+            <ng-container *ngIf="product.images && product.images.length > 0">
+              <img [src]="product.images[0]" alt="{{product.name}}" class="img-fluid">
             </ng-container>
             <h5 class="card-title">{{product.name}}</h5>
             <p class="card-text">{{product.description}}</p>

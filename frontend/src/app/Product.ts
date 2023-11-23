@@ -1,3 +1,5 @@
+
+
 export interface Product {
   id: number
   name: string
@@ -6,5 +8,5 @@ export interface Product {
   availability_quantity: number
   supplier: string
   expiration_date: number
-  photo: File[] | null
+  photo: File
 }

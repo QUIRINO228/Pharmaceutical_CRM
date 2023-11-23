@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Product createProduct(ProductDTO productDTO, List<MultipartFile> file) throws IOException {
+    public Product createProduct(ProductDTO productDTO, List<MultipartFile> files) throws IOException {
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
@@ -29,11 +29,13 @@ public class ProductServiceImpl implements ProductService {
         product.setSupplier(productDTO.getSupplier());
         product.setExpiration_date(productDTO.getExpiration_date());
 
-//        if (file != null && file.getSize() > 0) {
-//            Image image = toImageEntity(file);
-//            image.setPreviewImage(true);
-//            product.addImageToProduct(image);
-//        }
+        for (MultipartFile file : files) {
+            if (file != null && file.getSize() > 0) {
+                Image image = toImageEntity(file);
+                image.setPreviewImage(true);
+                product.addImageToProduct(image);
+            }
+        }
 
         productRepository.save(product);
         return product;
