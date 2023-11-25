@@ -13,18 +13,20 @@ import {ActivateUserComponent} from "./components/activate-user/activate-user.co
 
 
 const routes: Routes = [
-    {path: 'registration', component: RegistrationComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'product', component: ViewproductsComponent},
-    {path: '', redirectTo: '/product', pathMatch: 'full'},
-    {path: 'add', component: AddproductComponent},
-    {path: 'update/:id', component: UpdateproductComponent},
-    {path: 'activate/:link', component: ActivateUserComponent},
+  {path: 'registration', component: RegistrationComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'product', component: ViewproductsComponent},
+  {path: '', redirectTo: '/product', pathMatch: 'full'},
+  {path: 'add', component: AddproductComponent},
+  {path: 'update/:id', component: UpdateproductComponent},
+  {path: 'activate/:link', component: ActivateUserComponent},
+  {path: 'admin', loadChildren: () => import("./modules/admin/admin.module").then(m =>m.AdminModule)},
+  {path: 'worker', loadChildren: () => import("./modules/worker/worker.module").then(m =>m.WorkerModule)}
 ];
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(routes)],
-    exports: [RouterModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
 }

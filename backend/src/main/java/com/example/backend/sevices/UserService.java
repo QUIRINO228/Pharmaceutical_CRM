@@ -27,25 +27,24 @@ public class UserService {
     @Autowired
     private MailSender mailSender;
 
-    public boolean createUser(User user) {
-        String username = user.getUsername();
-        if (userRepository.findByEmail(username) != null) {
-            return false;
-        }
-        user.getRoles().add(Role.ROLE_WORKER);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActivationLink(UUID.randomUUID().toString());
-        user.setActivationCode(Integer.parseInt(
-                IntStream.range(0, 6)
-                        .mapToObj(i -> String.valueOf(new Random().nextInt(10)))
-                        .collect(Collectors.joining())));
-        user.setIsActive(false);
-        String message = message(user);
-        mailSender.send(user.getEmail(), "Activation code", message);
-        log.info("Saving new user with : {}", username);
-        userRepository.save(user);
-        return true;
-    }
+//    public boolean createUser(User user) {
+//        String username = user.getUsername();
+//        if (userRepository.findByEmail(username) != null) {
+//            return false;
+//        }
+//        user.getRoles().add(Role.WORKER);
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setActivationLink(UUID.randomUUID().toString());
+//        user.setActivationCode(Integer.valueOf(IntStream.range(0, 6)
+//                .mapToObj(i -> String.valueOf(new Random().nextInt(10)))
+//                .collect(Collectors.joining())));
+//        user.setIsActive(true);
+//        String message = message(user);
+//        mailSender.send(user.getEmail(), "Activation code", message);
+//        log.info("Saving new user with : {}", username);
+//        userRepository.save(user);
+//        return true;
+//    }
 
 
     public String message(User user) {
@@ -58,13 +57,13 @@ public class UserService {
         );
     }
 
-    public boolean activateUsers(String link, Integer code) {
+    public boolean activateUsers(String link,String code) {
         User user = userRepository.findByActivationLink(link);
         if (user == null) {
             return false;
         }
-        if (!code.equals(user.getActivationCode())) {
-            log.info("Activating failed, incorrect activate code for user: {}", user.getUsername());
+        if (!code.equals(user.getActivationCode())){
+//            log.info("Activating failed, incorrect activate code for user: {}", user.getUsername());
             return false;
         }
         user.setActivationLink(null);
@@ -80,21 +79,22 @@ public class UserService {
     }
 
     public boolean authenticateUser(String username, String password) {
-        log.info("Attempting to authenticate user: {} ", username);
+        log.info("Attempting to authenticate user: {} {}", username, password);
         User user = userRepository.findByEmail(username);
         if (user == null) {
             log.info("User not found: {}", username);
             return false;
         }
-        if (!user.getIsActive()) {
+        if (!user.getIsActive() ) {
             log.info("Authentication failed for user. Visit your mail to activate your account: {}", username);
             return false;
         }
         if (passwordEncoder.matches(password, user.getPassword())) {
             log.info("Authentication successful for user: {}", username);
             return true;
+        } else {
+            log.warn("Authentication failed for user: {}", username);
+            return false;
         }
-        log.warn("Authentication failed for user: {}", username);
-        return false;
     }
 }

@@ -2,11 +2,12 @@ package com.example.backend.models.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 
-public enum Role implements GrantedAuthority {
-    ROLE_WORKER, ROLE_ADMIN, ROLE_MANAGER, ROLE_CUSTOMER;
+import java.util.Collection;
+import java.util.Iterator;
 
-    @Override
-    public String getAuthority() {
-        return name();
-    }
+public enum Role {
+    WORKER, ADMIN, MANAGER, CUSTOMER;
+
+
+
 }
