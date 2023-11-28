@@ -13,12 +13,17 @@
         </div>
         <div class="form-group mb-3">
           <label for="password">Password:</label>
-          <input type="password" id="password" formControlName="password" name="password" class="form-control" placeholder="8+ characters">
+          <div class="input-group">
+            <input type="{{ hide ? 'password' : 'text' }}" id="password" formControlName="password" name="password" class="form-control">
+            <span class="input-group-text">
+        <mat-icon (click)="togglePasswordVisibility()">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </span>
+          </div>
         </div>
         <input type="hidden" name="_csrf" value="'${_csrf.token}'">
         <div class="d-grid gap-2">
           <button type="submit" [disabled]="loginForm.invalid" class="btn btn-custom">Log in</button>
-          <button type="button" (click)="goToAnotherPage()"class="btn btn-custom1">Sing up</button>
+          <button type="button" (click)="openRegistrationDialog()" class="btn btn-custom1">Sing up</button>
         </div>
       </form>
       <div *ngIf="loginError" class="alert alert-danger text-center">{{ loginError }}</div>

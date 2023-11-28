@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth/auth.service';
-import { StorageService } from '../../services/storage/storage.service';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth/auth.service';
+import {StorageService} from '../../services/storage/storage.service';
 
-import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar from the correct path
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {AppService} from "../../app.service"; // Import MatSnackBar from the correct path
 
 @Component({
   selector: 'app-login',
@@ -14,25 +15,36 @@ import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 export class LoginComponent {
   loginForm: FormGroup;
   loginError: string = '';
+  hide: boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private service: AuthService,
     private router: Router,
+    private appService: AppService,
     private snackbar: MatSnackBar // Inject MatSnackBar here
   ) {
-    this.loginForm = this.fb.group({
+    this
+      .loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
 
-  getPhotoPath(photoNumber: number): string {
+  getPhotoPath(photoNumber
+                 :
+                 number
+  ):
+    string {
     return `/assets/images/photo${photoNumber}.jpg`;
   }
 
-  goToAnotherPage() {
-    this.router.navigate(['/registration']);
+  togglePasswordVisibility() {
+    this.hide = !this.hide;
+  }
+
+  openRegistrationDialog(): void {
+    this.appService.openRegistrationDialog();
   }
 
   onSubmit() {
@@ -48,9 +60,9 @@ export class LoginComponent {
           this.router.navigateByUrl('admin/dashboard');
         } else if (StorageService.isUserLoggedIn()) {
           this.router.navigateByUrl('user/dashboard');
-        }else if (StorageService.isManagerLoggedIn()) {
+        } else if (StorageService.isManagerLoggedIn()) {
           this.router.navigateByUrl('manager/dashboard');
-        }else if (StorageService.isWorkerLoggedIn()) {
+        } else if (StorageService.isWorkerLoggedIn()) {
           this.router.navigateByUrl('worker/dashboard');
         }
       },

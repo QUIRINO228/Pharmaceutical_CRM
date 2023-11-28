@@ -1,6 +1,7 @@
 package com.example.backend.models;
 
 
+import com.example.backend.dto.UserDto;
 import com.example.backend.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,15 @@ public class User {
 
     private Boolean isActive;
 
+    public UserDto userDto(){
+        UserDto userDto = new UserDto();
+        userDto.setId(id);
+        userDto.setEmail(email);
+        userDto.setFirstName(firstName);
+        userDto.setLastName(lastName);
+        userDto.setRole(role);
+        userDto.setIsActive(isActive);
+        return userDto;
+    }
 
 }

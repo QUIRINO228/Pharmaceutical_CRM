@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import {RegistrationComponent} from './components/registration/registration.component';
 import {AppComponent} from './app.component';
@@ -17,6 +18,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 
 
@@ -29,10 +31,9 @@ import {MatButtonModule} from "@angular/material/button";
     UpdateproductComponent,
     ViewproductsComponent,
     ActivateUserComponent,
-
-
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -42,7 +43,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatSnackBarModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
