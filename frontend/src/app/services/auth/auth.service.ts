@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
-import {StorageService} from "./storage/storage.service";
+import {StorageService} from "../storage/storage.service";
 
 
 const url = ['http://localhost:8080/']

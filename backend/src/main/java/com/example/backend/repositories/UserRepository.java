@@ -4,9 +4,8 @@ import com.example.backend.models.User;
 import com.example.backend.models.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 
-import java.util.Collection;
-import java.util.Set;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String username);
@@ -14,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByActivationLink(String link);
 
 
-    User findByRole(Role role);
+    List<User> findByRole(Role role);
 }

@@ -1,15 +1,12 @@
 package com.example.backend.controllers;
 
-import com.example.backend.dto.LoginDTO;
-import com.example.backend.models.User;
 import com.example.backend.sevices.UserService;
 import lombok.AllArgsConstructor;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 

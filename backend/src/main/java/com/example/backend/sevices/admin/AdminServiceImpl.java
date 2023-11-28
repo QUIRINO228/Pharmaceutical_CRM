@@ -8,22 +8,22 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 
 
 @Service
 @AllArgsConstructor
-public class AdminServiceImpl {
-    private final UserRepository userRepository;
+public class AdminServiceImpl implements AdminService {
 
+    private final UserRepository userRepository;
 
     @PostConstruct
     public void createAdminAccount() {
-        User adminAccount = userRepository.findByRole(Role.ADMIN);
-        if (adminAccount != null) return; ;
+        List<User> adminAccounts = userRepository.findByRole(Role.ADMIN);
+        if (!adminAccounts.isEmpty()) {
+            return;
+        }
         User admin = new User();
         admin.setEmail("admin@gmail.com");
         admin.setIsActive(true);
