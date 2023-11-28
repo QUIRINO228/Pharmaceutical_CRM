@@ -4,6 +4,7 @@
 .image-container {
   flex: 1;
 }
+
 .container {
   flex: 1;
   padding: 20px;
@@ -18,9 +19,23 @@
 }
 input.form-control:focus {
   border-color: #bfc0bf;
-  box-shadow: 0 0 0 0.2rem #bfc0bf;
+  box-shadow: 0 0 0 0.1rem #bfc0bf;
 }
 .btn-custom1 {
   background-color: #01aba8;
   color: #fff;
+}
+@media (max-width: 390px) {
+  .image-container {
+    display: none;
+  }
+
+  .main-container {
+    display: flex;
+  }
+
+  .container {
+    flex: 1;
+    padding: 20px;
+  }
 }

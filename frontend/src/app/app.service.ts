@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "./User";
 import {Product} from './Product';
-import {ProductDTO} from "./ProductDTO";
+import { MatDialog } from '@angular/material/dialog';
+import {RegistrationComponent} from "./components/registration/registration.component";
 
 
 @Injectable({
@@ -13,11 +14,20 @@ export class AppService {
 
   private url = "http://localhost:8080"
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private dialog: MatDialog) {
   }
 
-  deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/delete/${id}`);
+
+  login(user: User): Observable<User> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<User>(`${this.url}/login`, user, {headers});
+  }
+
+  openRegistrationDialog(): void {
+    this.dialog.open(RegistrationComponent, {
+    });
   }
 
   registerUser(user: User): Observable<User> {
@@ -27,12 +37,18 @@ export class AppService {
     return this.http.post<User>(`${this.url}/registration`, user, {headers});
   }
 
-  login(user: User): Observable<User> {
+  checkActivateCode(link: string, code: number | null | undefined): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    return this.http.post<User>(`${this.url}/login`, user, {headers});
+    return this.http.post(`${this.url}/activate/${link}`, code, { headers });
   }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(`${this.url}/delete/${id}`);
+  }
+
+
 
 
   addProduct(formData: FormData): Observable<Product> {
@@ -54,10 +70,5 @@ export class AppService {
     return this.http.put<any>(`${this.url}/update/${id}`, product)
   }
 
-  checkActivateCode(link: string, code: number | null | undefined): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post(`${this.url}/activate/${link}`, code, { headers });
-  }
+
 }

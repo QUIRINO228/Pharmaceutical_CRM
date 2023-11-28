@@ -1,5 +1,6 @@
 package com.example.backend.sevices.admin;
 
+import com.example.backend.dto.UserDto;
 import com.example.backend.models.User;
 import com.example.backend.models.enums.Role;
 import com.example.backend.repositories.UserRepository;
@@ -9,7 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -32,4 +34,8 @@ public class AdminServiceImpl implements AdminService {
         userRepository.save(admin);
     }
 
+    @Override
+    public List<UserDto> getUsers() {
+        return userRepository.findAll().stream().map(User::userDto).collect(Collectors.toList());
+    }
 }

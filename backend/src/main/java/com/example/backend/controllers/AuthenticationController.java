@@ -58,6 +58,7 @@ public class AuthenticationController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginDTO.getEmail());
         final String jwt = jwtUtils.generateToken(userDetails.getUsername());
         User user = userRepository.findByEmail(userDetails.getUsername());
+        if (!user.getIsActive()) throw new BadCredentialsException("Activate your account");
         if (user != null) {
             JSONObject json = new JSONObject();
             json.put("user_id", user.getId());
