@@ -14,7 +14,10 @@ import { ActivateUserComponent } from './components/activate-user/activate-user.
 import {NgOptimizedImage} from "@angular/common";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
+
 
 
 @NgModule({
@@ -27,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     ViewproductsComponent,
     ActivateUserComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     NgOptimizedImage,
     NgbModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

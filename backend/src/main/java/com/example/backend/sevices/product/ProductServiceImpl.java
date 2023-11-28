@@ -1,15 +1,14 @@
-package com.example.backend.sevices;
+package com.example.backend.sevices.product;
 
 import com.example.backend.dto.ProductDTO;
+import com.example.backend.models.Image;
 import com.example.backend.models.Product;
 import com.example.backend.repositories.ProductRepository;
+import com.example.backend.sevices.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import com.example.backend.models.Image;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 

@@ -4,24 +4,18 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 
-import {RegistrationComponent} from "./components/registration/registration.component";
+
 import {LoginComponent} from "./components/login/login.component";
-import {AddproductComponent} from './components/addproduct/addproduct.component';
-import {UpdateproductComponent} from './components/updateproduct/updateproduct.component';
-import {ViewproductsComponent} from './components/viewproduct/viewproduct.component';
-import {ActivateUserComponent} from "./components/activate-user/activate-user.component";
+import {noAuthGuard} from "./services/guards/noAuth-guard/no-auth.guard";
 
 
 const routes: Routes = [
-  {path: 'registration', component: RegistrationComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'product', component: ViewproductsComponent},
-  {path: '', redirectTo: '/product', pathMatch: 'full'},
-  {path: 'add', component: AddproductComponent},
-  {path: 'update/:id', component: UpdateproductComponent},
-  {path: 'activate/:link', component: ActivateUserComponent},
+  {path: 'login', component: LoginComponent, canActivate: [noAuthGuard]},
   {path: 'admin', loadChildren: () => import("./modules/admin/admin.module").then(m =>m.AdminModule)},
-  {path: 'worker', loadChildren: () => import("./modules/worker/worker.module").then(m =>m.WorkerModule)}
+  {path: 'user', loadChildren: () => import("./modules/user/user.module").then(m =>m.UserModule)},
+  {path: 'manager', loadChildren: () => import("./modules/manager/manager.module").then(m =>m.ManagerModule)},
+  {path: 'worker', loadChildren: () => import("./modules/worker/worker.module").then(m =>m.WorkerModule)},
+
 ];
 
 @NgModule({

@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public enum Role {
-    WORKER, ADMIN, MANAGER, CUSTOMER;
-
-
+    ADMIN, MANAGER, USER, WORKER;
 
 }

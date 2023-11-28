@@ -1,14 +1,11 @@
 package com.example.backend.controllers;
 
-import com.example.backend.dto.AuthenticationResponse;
 import com.example.backend.dto.LoginDTO;
 import com.example.backend.models.User;
 import com.example.backend.repositories.UserRepository;
 import com.example.backend.utils.JwtUtils;
-import com.fasterxml.jackson.core.io.JsonEOFException;
 import jakarta.servlet.http.HttpServletResponse;
-
-
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,8 +19,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import net.minidev.json.JSONObject;
-
 
 import java.io.IOException;
 import java.util.Objects;

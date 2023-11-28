@@ -1,4 +1,4 @@
-package com.example.backend.sevices;
+package com.example.backend.sevices.product;
 
 import com.example.backend.dto.ProductDTO;
 import com.example.backend.models.Product;

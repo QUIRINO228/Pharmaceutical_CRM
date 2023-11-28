@@ -3,8 +3,7 @@ package com.example.backend.controllers;
 
 import com.example.backend.dto.ProductDTO;
 import com.example.backend.models.Product;
-import com.example.backend.sevices.ProductService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.backend.sevices.product.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

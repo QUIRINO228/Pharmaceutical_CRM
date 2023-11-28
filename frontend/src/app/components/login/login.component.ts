@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/services/auth.service';
-import { StorageService } from '../../auth/services/storage/storage.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { StorageService } from '../../services/storage/storage.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar from the correct path
 
@@ -46,7 +46,11 @@ export class LoginComponent {
         console.log(response);
         if (StorageService.isAdminLoggedIn()) {
           this.router.navigateByUrl('admin/dashboard');
-        } else if (StorageService.isWorkerLoggedIn()) {
+        } else if (StorageService.isUserLoggedIn()) {
+          this.router.navigateByUrl('user/dashboard');
+        }else if (StorageService.isManagerLoggedIn()) {
+          this.router.navigateByUrl('manager/dashboard');
+        }else if (StorageService.isWorkerLoggedIn()) {
           this.router.navigateByUrl('worker/dashboard');
         }
       },

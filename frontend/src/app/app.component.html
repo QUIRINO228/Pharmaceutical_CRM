@@ -1,3 +1,41 @@
-<div>
-  <router-outlet></router-outlet>
+<div *ngIf="isAdminLoggedIn">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand">Admin Nav</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button (click)="logout()"  routerLinkActive="active">Logout</button>
+  </mat-toolbar>
 </div>
+<div *ngIf="isManagerLoggedIn">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand">Manager Nav</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button (click)="logout()"  routerLinkActive="active">Logout</button>
+  </mat-toolbar>
+</div>
+<div *ngIf="isWorkerLoggedIn">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand">Worker Nav</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button (click)="logout()"  routerLinkActive="active">Logout</button>
+  </mat-toolbar>
+</div>
+<div *ngIf="isUserLoggedIn">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand">User Nav</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button (click)="logout()"  routerLinkActive="active">Logout</button>
+  </mat-toolbar>
+</div>
+<div *ngIf="!isUserLoggedIn && !isManagerLoggedIn && !isWorkerLoggedIn && !isAdminLoggedIn">
+  <mat-toolbar color="primary" class="navbar">
+    <span class="navbar-brand">Guest Nav</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
+  </mat-toolbar>
+</div>
+<router-outlet></router-outlet>
