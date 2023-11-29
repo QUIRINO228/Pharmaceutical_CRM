@@ -35,9 +35,8 @@ export class UpdateproductComponent implements OnInit {
   })
 
   submit(){
-    this.data = this.form.value
-
-    this.service.updateProduct(this.product?.id, this.data).subscribe(data => {
+    const id = this.route.snapshot.params['id'];
+    this.service.updateProduct(id, this.form).subscribe(data => {
     })
     setTimeout(() => {
 

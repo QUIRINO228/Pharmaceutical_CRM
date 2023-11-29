@@ -7,6 +7,7 @@ import {ForgotCodeDTO} from './ForgotCodeDTO'
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {AddproductComponent} from "./components/addproduct/addproduct.component";
+import {StorageService} from "./services/storage/storage.service";
 
 
 @Injectable({
@@ -41,7 +42,7 @@ export class AppService {
   }
 
   deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/delete/${id}`);
+    return this.http.delete(`${this.url}/delete/${id}`, {headers: this.createAuthorizationHeader()});
   }
 
   registerUser(user: User): Observable<User> {
@@ -54,8 +55,7 @@ export class AppService {
 
 
   addProduct(formData: FormData): Observable<Product> {
-    const headers = new HttpHeaders();
-    return this.http.post<Product>(`${this.url}/add`, formData, { headers });
+    return this.http.post<Product>(`${this.url}/add`, formData, {headers: this.createAuthorizationHeader()});
   }
 
 
@@ -65,11 +65,11 @@ export class AppService {
   }
 
   getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.url}/product/${id}`)
+    return this.http.get<Product>(`${this.url}/product/${id}`,{headers: this.createAuthorizationHeader()} )
   }
 
   updateProduct(id?: number, product?: any): Observable<any> {
-    return this.http.put<any>(`${this.url}/update/${id}`, product)
+    return this.http.put<any>(`${this.url}/update/${id}`, product, {headers: this.createAuthorizationHeader()})
   }
 
   checkActivateCode(link: string, code: number | null | undefined): Observable<any> {
@@ -88,5 +88,12 @@ export class AppService {
   openRegistrationDialog(): void {
     this.dialog.open(RegistrationComponent, {
     });
+  }
+
+  createAuthorizationHeader(): HttpHeaders {
+    let authHeaders: HttpHeaders = new HttpHeaders();
+    return authHeaders.set(
+      'Authorization', "Bearer " + StorageService.getToken()
+    );
   }
 }

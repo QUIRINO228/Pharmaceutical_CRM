@@ -18,7 +18,7 @@ public interface ProductService {
 
     void deleteProduct(Long id);
 
-    Product updateProduct (Product product, Long id, MultipartFile photo);
+    Product updateProduct (ProductDTO productDTO, Long id,  List<MultipartFile> files);
 }
 
 

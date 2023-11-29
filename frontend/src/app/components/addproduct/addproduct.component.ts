@@ -90,10 +90,6 @@ export class AddproductComponent implements OnInit {
         console.error('Error:', error);
       }
     );
-
-    if (this.someNewNameForm) {
-      this.someNewNameForm.resetForm();
-    }
-    this.router.navigate(['/product']);
+    location.reload();
   }
 }
