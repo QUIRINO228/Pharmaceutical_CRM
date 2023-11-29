@@ -13,6 +13,14 @@ import { ViewproductsComponent } from './components/viewproduct/viewproduct.comp
 import { ActivateUserComponent } from './components/activate-user/activate-user.component';
 import {NgOptimizedImage} from "@angular/common";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
+import {ForgotMessageComponent} from "./components/forgot-message/forgot-message.component";
+import {ChangePasswordComponent} from "./components/change-password/change-password.component";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule} from "@angular/material/button";
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -24,14 +32,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UpdateproductComponent,
     ViewproductsComponent,
     ActivateUserComponent,
+    ForgotMessageComponent,
+    ChangePasswordComponent,
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
     NgOptimizedImage,
     NgbModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

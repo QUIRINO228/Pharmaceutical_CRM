@@ -3,7 +3,10 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "./User";
 import {Product} from './Product';
-import {ProductDTO} from "./ProductDTO";
+import {ForgotCodeDTO} from './ForgotCodeDTO'
+import {MatDialog} from '@angular/material/dialog';
+import {RegistrationComponent} from "./components/registration/registration.component";
+import {AddproductComponent} from "./components/addproduct/addproduct.component";
 
 
 @Injectable({
@@ -13,7 +16,28 @@ export class AppService {
 
   private url = "http://localhost:8080"
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private dialog: MatDialog) {
+  }
+
+  login(user: User): Observable<User> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<User>(`${this.url}/login`, user, {headers});
+  }
+
+  forgotMessage(email: String): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<User>(`${this.url}/forgot`, email, {headers});
+  }
+
+  changePassword(link: string, forgotCodeDTO: ForgotCodeDTO): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post(`${this.url}/changePassword/${link}`, forgotCodeDTO, {headers});
   }
 
   deleteProduct(id: number): Observable<any> {
@@ -27,12 +51,6 @@ export class AppService {
     return this.http.post<User>(`${this.url}/registration`, user, {headers});
   }
 
-  login(user: User): Observable<User> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post<User>(`${this.url}/login`, user, {headers});
-  }
 
 
   addProduct(formData: FormData): Observable<Product> {
@@ -59,5 +77,16 @@ export class AppService {
       'Content-Type': 'application/json',
     });
     return this.http.post(`${this.url}/activate/${link}`, code, { headers });
+  }
+
+
+  openAddProductDialog(): void {
+    this.dialog.open(AddproductComponent, {
+    });
+  }
+
+  openRegistrationDialog(): void {
+    this.dialog.open(RegistrationComponent, {
+    });
   }
 }
