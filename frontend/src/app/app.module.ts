@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import { ForgotMessageComponent } from './components/forgot-message/forgot-message.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 
@@ -31,6 +33,8 @@ import {MatIconModule} from "@angular/material/icon";
     UpdateproductComponent,
     ViewproductsComponent,
     ActivateUserComponent,
+    ForgotMessageComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     MatDialogModule,

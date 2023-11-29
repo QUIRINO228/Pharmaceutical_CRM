@@ -19,13 +19,6 @@ export class AppService {
   }
 
 
-  login(user: User): Observable<User> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post<User>(`${this.url}/login`, user, {headers});
-  }
-
   openRegistrationDialog(): void {
     this.dialog.open(RegistrationComponent, {});
   }
