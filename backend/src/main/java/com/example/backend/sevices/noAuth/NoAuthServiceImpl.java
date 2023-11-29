@@ -37,7 +37,7 @@ public class NoAuthServiceImpl implements NoAuthService {
         user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActivationLink(UUID.randomUUID().toString());
-        user.setActivationCode(Integer.valueOf(IntStream.range(0, 6)
+        user.setActivationCode(Integer.valueOf(IntStream.range(0, 7)
                 .mapToObj(i -> String.valueOf(new Random().nextInt(10)))
                 .collect(Collectors.joining())));
         user.setIsActive(false);
@@ -81,11 +81,11 @@ public class NoAuthServiceImpl implements NoAuthService {
         User user = userRepository.findByEmail(email);
         if (user == null) return false;
         user.setForgotLink(UUID.randomUUID().toString());
-        user.setForgotCode(Integer.valueOf(IntStream.range(0, 6)
+        user.setForgotCode(Integer.valueOf(IntStream.range(0, 7)
                 .mapToObj(i -> String.valueOf(new Random().nextInt(10)))
                 .collect(Collectors.joining())));
         String message = forgotMessage(user);
-        mailSender.send(user.getEmail(), "Activation code", message);
+        mailSender.send(user.getEmail(), "Change password", message);
         userRepository.save(user);
         return true;
     }
@@ -110,7 +110,7 @@ public class NoAuthServiceImpl implements NoAuthService {
     public String forgotMessage(User user) {
         return String.format(
                 "Hello, %s! \n" +
-                        "Welcome in AnRo pharmacy. Please visit the following to change your password and enter the instructions code %s: http://localhost:4200/fogot-password/%s",
+                        "Please visit the following to change your password and enter the instructions code %s: http://localhost:4200/change-password/%s",
                 user.getEmail(),
                 user.getForgotCode(),
                 user.getForgotLink()
