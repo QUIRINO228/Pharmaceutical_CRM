@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AppService} from 'src/app/app.service';
 import {ProductDTO} from "../../ProductDTO";
-
+import { NgForm } from '@angular/forms';
 interface FormDataFields {
   name?: string | null;
   description?: string | null;
@@ -21,6 +21,8 @@ interface FormDataFields {
   styleUrls: ['./addproduct.component.css']
 })
 export class AddproductComponent implements OnInit {
+
+  @ViewChild('testForm') someNewNameForm: NgForm | null = null;
   constructor(private service: AppService, private router: Router) {
   }
 
@@ -30,7 +32,7 @@ export class AddproductComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    photo: new FormControl('', [Validators.required]),
+    photo: new FormControl([], [Validators.required]),
     price: new FormControl('', [Validators.required]),
     availability_quantity: new FormControl('', [Validators.required]),
     supplier: new FormControl('', [Validators.required]),
@@ -54,8 +56,6 @@ export class AddproductComponent implements OnInit {
     formData.forEach(console.log)
     return formData;
   }
-
-
 
 
   submit() {
@@ -84,12 +84,16 @@ export class AddproductComponent implements OnInit {
     this.service.addProduct(formData).subscribe(
       data => {
         console.log('Response:', data);
+
       },
       error => {
         console.error('Error:', error);
       }
     );
 
+    if (this.someNewNameForm) {
+      this.someNewNameForm.resetForm();
+    }
     this.router.navigate(['/product']);
   }
 }

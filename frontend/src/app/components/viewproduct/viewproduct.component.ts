@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { AppService } from 'src/app/app.service';
-import { SafeResourceUrl, DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer } from "@angular/platform-browser";
+import {CartService} from "../../cart.service";
+import {Product} from "../../Product";
+
 
 @Component({
   selector: 'app-viewproduct',
@@ -11,11 +14,21 @@ import { SafeResourceUrl, DomSanitizer } from "@angular/platform-browser";
 export class ViewproductsComponent implements OnInit {
 
   products: any[] | undefined;
-  url: string = "http://localhost:8080";
-
-  constructor(private service: AppService, private router: Router, private sanitizer: DomSanitizer) {}
 
 
+  constructor(private service: AppService, private router: Router, private sanitizer: DomSanitizer, private route: ActivatedRoute,
+              private cartService: CartService) {}
+
+
+
+  openAddProductDialog(): void {
+    this.service.openAddProductDialog();
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+    window.alert('Your product has been added to the cart!');
+  }
 
   ngOnInit(): void {
     this.service.getProduct().subscribe(data => {
@@ -23,14 +36,11 @@ export class ViewproductsComponent implements OnInit {
     });
   }
 
-
-
   deleteProduct(id: number): void {
     const isConfirmed = window.confirm('Are you sure you want to delete this product?');
 
     if (isConfirmed) {
       this.service.deleteProduct(id).subscribe(() => {
-        // Remove the deleted product from the local array
         this.products = this.products?.filter(product => product.id !== id);
       });
     }

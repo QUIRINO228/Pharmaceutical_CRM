@@ -9,6 +9,7 @@
   color: #fff;
 }
 
+
 @media (max-width: 390px) {
   .container {
     width: 300px;
