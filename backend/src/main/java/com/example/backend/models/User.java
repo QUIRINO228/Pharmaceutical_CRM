@@ -33,8 +33,10 @@ public class User {
     private String password;
 
     private String activationLink;
-
     private Integer activationCode;
+
+    private String forgotLink;
+    private Integer forgotCode;
 
     private Boolean isActive;
 

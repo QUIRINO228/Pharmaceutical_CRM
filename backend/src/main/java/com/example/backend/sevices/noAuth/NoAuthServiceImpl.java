@@ -1,5 +1,6 @@
 package com.example.backend.sevices.noAuth;
 
+import com.example.backend.dto.ForgotCodeDTO;
 import com.example.backend.models.User;
 import com.example.backend.models.enums.Role;
 import com.example.backend.repositories.UserRepository;
@@ -58,13 +59,13 @@ public class NoAuthServiceImpl implements NoAuthService {
         );
     }
 
-
-    public boolean activateUsers(String link,Integer code) {
+    @Override
+    public boolean activateUsers(String link, Integer code) {
         User user = userRepository.findByActivationLink(link);
         if (user == null) {
             return false;
         }
-        if (!code.equals(user.getActivationCode())){
+        if (!code.equals(user.getActivationCode())) {
             log.info("Activating failed, incorrect activate code for user: {}", user.getEmail());
             return false;
         }
@@ -73,5 +74,46 @@ public class NoAuthServiceImpl implements NoAuthService {
         user.setIsActive(true);
         userRepository.save(user);
         return true;
+    }
+
+    @Override
+    public boolean forgotMessage(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) return false;
+        user.setForgotLink(UUID.randomUUID().toString());
+        user.setForgotCode(Integer.valueOf(IntStream.range(0, 6)
+                .mapToObj(i -> String.valueOf(new Random().nextInt(10)))
+                .collect(Collectors.joining())));
+        String message = forgotMessage(user);
+        mailSender.send(user.getEmail(), "Activation code", message);
+        userRepository.save(user);
+        return true;
+    }
+
+    @Override
+    public boolean changePassword(String link, ForgotCodeDTO forgotCodeDTO) {
+        User user = userRepository.findByForgotLink(link);
+        if (user == null) {
+            return false;
+        }
+        if (!forgotCodeDTO.getCode().equals(user.getForgotCode())) {
+            log.info("Password change filed, incorrect forgotPass code for user: {}", user.getEmail());
+            return false;
+        }
+        user.setForgotLink(null);
+        user.setForgotCode(null);
+        user.setPassword(passwordEncoder.encode(forgotCodeDTO.getPassword()));
+        userRepository.save(user);
+        return true;
+    }
+
+    public String forgotMessage(User user) {
+        return String.format(
+                "Hello, %s! \n" +
+                        "Welcome in AnRo pharmacy. Please visit the following to change your password and enter the instructions code %s: http://localhost:4200/fogot-password/%s",
+                user.getEmail(),
+                user.getForgotCode(),
+                user.getForgotLink()
+        );
     }
 }
