@@ -1,1 +1,39 @@
-<p>view-user works!</p>
+<mat-table [dataSource]="dataSource">
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.email }}</mat-cell>
+  </ng-container>
+
+  <!-- FirstName Column -->
+  <ng-container matColumnDef="firstName">
+    <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.firstName }}</mat-cell>
+  </ng-container>
+
+  <!-- LastName Column -->
+  <ng-container matColumnDef="lastName">
+    <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.lastName }}</mat-cell>
+  </ng-container>
+
+  <!-- Role Column -->
+  <ng-container matColumnDef="role">
+    <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.role }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="isActive">
+    <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.isActive ? 'Yes' : 'No' }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

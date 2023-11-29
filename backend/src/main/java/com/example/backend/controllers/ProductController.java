@@ -52,8 +52,24 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    public Product updateProductById(@RequestBody Product product, @PathVariable Long id, @RequestParam("photo") MultipartFile photo) {
-        return productService.updateProduct(product, id, photo);
+    public Product updateProductById(@ModelAttribute("name") String name,
+                                     @ModelAttribute("photoPath") String photoPath,
+                                     @ModelAttribute("description") String description,
+                                     @ModelAttribute("price") String price,
+                                     @ModelAttribute("availability_quantity") String availability_quantity,
+                                     @ModelAttribute("supplier") String supplier,
+                                     @ModelAttribute("expiration_date") String expiration_date,
+                                     @ModelAttribute("files") List<MultipartFile> files,
+                                     @PathVariable Long id) {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setName(name);
+        productDTO.setPhotoPath(photoPath);
+        productDTO.setDescription(description);
+        productDTO.setPrice(new BigDecimal(price));
+        productDTO.setAvailability_quantity(new BigDecimal(availability_quantity));
+        productDTO.setSupplier(supplier);
+        productDTO.setExpiration_date(expiration_date);
+        return productService.updateProduct(productDTO, id, files);
     }
 
     @DeleteMapping("/delete/{id}")

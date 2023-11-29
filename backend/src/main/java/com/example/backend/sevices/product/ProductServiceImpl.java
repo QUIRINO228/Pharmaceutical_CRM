@@ -55,24 +55,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Product product, Long id, MultipartFile photo) {
+    public Product updateProduct(ProductDTO productDTO, Long id, List<MultipartFile> files) {
         try {
-            Image image = toImageEntity(photo);
-            product.addImageToProduct(image);
             Product existingProduct = productRepository.findById(id).orElse(null);
             if (existingProduct != null) {
-                existingProduct.setName(product.getName());
-                existingProduct.setDescription(product.getDescription());
-                existingProduct.setPrice(product.getPrice());
-                existingProduct.setAvailability_quantity(product.getAvailability_quantity());
-                existingProduct.setSupplier(product.getSupplier());
-                existingProduct.setExpiration_date(product.getExpiration_date());
+                existingProduct.setName(productDTO.getName());
+                existingProduct.setDescription(productDTO.getDescription());
+                existingProduct.setPrice(productDTO.getPrice());
+                existingProduct.setAvailability_quantity(productDTO.getAvailability_quantity());
+                existingProduct.setSupplier(productDTO.getSupplier());
+                existingProduct.setExpiration_date(productDTO.getExpiration_date());
+                existingProduct.getImages().clear();
+                for (MultipartFile file : files) {
+                    if (file != null && file.getSize() > 0) {
+                        Image image = toImageEntity(file);
+                        image.setPreviewImage(true);
+                        existingProduct.addImageToProduct(image);
+                    }
+                }
                 productRepository.save(existingProduct);
             }
+            return existingProduct;
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException("Failed to update product", e);
         }
-        return product;
     }
 
     private Image toImageEntity(MultipartFile file) throws IOException {

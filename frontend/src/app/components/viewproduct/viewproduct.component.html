@@ -4,7 +4,7 @@
 <div class="mt-5">
   <h1 class="text-center">View Products</h1>
   <div class="container">
-    <div class="my-3">
+    <div class="my-3" *ngIf="isManagerLoggedIn || isAdminLoggedIn ">
       <button type="button" (click)="openAddProductDialog()" class="btn btn-primary">
         <i class="bi bi-plus-circle-fill"></i> Add Products
       </button>
@@ -13,8 +13,8 @@
       <div class="col-md-2 mb-4" *ngFor="let product of products">
         <div class="card h-100">
           <div *ngIf="product" class="card-body">
-            <ng-container *ngIf="product.images && product.images.length > 0">
-              <img [src]="product.images[0]" alt="{{product.name}}" class="img-fluid">
+            <ng-container>
+              <img [src]="product.sanitizedImage" class="img-fluid">
             </ng-container>
             <h5 class="card-title">{{product.name}}</h5>
             <p class="card-text">{{product.description}}</p>
@@ -24,7 +24,7 @@
             <p class="card-text">Expiration Date: {{product.expiration_date}}</p>
             <button type="button" (click)="addToCart(product)">Buy</button>
           </div>
-          <div class="card-footer d-flex justify-content-between">
+          <div *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-footer d-flex justify-content-between" >
               <i class="bi bi-pencil-square" (click)="updateProduct(product.id)"type="button"></i>
               <i class="bi bi-trash3" (click)="deleteProduct(product.id)" type="button"></i>
           </div>
