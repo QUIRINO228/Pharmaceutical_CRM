@@ -18,6 +18,7 @@ import java.util.function.Function;
 public class JwtUtils {
 
     private final String SECRET = "rINnJSKt9i8xFIHPbk7JogBxla/XO/rz+bZkG8cWFIg=";
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
@@ -58,7 +59,7 @@ public class JwtUtils {
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
 
