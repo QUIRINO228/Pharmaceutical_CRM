@@ -25,4 +25,6 @@ public interface AdminService {
     Optional<Task> getTasksById(Long id);
 
     void updateTask(Long id, TaskDTO taskDTO);
+
+    List<Task> getAllTasksId(Long id);
 }

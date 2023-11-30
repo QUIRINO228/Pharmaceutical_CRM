@@ -114,4 +114,8 @@ export class AppService {
     });
 
   }
+
+  getUserTasks(userId: number): Observable<any> {
+    return this.http.get(`${this.url}/allTasksByid/${userId}`,{headers: this.createAuthorizationHeader()} )
+  }
 }

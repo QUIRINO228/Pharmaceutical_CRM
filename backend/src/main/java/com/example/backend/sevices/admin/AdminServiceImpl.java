@@ -106,4 +106,10 @@ public class AdminServiceImpl implements AdminService {
             }
         }
     }
+
+    @Override
+    public List<Task> getAllTasksId(Long id) {
+        Optional<Task> tasks = tasksRepository.findById(id);
+        return tasks.stream().toList();
+    }
 }
