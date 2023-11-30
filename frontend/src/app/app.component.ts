@@ -49,9 +49,9 @@ export class AppComponent implements OnInit {
   toggleMenu() {
     if (this.isMobile) {
       this.sidenav.toggle();
-      this.isCollapsed = false; // On mobile, the menu can never be collapsed
+      this.isCollapsed = false;
     } else {
-      this.sidenav.open(); // On desktop/tablet, the menu can never be fully closed
+      this.sidenav.open();
       this.isCollapsed = !this.isCollapsed;
     }
   }
@@ -59,5 +59,6 @@ export class AppComponent implements OnInit {
   logout() {
     StorageService.logout();
     this.router.navigate(["/login"]);
+    location.reload()
   }
 }

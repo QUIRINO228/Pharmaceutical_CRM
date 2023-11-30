@@ -23,6 +23,7 @@ import {MatButtonModule} from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import {CartComponent} from "./cart/cart.component";
 
 
 @NgModule({
@@ -36,8 +37,10 @@ import {MatListModule} from "@angular/material/list";
     ActivateUserComponent,
     ForgotMessageComponent,
     ChangePasswordComponent,
+      CartComponent
   ],
   imports: [
+    MatIconModule,
     MatDialogModule,
     BrowserModule,
     HttpClientModule,

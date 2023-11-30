@@ -44,10 +44,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/authenticate","/images/**", "/registration","/products", "/activate/**", "/forgot", "/changePassword/{link}").permitAll()
-                        .requestMatchers("/users", "/add", "delete/**", "update/**", "/product/**").authenticated())
+                        .requestMatchers("/users", "/add", "delete/**","task/update/**", "update/**", "/product/**", "/user/**", "tasks", "task/**", "task/delete/**").authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationManager(authenticationManager);
-
 
         return http.build();
     }
