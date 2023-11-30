@@ -23,8 +23,10 @@ import {MatButtonModule} from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import { CartComponent } from './cart/cart.component';
+import {RouterModule} from "@angular/router";
+import {AuthService} from "./services/auth/auth.service";
 import {CartComponent} from "./cart/cart.component";
-
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {CartComponent} from "./cart/cart.component";
     ActivateUserComponent,
     ForgotMessageComponent,
     ChangePasswordComponent,
-      CartComponent
+    CartComponent,
+    CartComponent
+
   ],
   imports: [
     MatIconModule,
@@ -56,8 +60,13 @@ import {CartComponent} from "./cart/cart.component";
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
+    RouterModule.forRoot([
+      { path: '', component: ViewproductsComponent},
+      { path: 'products/:productId', component: ViewproductsComponent},
+      { path: 'cart', component: CartComponent },
+    ])
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

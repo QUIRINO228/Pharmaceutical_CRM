@@ -16,6 +16,8 @@ export class ViewproductsComponent implements OnInit {
   products: any[] | undefined;
   isManagerLoggedIn: boolean = false;
   isAdminLoggedIn: boolean = false;
+  isUserLoggedIn: boolean = false;
+  isWorkerLoggedIn: boolean = false;
   constructor(
     private service: AppService,
     private router: Router,
@@ -65,10 +67,17 @@ export class ViewproductsComponent implements OnInit {
   updateProduct(id: number): void {
     this.router.navigate(['update', id]);
   }
-
-
   private updateUserLoggedStatus(): void {
     this.isManagerLoggedIn = StorageService.isManagerLoggedIn()
     this.isAdminLoggedIn = StorageService.isAdminLoggedIn()
+  }
+
+  openUpdateProductDialog(id: number) {
+    this.service.openUpdateProductDialog();
+
+  }
+
+  openCartDialog() {
+    this.service.openCartDialog();
   }
 }

@@ -1,3 +1,28 @@
+<div *ngIf="!isUserLoggedIn && !isAdminLoggedIn && !isWorkerLoggedIn && !isManagerLoggedIn">
+  <mat-toolbar color="primary">
+    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Guest Nav</h1>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()"  routerLinkActive="active">Log out <i class="bi bi-box-arrow-right"></i> </button>
+  </mat-toolbar>
+  <mat-sidenav-container autosize>
+    <mat-sidenav [opened]="!isCollapsed" mode="side">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/products" routerLinkActive="active">
+      <span class="entry">
+        <mat-icon>shopping_cart</mat-icon>
+        <span *ngIf="!isCollapsed">Products</span>
+      </span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
 <div *ngIf="isAdminLoggedIn">
   <mat-toolbar color="primary">
     <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
@@ -137,6 +162,14 @@
         </a>
         <a mat-list-item routerLink="/products" routerLinkActive="active">
       <span class="entry">
+        <mat-icon>store</mat-icon>
+        <span *ngIf="!isCollapsed">Products</span>
+      </span>
+        </a>
+        <a mat-list-item routerLink="/cart" routerLinkActive="active">
+      <span class="entry">
+        <mat-icon>shopping_cart</mat-icon>
+        <span *ngIf="!isCollapsed">Shopping cart</span>
         <mat-icon>shopping_cart</mat-icon>
         <span *ngIf="!isCollapsed">Products</span>
       </span>

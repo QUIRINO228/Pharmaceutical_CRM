@@ -10,6 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     styleUrls: ['./view-user.component.css'],
 })
 export class ViewUserComponent implements OnInit {
+dColumns: string[] = ['id', 'email', 'firstName', 'lastName', 'isActive', 'role'];
+    dataSource = new MatTableDataSource<any>();
+    isAdminLoggedIn: boolean = false;
+    newRole: string | undefined; // Remove "private" to make it accessible in the template
+
+
     displayedColumns: string[] = ['id', 'email', 'firstName', 'lastName', 'isActive', 'role', 'actions'];
     dataSource = new MatTableDataSource<any>();
     isAdminLoggedIn: boolean = false;
@@ -18,11 +24,31 @@ export class ViewUserComponent implements OnInit {
     isEditing: boolean = false;
     editedItem: any;
     roles: string[] = ['ADMIN', 'MANAGER', 'USER', 'WORKER'];
+
     constructor(private service: AdminService, private snackBar: MatSnackBar) {}
 
     ngOnInit() {
         this.getAllUsers();
     }
+
+
+    changeRole(user: any) {
+        this.service.changeUserRole(user.id, this.newRole).subscribe(
+            () => {
+                this.snackBar.open('Role changed successfully', 'Close', { duration: 2000 });
+                this.getAllUsers();
+            },
+            (error: any) => {
+                console.error('Error changing role:', error);
+                this.snackBar.open('Error changing role', 'Close', { duration: 2000 });
+            }
+        );
+    }
+
+    getAllUsers() {
+        this.service.getAllUsers().subscribe((res) => {
+            this.dataSource.data = res;
+        });
 
 
     editItem(element: any) {
@@ -79,5 +105,6 @@ export class ViewUserComponent implements OnInit {
     cancelEdit() {
         this.isEditing = false;
         this.editedItem = null;
+
     }
 }

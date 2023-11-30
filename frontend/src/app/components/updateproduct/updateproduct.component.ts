@@ -43,6 +43,15 @@ export class UpdateproductComponent implements OnInit {
     let id = this.route.snapshot.params['id'];
     this.service.getProductById(id).subscribe(data => {
       this.product = data
+      this.form.patchValue({
+        name: this.product.name,
+        description: this.product.description,
+        price: this.product.price.toString(), // Convert to string if necessary
+        availability_quantity: this.product.availability_quantity.toString(),
+        supplier: this.product.supplier,
+        expiration_date: this.product.expiration_date.toString(),
+      });
+
     })
   }
 
@@ -92,3 +101,4 @@ export class UpdateproductComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 }
+

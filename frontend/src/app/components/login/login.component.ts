@@ -5,7 +5,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {StorageService} from '../../services/storage/storage.service';
 
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {AppService} from "../../app.service"; // Import MatSnackBar from the correct path
+import {AppService} from "../../app.service";
 
 @Component({
   selector: 'app-login',

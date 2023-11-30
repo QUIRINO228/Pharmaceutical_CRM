@@ -2,3 +2,34 @@
   background-color: #696969;
   color: #fff;
 }
+.btn-custom2 {
+  background-color: #696969;
+  color: #fff;
+}
+.price {
+   font-size: 1.5em; /* розмір шрифту */
+   font-family: 'Your Chosen Font', sans-serif; /* шрифт (замініть 'Your Chosen Font' на вибраний вами шрифт) */
+   font-weight: bold; /* товщина шрифту */
+   color: black; /* колір шрифту */
+   /* Додайте інші стилі, які вам потрібні */
+ }
+.name {
+  font-size: 1.5em; /* розмір шрифту */
+  font-family: 'Your Chosen Font', sans-serif; /* шрифт (замініть 'Your Chosen Font' на вибраний вами шрифт) */
+  font-weight: bold; /* товщина шрифту */
+  color: black; /* колір шрифту */
+  /* Додайте інші стилі, які вам потрібні */
+}
+.card {
+  border: none;
+  background-color: transparent;/* встановлення ободку на нуль для всіх карток */
+}
+.card-text.price::after {
+  content: '$';
+  font-size: 0.7em; /* Розмір, який вам потрібен */
+  display: inline-block;
+  margin-right: 4px; /* опціонально, для відступу між символом і ціною */
+}
+.card:hover {
+  cursor: pointer;
+}
