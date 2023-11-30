@@ -7,7 +7,6 @@ import {ForgotCodeDTO} from './ForgotCodeDTO'
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {AddproductComponent} from "./components/addproduct/addproduct.component";
-import {ForgotMessageComponent} from "./components/forgot-message/forgot-message.component";
 
 
 @Injectable({
@@ -88,12 +87,6 @@ export class AppService {
 
   openRegistrationDialog(): void {
     this.dialog.open(RegistrationComponent, {
-    });
-  }
-  openForgotPasswordDialog() {
-    this.dialog.open(ForgotMessageComponent, {
-      height: '200px',
-      width: '400px',
     });
   }
 }
