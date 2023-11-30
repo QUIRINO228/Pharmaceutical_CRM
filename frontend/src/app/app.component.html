@@ -53,6 +53,12 @@
         <span *ngIf="!isCollapsed">Products</span>
       </span>
         </a>
+        <a mat-list-item routerLink="/admin/tasks" routerLinkActive="active">
+      <span class="entry">
+        <mat-icon>assignment</mat-icon>
+        <span *ngIf="!isCollapsed">Tasks</span>
+      </span>
+        </a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -80,8 +86,14 @@
         </a>
         <a mat-list-item routerLink="/products" routerLinkActive="active">
       <span class="entry">
-        <mat-icon>store</mat-icon>
+        <mat-icon>shopping_cart</mat-icon>
         <span *ngIf="!isCollapsed">Products</span>
+      </span>
+        </a>
+        <a mat-list-item routerLink="/tasks" routerLinkActive="active">
+      <span class="entry">
+        <mat-icon>assignment</mat-icon>
+        <span *ngIf="!isCollapsed">Tasks</span>
       </span>
         </a>
       </mat-nav-list>
@@ -112,8 +124,14 @@
         </a>
         <a mat-list-item routerLink="/products" routerLinkActive="active">
       <span class="entry">
-        <mat-icon>store</mat-icon>
+        <mat-icon>shopping_cart</mat-icon>
         <span *ngIf="!isCollapsed">Products</span>
+      </span>
+        </a>
+        <a mat-list-item routerLink="/tasks" routerLinkActive="active">
+      <span class="entry">
+        <mat-icon>assignment</mat-icon>
+        <span *ngIf="!isCollapsed">Tasks</span>
       </span>
         </a>
       </mat-nav-list>
@@ -152,6 +170,8 @@
       <span class="entry">
         <mat-icon>shopping_cart</mat-icon>
         <span *ngIf="!isCollapsed">Shopping cart</span>
+        <mat-icon>shopping_cart</mat-icon>
+        <span *ngIf="!isCollapsed">Products</span>
       </span>
         </a>
       </mat-nav-list>

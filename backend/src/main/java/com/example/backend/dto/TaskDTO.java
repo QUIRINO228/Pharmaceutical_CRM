@@ -1,6 +1,7 @@
 package com.example.backend.dto;
 
-import com.example.backend.models.enums.Role;
+
+import com.example.backend.models.enums.TaskEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,16 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-    private Long id;
-
+public class TaskDTO {
+    private String header;
+    private String description;
     private String email;
-
-    private String firstName;
-
-    private String lastName;
-
-    private Role role;
-
-    private Boolean isActive;
+    private String taskStatus;
 }

@@ -26,6 +26,7 @@ import {MatListModule} from "@angular/material/list";
 import { CartComponent } from './cart/cart.component';
 import {RouterModule} from "@angular/router";
 import {AuthService} from "./services/auth/auth.service";
+import {CartComponent} from "./cart/cart.component";
 
 @NgModule({
   declarations: [
@@ -39,9 +40,11 @@ import {AuthService} from "./services/auth/auth.service";
     ForgotMessageComponent,
     ChangePasswordComponent,
     CartComponent,
+    CartComponent
 
   ],
   imports: [
+    MatIconModule,
     MatDialogModule,
     BrowserModule,
     HttpClientModule,

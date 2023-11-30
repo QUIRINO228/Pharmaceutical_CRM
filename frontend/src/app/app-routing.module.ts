@@ -14,6 +14,9 @@ import {ViewproductsComponent} from "./components/viewproduct/viewproduct.compon
 import {UpdateproductComponent} from "./components/updateproduct/updateproduct.component";
 import {AdminGuard} from "./services/guards/admin-gurad/admin.guard";
 import {ManagerGuard} from "./services/guards/manager-guard/manager.guard";
+import {TasksComponent} from "./modules/admin/admin-components/tasks/tasks.component";
+import {AddTaskComponent} from "./modules/admin/admin-components/add-task/add-task.component";
+import {WorkerGuard} from "./services/guards/worker-guard/worker.guard.guard";
 
 
 const routes: Routes = [
