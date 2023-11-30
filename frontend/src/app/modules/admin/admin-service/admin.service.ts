@@ -62,12 +62,6 @@ export class AdminService {
         return this.http.post( this.url+"/task/add", newTask,{ headers: this.createAuthorizationHeader() });
     }
 
-    createAuthorizationHeader(): HttpHeaders {
-        let authHeaders: HttpHeaders = new HttpHeaders();
-        return authHeaders.set(
-            'Authorization', "Bearer " + StorageService.getToken()
-        );
-    }
 
     deleteTask(taskId: number):any {
         return this.http.delete(this.url+"/task/delete/"+taskId, { headers: this.createAuthorizationHeader() })

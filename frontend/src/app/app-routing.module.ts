@@ -12,11 +12,7 @@ import {ChangePasswordComponent} from "./components/change-password/change-passw
 import {ForgotMessageComponent} from "./components/forgot-message/forgot-message.component";
 import {ViewproductsComponent} from "./components/viewproduct/viewproduct.component";
 import {UpdateproductComponent} from "./components/updateproduct/updateproduct.component";
-import {AdminGuard} from "./services/guards/admin-gurad/admin.guard";
-import {ManagerGuard} from "./services/guards/manager-guard/manager.guard";
-import {TasksComponent} from "./modules/admin/admin-components/tasks/tasks.component";
-import {AddTaskComponent} from "./modules/admin/admin-components/add-task/add-task.component";
-import {WorkerGuard} from "./services/guards/worker-guard/worker.guard.guard";
+import {MyTasksComponent} from "./components/my-tasks/my-tasks.component";
 
 
 const routes: Routes = [
@@ -26,7 +22,8 @@ const routes: Routes = [
   {path: 'change-password/:link', component: ChangePasswordComponent, canActivate: [noAuthGuard]},
   {path: 'forgot-password', component: ForgotMessageComponent, canActivate: [noAuthGuard]},
   {path: 'products', component: ViewproductsComponent},
-  {path: 'update/:id', component: UpdateproductComponent, canActivate: [AdminGuard || ManagerGuard]},
+  {path: 'update/:id', component: UpdateproductComponent},
+  {path: 'my-tasks', component: MyTasksComponent},
   {path: 'admin', loadChildren: () => import("./modules/admin/admin.module").then(m =>m.AdminModule)},
   {path: 'user', loadChildren: () => import("./modules/user/user.module").then(m =>m.UserModule)},
   {path: 'manager', loadChildren: () => import("./modules/manager/manager.module").then(m =>m.ManagerModule)},

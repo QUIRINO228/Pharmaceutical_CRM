@@ -23,7 +23,6 @@ import {MatButtonModule} from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
-import { CartComponent } from './cart/cart.component';
 import {RouterModule} from "@angular/router";
 import {AuthService} from "./services/auth/auth.service";
 import {CartComponent} from "./cart/cart.component";
