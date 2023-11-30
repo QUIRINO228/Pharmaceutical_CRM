@@ -3,10 +3,14 @@ package com.example.backend.models;
 
 import com.example.backend.dto.UserDto;
 import com.example.backend.models.enums.Role;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Data
@@ -28,7 +32,6 @@ public class User {
 
     private Role role;
 
-    private String phone;
 
     private String password;
 
@@ -40,6 +43,12 @@ public class User {
 
     private Boolean isActive;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            mappedBy = "user")
+    @JsonBackReference
+    @JsonIgnoreProperties("user")
+    private List<Task> tasks;
+
     public UserDto userDto(){
         UserDto userDto = new UserDto();
         userDto.setId(id);
@@ -49,6 +58,10 @@ public class User {
         userDto.setRole(role);
         userDto.setIsActive(isActive);
         return userDto;
+    }
+
+    public void addTask(Task task){
+        this.tasks.add(task);
     }
 
 }

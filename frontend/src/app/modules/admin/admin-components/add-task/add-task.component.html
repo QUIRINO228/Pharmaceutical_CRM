@@ -1,0 +1,33 @@
+<div class="my-5">
+    <div class="mx-auto w-75">
+        <h2 class="text-center mb-3">Add Task</h2>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                    <label for="header" class="form-label">Header</label>
+                    <input id="header" type="text" formControlName="header" class="form-control"  required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" formControlName="description" class="form-control" rows="3" required></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12 form-group mb-3">
+                <label for="user" class="form-label">Select User</label>
+                <select id="user" formControlName="user" name="user" class="form-control" required (change)="onUserSelected()">
+                    <option *ngFor="let user of users" [ngValue]="user" [selected]="user.id === yourData?.user?.id">{{ user.role }} - {{ user.email }}</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <button [disabled]="!form.valid" class="btn btn-primary w-100" type="submit">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
