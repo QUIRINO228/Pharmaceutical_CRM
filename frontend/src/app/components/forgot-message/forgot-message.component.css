@@ -1,0 +1,8 @@
+.btn-custom {
+  background-color: #01aba8;
+  color: #fff;
+}
+input.form-control:focus {
+  border-color: #bfc0bf;
+  box-shadow: 0 0 0 0.1rem #bfc0bf;
+}

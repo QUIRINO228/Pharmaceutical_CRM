@@ -3,8 +3,8 @@
     <img [src]="getPhotoPath(1)" alt="логін" class="photo1">
   </div>
   <div class="container d-flex align-items-center justify-content-center">
-    <div>
-      <h2 class="text-center">Welcome to AnRo pharmacy!</h2>
+    <div class="form-group mb-3 custom-width">
+      <h2 class="text-center ">Welcome to AnRo pharmacy!</h2>
       <p>Please log in to your account</p>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mx-auto">
         <div class="form-group mb-3">
@@ -23,6 +23,7 @@
         <input type="hidden" name="_csrf" value="'${_csrf.token}'">
         <div class="d-grid gap-2">
           <button type="submit" [disabled]="loginForm.invalid" class="btn btn-custom">Log in</button>
+          <button type="button" class="btn btn-link" (click)="openForgotPasswordDialog()">Forgot your password? Change it here</button>
           <button type="button" (click)="openRegistrationDialog()" class="btn btn-custom1">Sing up</button>
         </div>
       </form>

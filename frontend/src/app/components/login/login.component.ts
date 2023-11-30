@@ -46,6 +46,10 @@ export class LoginComponent {
   openRegistrationDialog(): void {
     this.appService.openRegistrationDialog();
   }
+  openForgotPasswordDialog() {
+    this.appService.openForgotPasswordDialog();
+
+  }
 
   onSubmit() {
     this.service.login(
@@ -77,6 +81,4 @@ export class LoginComponent {
       }
     );
   }
-
-
 }
