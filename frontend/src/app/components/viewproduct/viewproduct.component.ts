@@ -40,6 +40,7 @@ export class ViewproductsComponent implements OnInit {
       }
     })
     this.service.getProduct().subscribe(data => {
+      console.log(data)
       this.products = data.map(product => {
         const imageUrl = product.images.length > 0 ? `http://localhost:8080/images/${product.images[0].id}` : '';
         const sanitizedImage = imageUrl ? this.sanitizer.bypassSecurityTrustUrl(imageUrl) : null;
