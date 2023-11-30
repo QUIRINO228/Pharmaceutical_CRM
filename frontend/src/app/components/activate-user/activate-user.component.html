@@ -4,14 +4,14 @@
     <form [formGroup]="form" (ngSubmit)="submit()">
       <div class="row">
         <div class="col-md-12 form-group mb-3">
-          <label for="code" class="form-label">Activation Code</label>
+          <label for="code" class="form-label">Activation Code:</label>
           <input id="code" type="number" formControlName="code" name="code" class="form-control" required>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-12 form-group">
-          <button [disabled]="!form.valid" class="btn btn-primary w-100" type="submit" value="Submit">Activate</button>
+          <button [disabled]="!form.valid" class="btn btn-custom w-100" type="submit" value="Submit">Activate</button>
         </div>
       </div>
     </form>

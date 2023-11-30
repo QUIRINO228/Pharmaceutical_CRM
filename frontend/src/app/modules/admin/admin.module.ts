@@ -6,6 +6,8 @@ import { DashboardComponent } from './admin-components/dashboard/dashboard.compo
 import { ViewUserComponent } from './admin-components/view-user/view-user.component';
 import {HttpClientModule} from "@angular/common/http";
 import {MatTableModule} from "@angular/material/table";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import {MatTableModule} from "@angular/material/table";
         CommonModule,
         AdminRoutingModule,
         HttpClientModule,
-        MatTableModule
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule
     ]
 })
 export class AdminModule { }

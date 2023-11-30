@@ -1,0 +1,40 @@
+/* cart.component.css */
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th, .cart-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.total {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+h3{
+    font-size: 1.5em; /* розмір шрифту */
+    font-family: 'Your Chosen Font', sans-serif; /* шрифт (замініть 'Your Chosen Font' на вибраний вами шрифт) */
+    font-weight: bold; /* товщина шрифту */
+    color: black; /* колір шрифту */
+    /* Додайте інші стилі, які вам потрібні */
+    margin: 20px;
+}
+.cart-container {
+    margin: 20px; /* Adjust the value as needed */
+    padding: 20px; /* Adjust the value as needed */
+}
+.btn-custom {
+    background-color: #696969;
+    color: #fff;
+}
+.purchase-message {
+    margin-top: 10px;
+    color: green; /* Adjust the color as needed */
+    font-weight: bold;
+}

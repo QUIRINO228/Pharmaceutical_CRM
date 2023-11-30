@@ -4,6 +4,7 @@ import {map, Observable, tap} from "rxjs";
 import {StorageService} from "../storage/storage.service";
 
 
+
 const url = ['http://localhost:8080/']
 export const AUTH_HEADER = 'authorization'
 
@@ -14,6 +15,10 @@ export class AuthService {
 
   constructor(private http: HttpClient, private storage: StorageService) {
   }
+    isLoggedIn(): boolean {
+
+        return true;
+    }
 
   login(email: String, password: String): Observable<any> {
     return this.http.post(url + 'authenticate', {

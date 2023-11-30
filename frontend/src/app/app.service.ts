@@ -7,8 +7,10 @@ import {ForgotCodeDTO} from './ForgotCodeDTO'
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {AddproductComponent} from "./components/addproduct/addproduct.component";
+import {UpdateproductComponent} from "./components/updateproduct/updateproduct.component";
 import {StorageService} from "./services/storage/storage.service";
 import {ForgotMessageComponent} from "./components/forgot-message/forgot-message.component";
+import {CartComponent} from "./cart/cart.component";
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +54,6 @@ export class AppService {
     return this.http.post<User>(`${this.url}/registration`, user, {headers});
   }
 
-
-
   addProduct(formData: FormData): Observable<Product> {
     return this.http.post<Product>(`${this.url}/add`, formData, {headers: this.createAuthorizationHeader()});
   }
@@ -82,9 +82,10 @@ export class AppService {
 
   openAddProductDialog(): void {
     this.dialog.open(AddproductComponent, {
-    });
-  }
+    })
 
+
+  }
   openRegistrationDialog(): void {
     this.dialog.open(RegistrationComponent, {
     });
@@ -101,5 +102,16 @@ export class AppService {
       height: '200px',
       width: '400px',
     });
+  }
+
+  openUpdateProductDialog() {
+    this.dialog.open(UpdateproductComponent, {
+    });
+
+  }
+  openCartDialog() {
+    this.dialog.open(CartComponent, {
+    });
+
   }
 }
