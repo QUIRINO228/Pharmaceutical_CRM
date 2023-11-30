@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {AddproductComponent} from "./components/addproduct/addproduct.component";
 import {StorageService} from "./services/storage/storage.service";
-
+import {ForgotMessageComponent} from "./components/forgot-message/forgot-message.component";
 
 @Injectable({
   providedIn: 'root'
@@ -95,5 +95,11 @@ export class AppService {
     return authHeaders.set(
       'Authorization', "Bearer " + StorageService.getToken()
     );
+  }
+  openForgotPasswordDialog() {
+    this.dialog.open(ForgotMessageComponent, {
+      height: '200px',
+      width: '400px',
+    });
   }
 }
