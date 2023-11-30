@@ -21,6 +21,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonModule} from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

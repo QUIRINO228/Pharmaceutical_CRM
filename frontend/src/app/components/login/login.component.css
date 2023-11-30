@@ -4,14 +4,27 @@
 .image-container {
   flex: 1;
 }
-
+h2.text-center {
+  font-size: 2.5rem;
+  margin-bottom: 100px;
+}
 .container {
   flex: 1;
   padding: 20px;
 }
+.custom-width {
+  width: 500px;
+}
 .photo1 {
   max-width: 100%;
   height: auto;
+}
+.d-grid button.btn-link {
+  color: #696969;
+  text-decoration: none;
+}
+.d-grid button.btn-link:hover {
+  color: #01aba8;
 }
 .btn-custom {
   background-color: #97e1e4;
