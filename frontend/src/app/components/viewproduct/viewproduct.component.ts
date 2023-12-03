@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { DomSanitizer } from "@angular/platform-browser";
-import { CartService } from "../../cart.service";
-import { Product } from "../../Product";
 import { StorageService } from "../../services/storage/storage.service";
+import { Product } from "../../Product";
 
 @Component({
   selector: 'app-viewproduct',
@@ -12,26 +11,21 @@ import { StorageService } from "../../services/storage/storage.service";
   styleUrls: ['./viewproduct.component.css']
 })
 export class ViewproductsComponent implements OnInit {
-
-  products: any[] | undefined;
+  products: Product[] = [];
   isManagerLoggedIn: boolean = false;
   isAdminLoggedIn: boolean = false;
   isUserLoggedIn: boolean = false;
   isWorkerLoggedIn: boolean = false;
+
   constructor(
-    private service: AppService,
-    private router: Router,
-    private sanitizer: DomSanitizer,
-    private route: ActivatedRoute,
-    private cartService: CartService
+      private service: AppService,
+      private router: Router,
+      private sanitizer: DomSanitizer,
+      private route: ActivatedRoute,
   ) { }
 
   openAddProductDialog(): void {
     this.service.openAddProductDialog();
-  }
-
-  addToCart(product: Product) {
-    this.cartService.addToCart(product);
   }
 
   ngOnInit(): void {
@@ -40,11 +34,11 @@ export class ViewproductsComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.updateUserLoggedStatus();
       }
-    })
+    });
     this.service.getProduct().subscribe(data => {
-      console.log(data)
+      console.log(data);
       this.products = data.map(product => {
-        const imageUrl = product.images.length > 0 ? `http://localhost:8080/images/${product.images[0].id}` : '';
+        const imageUrl = product.image ? `http://localhost:8080/images/${product.image.id}` : '';
         const sanitizedImage = imageUrl ? this.sanitizer.bypassSecurityTrustUrl(imageUrl) : null;
         return {
           ...product,
@@ -54,7 +48,24 @@ export class ViewproductsComponent implements OnInit {
     });
   }
 
-    deleteProduct(id: number): void {
+  addToBasket(product: Product): void {
+    if (!product.quantity || isNaN(product.quantity) || product.quantity <= 0) {
+      alert('Invalid quantity');
+      return;
+    }
+    const userId = StorageService.getUserId();
+    const requestData = {
+      productId: product.id,
+      quantity: product.quantity,
+      userId: userId
+    };
+    console.log(requestData);
+    this.service.addToBasket(requestData).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+  deleteProduct(id: number): void {
     const isConfirmed = window.confirm('Are you sure you want to delete this product?');
     if (isConfirmed) {
       this.service.deleteProduct(id).subscribe(() => {
@@ -67,17 +78,13 @@ export class ViewproductsComponent implements OnInit {
   updateProduct(id: number): void {
     this.router.navigate(['update', id]);
   }
+
   private updateUserLoggedStatus(): void {
-    this.isManagerLoggedIn = StorageService.isManagerLoggedIn()
-    this.isAdminLoggedIn = StorageService.isAdminLoggedIn()
+    this.isManagerLoggedIn = StorageService.isManagerLoggedIn();
+    this.isAdminLoggedIn = StorageService.isAdminLoggedIn();
   }
 
   openUpdateProductDialog(id: number) {
     this.service.openUpdateProductDialog();
-
-  }
-
-  openCartDialog() {
-    this.service.openCartDialog();
   }
 }

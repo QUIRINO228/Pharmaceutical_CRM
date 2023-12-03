@@ -10,7 +10,8 @@ import java.util.List;
 
 @Service
 public interface ProductService {
-    Product createProduct (ProductDTO productDTO, List<MultipartFile> files) throws IOException;
+
+    Product createProduct(ProductDTO productDTO, MultipartFile file) throws IOException;
 
     List<Product> getProducts();
 
@@ -18,7 +19,9 @@ public interface ProductService {
 
     void deleteProduct(Long id);
 
-    Product updateProduct (ProductDTO productDTO, Long id,  List<MultipartFile> files);
+    Product updateProduct (ProductDTO productDTO, Long id,  MultipartFile file) throws IOException;
+
+    List<ProductDTO> getProductsDTO();
 }
 
 

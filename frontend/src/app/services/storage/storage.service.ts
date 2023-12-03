@@ -85,4 +85,9 @@ export class StorageService {
         window.localStorage.removeItem(TOKEN)
         window.localStorage.removeItem(USER)
     }
+
+    static getUserId(): number | null {
+        const user = this.getUser();
+        return user ? user.user_id : null;
+    }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AppService } from 'src/app/app.service';
-import { Product } from 'src/app/Product';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AppService} from 'src/app/app.service';
+import {Product} from 'src/app/Product';
 import {ProductDTO} from "../../ProductDTO";
 
 interface FormDataFields {
@@ -24,9 +24,8 @@ interface FormDataFields {
 export class UpdateproductComponent implements OnInit {
 
   product?: Product
-  data: any
-  selectedFiles: File[] = [];
-
+  data: any;
+  selectedFile: File | undefined;
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
@@ -56,17 +55,17 @@ export class UpdateproductComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    if (event.target.files && event.target.files.length) {
-      this.selectedFiles = event.target.files;
+    if (event.target.files && event.target.files.length > 0) {
+      this.selectedFile = event.target.files[0];
     }
   }
 
+
   onUploadFiles(): FormData {
     const formData = new FormData();
-    for (const file of this.selectedFiles) {
-      formData.append('files', file, file.name);
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile, this.selectedFile.name);
     }
-    formData.forEach(console.log)
     return formData;
   }
 
@@ -76,7 +75,6 @@ export class UpdateproductComponent implements OnInit {
 
     const productDTO: ProductDTO = {
       name: formValue.name ?? '',
-      photoPath: this.selectedFiles[0].name,
       description: formValue.description ?? '',
       price: parseFloat(formValue.price ?? '0'),
       availability_quantity: parseInt(formValue.availability_quantity ?? '0'),
@@ -87,7 +85,6 @@ export class UpdateproductComponent implements OnInit {
     const formData = this.onUploadFiles();
 
     formData.append('name', productDTO.name);
-    formData.append('photoPath', productDTO.photoPath);
     formData.append('description', productDTO.description);
     formData.append('price', String(productDTO.price));
     formData.append('availability_quantity',  String(productDTO.availability_quantity));

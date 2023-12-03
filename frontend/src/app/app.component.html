@@ -5,7 +5,7 @@
     </button>
     <h1>Guest Nav</h1>
     <span class="spacer"></span>
-    <button mat-button (click)="logout()"  routerLinkActive="active">Log out <i class="bi bi-box-arrow-right"></i> </button>
+    <button mat-button routerLink="/login"  routerLinkActive="active">Log in <i class="bi bi-box-arrow-right"></i> </button>
   </mat-toolbar>
   <mat-sidenav-container autosize>
     <mat-sidenav [opened]="!isCollapsed" mode="side">
@@ -23,6 +23,7 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
+
 <div *ngIf="isAdminLoggedIn">
   <mat-toolbar color="primary">
     <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
@@ -57,6 +58,18 @@
       <span class="entry">
         <mat-icon>assignment</mat-icon>
         <span *ngIf="!isCollapsed">Tasks</span>
+      </span>
+        </a>
+        <a mat-list-item routerLink="/storage" routerLinkActive="active">
+      <span class="entry">
+        <mat-icon>warehouse</mat-icon>
+        <span *ngIf="!isCollapsed">Storage</span>
+      </span>
+        </a>
+        <a mat-list-item routerLink="/orders" routerLinkActive="active">
+      <span class="entry">
+        <mat-icon>list_alt</mat-icon>
+        <span *ngIf="!isCollapsed">Orders</span>
       </span>
         </a>
       </mat-nav-list>

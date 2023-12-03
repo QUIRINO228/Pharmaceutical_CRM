@@ -1,8 +1,7 @@
-import {ActivatedRouteSnapshot, CanActivate, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from "@angular/core";
 import {StorageService} from "../../storage/storage.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-
 
 
 @Injectable({
