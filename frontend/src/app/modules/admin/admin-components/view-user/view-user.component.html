@@ -44,7 +44,6 @@
   </ng-container>
 
   <!-- Role Column -->
-  <!-- Role Column with Mat-Select Dropdown -->
   <ng-container matColumnDef="role">
     <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
     <mat-cell *matCellDef="let element">
@@ -72,13 +71,8 @@
       </button>
     </mat-cell>
   </ng-container>
-  <ng-container matColumnDef="isActive">
-    <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.isActive ? 'Yes' : 'No' }}</mat-cell>
-  </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <!-- isActive Column -->
   <ng-container matColumnDef="isActive">
     <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.isActive ? 'Yes' : 'No' }}</mat-cell>

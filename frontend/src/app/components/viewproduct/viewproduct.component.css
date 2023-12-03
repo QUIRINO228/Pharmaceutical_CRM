@@ -33,3 +33,13 @@
 .card:hover {
   cursor: pointer;
 }
+
+.inp{
+    width: 120px;
+}
+
+.btn{
+    margin-top: 12px;
+    justify-content: center;
+    text-align: center;
+}

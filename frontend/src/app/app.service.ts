@@ -10,112 +10,111 @@ import {AddproductComponent} from "./components/addproduct/addproduct.component"
 import {UpdateproductComponent} from "./components/updateproduct/updateproduct.component";
 import {StorageService} from "./services/storage/storage.service";
 import {ForgotMessageComponent} from "./components/forgot-message/forgot-message.component";
-import {CartComponent} from "./cart/cart.component";
+
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AppService {
 
-  private url = "http://localhost:8080"
+    private url = "http://localhost:8080"
 
-  constructor(private http: HttpClient,private dialog: MatDialog) {
-  }
+    constructor(private http: HttpClient, private dialog: MatDialog) {
+    }
 
-  login(user: User): Observable<User> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post<User>(`${this.url}/login`, user, {headers});
-  }
+    login(user: User): Observable<User> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post<User>(`${this.url}/login`, user, {headers});
+    }
 
-  forgotMessage(email: String): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post<User>(`${this.url}/forgot`, email, {headers});
-  }
+    forgotMessage(email: String): Observable<any> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post<User>(`${this.url}/forgot`, email, {headers});
+    }
 
-  changePassword(link: string, forgotCodeDTO: ForgotCodeDTO): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post(`${this.url}/changePassword/${link}`, forgotCodeDTO, {headers});
-  }
+    changePassword(link: string, forgotCodeDTO: ForgotCodeDTO): Observable<any> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post(`${this.url}/changePassword/${link}`, forgotCodeDTO, {headers});
+    }
 
-  deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/delete/${id}`, {headers: this.createAuthorizationHeader()});
-  }
+    deleteProduct(id: number): Observable<any> {
+        return this.http.delete(`${this.url}/delete/${id}`, {headers: this.createAuthorizationHeader()});
+    }
 
-  registerUser(user: User): Observable<User> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post<User>(`${this.url}/registration`, user, {headers});
-  }
+    registerUser(user: User): Observable<User> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post<User>(`${this.url}/registration`, user, {headers});
+    }
 
-  addProduct(formData: FormData): Observable<Product> {
-    return this.http.post<Product>(`${this.url}/add`, formData, {headers: this.createAuthorizationHeader()});
-  }
+    addProduct(formData: FormData): Observable<Product> {
+        return this.http.post<Product>(`${this.url}/add`, formData, {headers: this.createAuthorizationHeader()});
+    }
 
+    getProductForStorage(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.url}/storage`, {headers: this.createAuthorizationHeader()})
+    }
 
-  getProduct(): Observable<any[]> {
-    const headers = new HttpHeaders();
-    return this.http.get<any[]>(`${this.url}/products`, { headers })
-  }
+    getProduct(): Observable<any[]> {
+        const headers = new HttpHeaders();
+        return this.http.get<any[]>(`${this.url}/products`, {headers})
+    }
 
-  getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.url}/product/${id}`,{headers: this.createAuthorizationHeader()} )
-  }
+    getProductById(id: number): Observable<Product> {
+        return this.http.get<Product>(`${this.url}/product/${id}`, {headers: this.createAuthorizationHeader()})
+    }
 
-  updateProduct(id?: number, product?: any): Observable<any> {
-    return this.http.put<any>(`${this.url}/update/${id}`, product, {headers: this.createAuthorizationHeader()})
-  }
+    updateProduct(id?: number, product?: any): Observable<any> {
+        return this.http.put<any>(`${this.url}/update/${id}`, product, {headers: this.createAuthorizationHeader()})
+    }
 
-  checkActivateCode(link: string, code: number | null | undefined): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post(`${this.url}/activate/${link}`, code, { headers });
-  }
-
-
-  openAddProductDialog(): void {
-    this.dialog.open(AddproductComponent, {
-    })
+    checkActivateCode(link: string, code: number | null | undefined): Observable<any> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        return this.http.post(`${this.url}/activate/${link}`, code, {headers});
+    }
 
 
-  }
-  openRegistrationDialog(): void {
-    this.dialog.open(RegistrationComponent, {
-    });
-  }
+    openAddProductDialog(): void {
+        this.dialog.open(AddproductComponent, {})
+    }
 
-  createAuthorizationHeader(): HttpHeaders {
-    let authHeaders: HttpHeaders = new HttpHeaders();
-    return authHeaders.set(
-      'Authorization', "Bearer " + StorageService.getToken()
-    );
-  }
-  openForgotPasswordDialog() {
-    this.dialog.open(ForgotMessageComponent, {
-      height: '200px',
-      width: '400px',
-    });
-  }
+    openRegistrationDialog(): void {
+        this.dialog.open(RegistrationComponent, {});
+    }
 
-  openUpdateProductDialog() {
-    this.dialog.open(UpdateproductComponent, {
-    });
+    createAuthorizationHeader(): HttpHeaders {
+        let authHeaders: HttpHeaders = new HttpHeaders();
+        return authHeaders.set(
+            'Authorization', "Bearer " + StorageService.getToken()
+        );
+    }
 
-  }
-  openCartDialog() {
-    this.dialog.open(CartComponent, {
-    });
+    openForgotPasswordDialog() {
+        this.dialog.open(ForgotMessageComponent, {
+            height: '200px',
+            width: '400px',
+        });
+    }
 
-  }
+    openUpdateProductDialog() {
+        this.dialog.open(UpdateproductComponent, {});
 
-  getUserTasks(userId: number): Observable<any> {
-    return this.http.get(`${this.url}/allTasksByid/${userId}`,{headers: this.createAuthorizationHeader()} )
-  }
+    }
+
+    addToBasket(requestData: any) {
+        return this.http.post('http://localhost:8080/addToBasket', requestData, {headers: this.createAuthorizationHeader()});
+    }
+
+    getUserTasks(userId: number): Observable<any> {
+        return this.http.get(`${this.url}/my-tasks/${userId}`, {headers: this.createAuthorizationHeader()})
+    }
 }

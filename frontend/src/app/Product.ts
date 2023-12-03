@@ -1,4 +1,5 @@
 export interface Product {
+  sanitizedImage: any;
   id: number
   name: string
   description: string
@@ -7,4 +8,5 @@ export interface Product {
   supplier: string
   expiration_date: number
   photo: File
+  quantity: number;
 }

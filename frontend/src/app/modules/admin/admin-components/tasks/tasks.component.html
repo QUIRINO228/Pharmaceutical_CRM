@@ -1,78 +1,76 @@
-
 <div class="mt-5">
-    <div class="container">
-        <div class="my-3">
-            <button type="button" (click)="addTask()" class="btn btn-custom">
-                <i class="bi bi-plus-circle-fill"></i> Add Task
-            </button>
-        </div>
-        <div class="row">
-            <mat-table [dataSource]="taskDataSource" class="mat-table table table-striped">
-                <!-- ID Column -->
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-                    <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
-                </ng-container>
-
-                <!-- Header Column -->
-                <ng-container matColumnDef="header">
-                    <mat-header-cell *matHeaderCellDef>Header</mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                            {{ element.header }}
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Description Column -->
-                <ng-container matColumnDef="description">
-                    <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                            {{ element.description }}
-                    </mat-cell>
-                </ng-container>
-
-                <!-- TaskEnum Column -->
-                <ng-container matColumnDef="taskEnum" class="user-select-field">
-                    <mat-header-cell *matHeaderCellDef>Task Enum</mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                            {{ element.taskEnum }}
-                    </mat-cell>
-                </ng-container>
-
-                <!-- User Column -->
-                <ng-container matColumnDef="user">
-                    <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                            {{ element.user.email }}
-                    </mat-cell>
-                </ng-container>
-
-                <!-- ChangeUser Column -->
-                <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
-                    <mat-cell *matCellDef="let element">
-                        <ng-container *ngIf="!isEditing || editedItem.id !== element.id; else editMode">
-                            <button mat-icon-button (click)="eDitTask(element)" color="primary">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                            <button mat-icon-button (click)="deleteTask(element)" color="warn">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </ng-container>
-                        <ng-template #editMode>
-                            <button mat-icon-button (click)="saveChanges()" color="primary">
-                                <mat-icon>check</mat-icon>
-                            </button>
-                            <button mat-icon-button (click)="cancelEdit()" color="warn">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </ng-template>
-                    </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="taskDisplayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: taskDisplayedColumns"></mat-row>
-            </mat-table>
-        </div>
+  <div class="container">
+    <div class="my-3">
+      <button type="button" (click)="addTask()" class="btn btn-custom">
+        <i class="bi bi-plus-circle-fill"></i> Add Task
+      </button>
     </div>
-</div>
+    <div class="row">
+      <mat-table [dataSource]="taskDataSource" class="mat-table table table-striped">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+        </ng-container>
 
+        <!-- Header Column -->
+        <ng-container matColumnDef="header">
+          <mat-header-cell *matHeaderCellDef>Header</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.header }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.description }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- TaskEnum Column -->
+        <ng-container matColumnDef="taskEnum" class="user-select-field">
+          <mat-header-cell *matHeaderCellDef>Task Enum</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.taskEnum }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- User Column -->
+        <ng-container matColumnDef="user">
+          <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.user.email }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- ChangeUser Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <ng-container *ngIf="!isEditing || editedItem.id !== element.id; else editMode">
+              <button mat-icon-button (click)="eDitTask(element)" color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteTask(element)" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-container>
+            <ng-template #editMode>
+              <button mat-icon-button (click)="saveChanges()" color="primary">
+                <mat-icon>check</mat-icon>
+              </button>
+              <button mat-icon-button (click)="cancelEdit()" color="warn">
+                <mat-icon>close</mat-icon>
+              </button>
+            </ng-template>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="taskDisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: taskDisplayedColumns"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

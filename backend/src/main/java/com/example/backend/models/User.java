@@ -23,31 +23,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     private String email;
-
     private String firstName;
-
     private String lastName;
-
     private Role role;
-
-
     private String password;
-
     private String activationLink;
     private Integer activationCode;
-
     private String forgotLink;
     private Integer forgotCode;
-
     private Boolean isActive;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "user")
     @JsonBackReference
     @JsonIgnoreProperties("user")
     private List<Task> tasks;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            mappedBy = "user")
+    private Basket basket;
 
     public UserDto userDto(){
         UserDto userDto = new UserDto();

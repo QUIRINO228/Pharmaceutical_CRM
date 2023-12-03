@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavigationEnd, Router } from "@angular/router";
-import { StorageService } from "./services/storage/storage.service";
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { MatSidenav } from '@angular/material/sidenav';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
+import {StorageService} from "./services/storage/storage.service";
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {MatSidenav} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',

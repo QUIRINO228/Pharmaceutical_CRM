@@ -25,12 +25,10 @@ public class Image {
     private Long size;
     @Column(name = "contentType")
     private String contentType;
-    @Column(name = "isPreviewImage")
-    private boolean isPreviewImage;
     @Lob
     @Column(name="bytes", columnDefinition ="LONGBLOB")
     private byte[] bytes;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JsonBackReference
     private Product product;
 }

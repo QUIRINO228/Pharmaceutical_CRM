@@ -28,13 +28,21 @@ public class Product {
     private BigDecimal availability_quantity;
     private String supplier;
     private String expiration_date;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "product")
     @JsonManagedReference
-    private List<Image> images = new ArrayList<>();
+    private Image image;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<BasketItem> basketItems = new ArrayList<>();
 
     public void addImageToProduct(Image image) {
         image.setProduct(this);
-        images.add(image);
+        this.setImage(image);
+    }
+
+    public void removeImageFromProduct(Image image) {
+        this.setImage(null);
+        image.setProduct(null);
     }
 }

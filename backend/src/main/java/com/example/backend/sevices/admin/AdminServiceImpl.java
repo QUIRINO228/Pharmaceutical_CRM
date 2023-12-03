@@ -76,7 +76,9 @@ public class AdminServiceImpl implements AdminService {
         task.setHeader(taskDTO.getHeader());
         task.setDescription(taskDTO.getDescription());
         task.setTaskEnum(TaskEnum.GIVEN);
-        tasksRepository.save(task);
+        task.setUser(user);
+        user.addTask(task);
+        userRepository.save(user);
     }
 
     @Override
@@ -109,7 +111,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<Task> getAllTasksId(Long id) {
-        Optional<Task> tasks = tasksRepository.findById(id);
-        return tasks.stream().toList();
+        Optional<User> userOptional = userRepository.findById(id);
+        User user = userOptional.get();
+        return user.getTasks();
     }
 }

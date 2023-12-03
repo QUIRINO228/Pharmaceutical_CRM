@@ -1,0 +1,75 @@
+<div class="mt-5">
+  <div class="container">
+    <div class="my-3">
+      <!-- Add Product Button -->
+      <button type="button" (click)="addProduct()" class="btn btn-custom">
+        <i class="bi bi-plus-circle-fill"></i> Add Product
+      </button>
+    </div>
+
+    <!-- Product Table -->
+    <div class="row">
+      <mat-table [dataSource]="productDataSource" class="mat-table table table-striped">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.price }}</mat-cell>
+        </ng-container>
+
+        <!-- Availability Quantity Column -->
+        <ng-container matColumnDef="availability_quantity">
+          <mat-header-cell *matHeaderCellDef>Availability Quantity</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.availability_quantity }}</mat-cell>
+        </ng-container>
+
+        <!-- Supplier Column -->
+        <ng-container matColumnDef="supplier">
+          <mat-header-cell *matHeaderCellDef>Supplier</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.supplier }}</mat-cell>
+        </ng-container>
+
+        <!-- Expiration Date Column -->
+        <ng-container matColumnDef="expiration_date">
+          <mat-header-cell *matHeaderCellDef>Expiration Date</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.expiration_date }}</mat-cell>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <ng-container>
+              <button mat-icon-button (click)="editProduct(element)" color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteProduct(element)" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-container>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="productDisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: productDisplayedColumns"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

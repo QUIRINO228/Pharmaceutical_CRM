@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AdminService } from '../../admin-service/admin.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AdminService} from '../../admin-service/admin.service';
 
 @Component({
   selector: 'app-add-task',
@@ -48,13 +48,13 @@ export class AddTaskComponent implements OnInit {
       console.log(taskData);
 
       this.service.addTask(taskData).subscribe(
-          () => {
-            console.log('Task added successfully');
-            this.router.navigate(['/tasks']);
-          },
-          (error: any) => {
-            this.router.navigate(['/tasks']);
-          }
+        () => {
+          console.log('Task added successfully');
+          this.router.navigate(['/admin/tasks']);
+        },
+        (error: any) => {
+          this.router.navigate(['/admin/tasks']);
+        }
       );
     } else {
 

@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {StorageService} from "../../../../services/storage/storage.service";
-import {Observable} from "rxjs";
-import {Product} from "../../../../Product";
-import {AddproductComponent} from "../../../../components/addproduct/addproduct.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({

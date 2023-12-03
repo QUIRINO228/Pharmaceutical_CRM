@@ -6,11 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
-
 
 import java.math.BigDecimal;
-import java.util.List;
 
 
 @Data
@@ -18,10 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
+    @JsonProperty("id")
+    private Long id;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("photoPath")
-    private String photoPath;
     @JsonProperty("description")
     private String description;
     @JsonProperty("price")

@@ -1,10 +1,12 @@
 package com.example.backend.sevices.product;
 
 import com.example.backend.dto.ProductDTO;
+import com.example.backend.models.BasketItem;
 import com.example.backend.models.Image;
 import com.example.backend.models.Product;
 import com.example.backend.repositories.ImageRepository;
 import com.example.backend.repositories.ProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,8 +24,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ImageRepository imageRepository;
 
+
+
     @Override
-    public Product createProduct(ProductDTO productDTO, List<MultipartFile> files) throws IOException {
+    public Product createProduct(ProductDTO productDTO, MultipartFile file) throws IOException {
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
@@ -31,16 +35,11 @@ public class ProductServiceImpl implements ProductService {
         product.setAvailability_quantity(productDTO.getAvailability_quantity());
         product.setSupplier(productDTO.getSupplier());
         product.setExpiration_date(productDTO.getExpiration_date());
-
-        for (MultipartFile file : files) {
-            if (file != null && file.getSize() > 0) {
-                Image image = toImageEntity(file);
-                image.setPreviewImage(true);
-                product.addImageToProduct(image);
-            }
+        if (file != null && file.getSize() > 0) {
+            Image image = toImageEntity(file);
+            product.addImageToProduct(image);
         }
-
-        productRepository.save(product);
+                productRepository.save(product);
         return product;
     }
 
@@ -56,11 +55,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + id));
+        for (BasketItem basketItem : product.getBasketItems()) {
+            basketItem.getBasket().getBasketItems().remove(basketItem);
+            basketItem.setProduct(null);
+            basketItem.setBasket(null);
+        }
         productRepository.deleteById(id);
     }
 
+
     @Override
-    public Product updateProduct(ProductDTO productDTO, Long id, List<MultipartFile> files) {
+    public Product updateProduct(ProductDTO productDTO, Long id, MultipartFile file) throws IOException {
         Product existingProduct = productRepository.findById(id).orElse(null);
         if (existingProduct != null) {
             existingProduct.setName(productDTO.getName());
@@ -69,19 +76,37 @@ public class ProductServiceImpl implements ProductService {
             existingProduct.setAvailability_quantity(productDTO.getAvailability_quantity());
             existingProduct.setSupplier(productDTO.getSupplier());
             existingProduct.setExpiration_date(productDTO.getExpiration_date());
-            existingProduct.getImages().clear();
-//                List<Image> oldImages = existingProduct.getImages();
-//                imageRepository.deleteAll(oldImages);
-//                for (MultipartFile file : files) {
-//                    if (file != null && file.getSize() > 0) {
-//                        Image image = toImageEntity(file);
-//                        image.setPreviewImage(true);
-//                        existingProduct.addImageToProduct(image);
-//                    }
-//                }
+            if (file != null && file.getSize() > 0) {
+                Image newImage = toImageEntity(file);
+                Image oldImage = existingProduct.getImage();
+                if (oldImage != null) {
+                    existingProduct.removeImageFromProduct(oldImage);
+                    imageRepository.delete(oldImage);
+                }
+                existingProduct.addImageToProduct(newImage);
+            }
+
             productRepository.save(existingProduct);
         }
         return existingProduct;
+    }
+
+    @Override
+    public List<ProductDTO> getProductsDTO() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for (Product product : products) {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setId(product.getId());
+            productDTO.setName(product.getName());
+            productDTO.setDescription(product.getDescription());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setAvailability_quantity(product.getAvailability_quantity());
+            productDTO.setSupplier(product.getSupplier());
+            productDTO.setExpiration_date(product.getExpiration_date());
+            productDTOS.add(productDTO);
+        }
+        return productDTOS;
     }
 
     private Image toImageEntity(MultipartFile file) throws IOException {

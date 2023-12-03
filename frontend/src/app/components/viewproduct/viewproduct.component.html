@@ -1,9 +1,8 @@
+<!-- viewproduct.component.html -->
 <div class="mt-5">
   <div class="container">
-    <button  (click)="openCartDialog()" class="btn btn-custom">
-      <i class="bi bi-cart"></i>Shopping Cart
-    </button>
-    <div class="my-3" *ngIf="isManagerLoggedIn || isAdminLoggedIn ">
+    <button *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" class="btn btn-custom"><i class="bi bi-cart"></i> Basket</button>
+    <div class="my-3" *ngIf="isManagerLoggedIn || isAdminLoggedIn">
       <button type="button" (click)="openAddProductDialog()" class="btn btn-custom">
         <i class="bi bi-plus-circle-fill"></i> Add Products
       </button>
@@ -18,14 +17,15 @@
             <h3 class="card-title name">{{product.name}}</h3>
             <p class="card-text">{{product.description}}</p>
             <p *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-text">Availability: {{product.availability_quantity}}</p>
-            <p class="card-text">{{product.supplier}}</p>
+            <p *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-text">{{product.supplier}}</p>
             <p class="card-text price">{{product.price}}</p>
             <p *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-text">Expiration Date: {{product.expiration_date}}</p>
-            <button type="button" (click)="addToCart(product)"class="btn btn-custom2" >Add to cart</button>
+            <input *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="number" class="inp" [(ngModel)]="product.quantity">
+            <button *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="button" (click)="addToBasket(product)" class="btn btn-custom2">Add to basket</button>
           </div>
-          <div *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-footer d-flex justify-content-between" >
-            <i class="bi bi-pencil-square" (click)="openUpdateProductDialog(product.id)"type="button"></i>
-              <i class="bi bi-trash3" (click)="deleteProduct(product.id)" type="button"></i>
+          <div *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-footer d-flex justify-content-between">
+            <i class="bi bi-pencil-square" (click)="updateProduct(product.id)" type="button"></i>
+            <i class="bi bi-trash3" (click)="deleteProduct(product.id)" type="button"></i>
           </div>
         </div>
       </div>
