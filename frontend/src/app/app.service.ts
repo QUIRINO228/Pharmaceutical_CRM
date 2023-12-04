@@ -117,4 +117,5 @@ export class AppService {
     getUserTasks(userId: number): Observable<any> {
         return this.http.get(`${this.url}/my-tasks/${userId}`, {headers: this.createAuthorizationHeader()})
     }
+
 }
