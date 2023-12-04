@@ -1,7 +1,7 @@
 <!-- viewproduct.component.html -->
 <div class="mt-5">
   <div class="container">
-    <button *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" class="btn btn-custom"><i class="bi bi-cart"></i> Basket</button>
+    <a type="button" *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" routerLink="/basket" class="btn btn-custom"><i class="bi bi-cart"></i> Basket</a>
     <div class="my-3" *ngIf="isManagerLoggedIn || isAdminLoggedIn">
       <button type="button" (click)="openAddProductDialog()" class="btn btn-custom">
         <i class="bi bi-plus-circle-fill"></i> Add Products
@@ -20,7 +20,7 @@
             <p *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-text">{{product.supplier}}</p>
             <p class="card-text price">{{product.price}}</p>
             <p *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-text">Expiration Date: {{product.expiration_date}}</p>
-            <input *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="number" class="inp" [(ngModel)]="product.quantity">
+            <input *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="number" class="inp" [(ngModel)]="product.quantity" min="0" >
             <button *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="button" (click)="addToBasket(product)" class="btn btn-custom2">Add to basket</button>
           </div>
           <div *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-footer d-flex justify-content-between">

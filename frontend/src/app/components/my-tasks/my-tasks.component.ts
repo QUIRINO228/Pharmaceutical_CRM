@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {AppService} from "../../app.service";
+import { Component, OnInit } from '@angular/core';
+import { AppService } from "../../app.service";
 
 @Component({
   selector: 'app-my-tasks',
@@ -22,13 +22,13 @@ export class MyTasksComponent implements OnInit {
 
     if (this.userId) {
       this.service.getUserTasks(this.userId).subscribe(
-          (tasks: any[]) => {
-            console.log(tasks)
-            this.userTasks = tasks;
-          },
-          (error: any) => {
-            console.error('Error fetching user tasks:', error);
-          }
+        (tasks: any[]) => {
+          console.log(tasks)
+          this.userTasks = tasks;
+        },
+        (error: any) => {
+          console.error('Error fetching user tasks:', error);
+        }
       );
     } else {
       console.error('User ID not found in localStorage.');

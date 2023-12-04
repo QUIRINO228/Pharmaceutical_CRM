@@ -30,6 +30,7 @@ import {OrdersComponent} from './components/orders/orders.component';
 import {StorageComponent} from "./components/storage/storage.component";
 import {MatTableModule} from "@angular/material/table";
 import {MatInputModule} from "@angular/material/input";
+import { BasketComponent } from './components/basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {MatInputModule} from "@angular/material/input";
     ChangePasswordComponent,
     MyTasksComponent,
     StorageComponent,
-    OrdersComponent
+    OrdersComponent,
+    BasketComponent
   ],
   imports: [
     MatTableModule,
@@ -68,6 +70,7 @@ import {MatInputModule} from "@angular/material/input";
     RouterModule.forRoot([
       {path: '', component: ViewproductsComponent},
       {path: 'products/:productId', component: ViewproductsComponent},
+      { path: 'basket', component: BasketComponent },
     ]),
     FormsModule
   ],
