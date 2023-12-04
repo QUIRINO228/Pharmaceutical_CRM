@@ -4,7 +4,7 @@ import { AppService } from 'src/app/app.service';
 import { DomSanitizer } from "@angular/platform-browser";
 import { StorageService } from "../../services/storage/storage.service";
 import { Product } from "../../Product";
-import {BasketService} from "../../basket.service";
+
 
 @Component({
   selector: 'app-viewproduct',
@@ -23,7 +23,6 @@ export class ViewproductsComponent implements OnInit {
       private router: Router,
       private sanitizer: DomSanitizer,
       private route: ActivatedRoute,
-      private basketService: BasketService
   ) { }
 
   openAddProductDialog(): void {
@@ -51,7 +50,6 @@ export class ViewproductsComponent implements OnInit {
   }
 
   addToBasket(product: Product): void {
-    this.basketService.addToBasket(product);
     if (!product.quantity || isNaN(product.quantity) || product.quantity <= 0) {
       alert('Invalid quantity');
       return;

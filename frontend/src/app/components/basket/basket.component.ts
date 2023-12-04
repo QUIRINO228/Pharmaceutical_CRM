@@ -1,29 +1,61 @@
-import { Component } from '@angular/core';
-import {BasketService} from "../../basket.service";
+import { Component, OnInit } from '@angular/core';
+import {AppService} from "../../app.service";
+import { StorageService } from '../../services/storage/storage.service';;
+import {BasketItem} from "../../BasketItem";
 
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.css']
 })
-export class BasketComponent {
-    totalCost: number = 0;
-
-  items = this.basketService.getItems();
+export class BasketComponent implements OnInit {
+  items: BasketItem[] = [];
+  totalCost: number = 0;
 
   constructor(
-    private basketService: BasketService
-  ) { }
-    ngOnInit() {
+    private service: AppService,
+    private storage: StorageService
+  ) {}
 
-        this.items = this.basketService.getItems();
-        this.updateTotalCost();
-    }
-    clearBasket(): void {
-        this.basketService.clearBasket();
-        this.items = this.basketService.getItems();
-    }
-    private updateTotalCost(): void {
-        this.totalCost = this.items.reduce((total, item) => total + (item.quantity || 0) * item.price, 0);
-    }
+  ngOnInit(): void {
+    this.getBasket();
+  }
+
+  getBasket() {
+    const userId = StorageService.getUserId();
+    this.service.getBasket(userId).subscribe(
+      (data: any) => {
+        console.log(data);
+        if (data && Array.isArray(data) && data.length > 0 && data[0].product) {
+          this.items = data.map((item: any) => ({ product: item.product, quantity: item.quantity }));
+          this.calculateTotalCost();
+        } else {
+
+          console.error('Invalid data structure:', data);
+        }
+      },
+      (error) => {
+        console.error('Error fetching basket:', error);
+
+      }
+    );
+  }
+
+
+  calculateTotalCost() {
+    this.totalCost = this.items.reduce((sum, item) => {
+      const price = item.product?.price || 0;
+      return sum + (item.quantity * price);
+    }, 0);
+  }
+
+  clearBasket() {
+    const userId = StorageService.getUserId();
+    this.service.clearBasket(userId).subscribe(()=>{
+      location.reload()
+    },
+      (error) =>{
+        console.error('Error clearing basket:', error);
+      })
+  }
 }

@@ -118,4 +118,11 @@ export class AppService {
         return this.http.get(`${this.url}/my-tasks/${userId}`, {headers: this.createAuthorizationHeader()})
     }
 
+  getBasket(userId: number | null) : Observable<any> {
+    return this.http.get(`${this.url}/basket/${userId}`, {headers: this.createAuthorizationHeader()} )
+  }
+
+  clearBasket(userId: number | null) {
+    return this.http.delete(`${this.url}/basket/delete/${userId}`, {headers: this.createAuthorizationHeader()} )
+  }
 }

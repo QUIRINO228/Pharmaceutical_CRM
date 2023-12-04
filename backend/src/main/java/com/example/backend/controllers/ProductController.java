@@ -48,18 +48,18 @@ public class ProductController {
 
     @GetMapping(value = "/products")
     @ResponseBody
-    public List<Product> getProducts() {
-        return productService.getProducts();
+    public ResponseEntity<List<Product>> getProducts() {
+        return ResponseEntity.ok(productService.getProducts());
     }
 
     @GetMapping(value = "/storage")
     @ResponseBody
-    public List<ProductDTO> getProductsForStorage() {
-        return productService.getProductsDTO();
+    public ResponseEntity<List<ProductDTO>> getProductsForStorage() {
+        return ResponseEntity.ok(productService.getProductsDTO());
     }
 
     @PutMapping("/update/{id}")
-    public Product updateProductById(@ModelAttribute("name") String name,
+    public ResponseEntity<Product> updateProductById(@ModelAttribute("name") String name,
                                      @ModelAttribute("photoPath") String photoPath,
                                      @ModelAttribute("description") String description,
                                      @ModelAttribute("price") String price,
@@ -75,17 +75,17 @@ public class ProductController {
         productDTO.setAvailability_quantity(new BigDecimal(availability_quantity));
         productDTO.setSupplier(supplier);
         productDTO.setExpiration_date(expiration_date);
-        return productService.updateProduct(productDTO, id, file);
+        return ResponseEntity.ok(productService.updateProduct(productDTO, id, file));
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return "Product deleted successfully.";
+        return ResponseEntity.ok("Product deleted successfully.");
     }
 
     @GetMapping("/product/{id}")
-    public Product getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductById(id));
     }
 }

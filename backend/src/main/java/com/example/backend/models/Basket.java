@@ -20,6 +20,6 @@ public class Basket {
     private Long id;
     @OneToOne
     private User user;
-    @OneToMany(mappedBy = "basket", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "basket", cascade = CascadeType.REMOVE)
     private List<BasketItem> basketItems;
 }

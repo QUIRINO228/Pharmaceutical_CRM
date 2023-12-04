@@ -1,12 +1,14 @@
 package com.example.backend.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -33,8 +35,9 @@ public class Product {
     @JsonManagedReference
     private Image image;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @JsonIgnoreProperties("product")
     private List<BasketItem> basketItems = new ArrayList<>();
+
 
     public void addImageToProduct(Image image) {
         image.setProduct(this);
