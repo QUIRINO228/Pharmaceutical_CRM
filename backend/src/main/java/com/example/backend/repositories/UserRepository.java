@@ -1,6 +1,7 @@
 package com.example.backend.repositories;
 
 import com.example.backend.models.Basket;
+import com.example.backend.models.Task;
 import com.example.backend.models.User;
 import com.example.backend.models.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
