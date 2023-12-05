@@ -36,4 +36,14 @@ public class BasketController {
         basketService.deleteBasketById(id);
         return ResponseEntity.ok("Basket is clear");
     }
+
+    @DeleteMapping("/basket/remove/{userId}/{productId}")
+    public ResponseEntity<String> removeFromBasket(
+            @PathVariable Long userId,
+            @PathVariable Long productId
+    ) {
+        basketService.removeProductFromBasket(userId, productId);
+        return ResponseEntity.ok("Product removed from the basket successfully.");
+    }
+
 }

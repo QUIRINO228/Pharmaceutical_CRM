@@ -50,7 +50,7 @@ export class ViewproductsComponent implements OnInit {
   }
 
   addToBasket(product: Product): void {
-    if (!product.quantity || isNaN(product.quantity) || product.quantity <= 0) {
+    if (!this.isValidQuantity(product.quantity)) {
       alert('Invalid quantity');
       return;
     }
@@ -65,6 +65,10 @@ export class ViewproductsComponent implements OnInit {
       console.log(data);
     });
   }
+  private isValidQuantity(quantity: any): boolean {
+    return /^[0-9]+$/.test(quantity);
+  }
+
 
   deleteProduct(id: number): void {
     const isConfirmed = window.confirm('Are you sure you want to delete this product?');
@@ -84,7 +88,6 @@ export class ViewproductsComponent implements OnInit {
     this.isManagerLoggedIn = StorageService.isManagerLoggedIn();
     this.isAdminLoggedIn = StorageService.isAdminLoggedIn();
   }
-
   openUpdateProductDialog(id: number) {
     this.service.openUpdateProductDialog();
   }

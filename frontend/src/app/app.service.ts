@@ -123,11 +123,14 @@ export class AppService {
     return this.http.get(`${this.url}/basket/${userId}`, {headers: this.createAuthorizationHeader()} )
   }
 
-  clearBasket(userId: number | null) {
-    return this.http.delete(`${this.url}/basket/delete/${userId}`, {headers: this.createAuthorizationHeader()} )
-  }
-
   createOrder(orderDTO: OrderDTO): Observable<any> {
     return this.http.post(`${this.url}/create-order`, orderDTO, {headers: this.createAuthorizationHeader()});
   }
+  removeFromBasket(userId: number | null, productId: number): Observable<any> {
+        return this.http.delete(`${this.url}/basket/remove/${userId}/${productId}`, { headers: this.createAuthorizationHeader() });
+    }
+
+  clearBasket(userId: number | null): Observable<any> {
+        return this.http.delete(`${this.url}/basket/delete/${userId}`, { headers: this.createAuthorizationHeader() });
+    }
 }

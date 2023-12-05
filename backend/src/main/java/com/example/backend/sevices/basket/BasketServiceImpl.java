@@ -70,6 +70,17 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
+    public void removeProductFromBasket(Long userId, Long productId) {
+        Basket basket = findBasketByUserId(userId);
+        Product product = productService.getProductById(productId);
+
+        basketItemRepository.findByBasketAndProduct(basket, product).ifPresent(basketItem -> {
+            basketItemRepository.delete(basketItem);
+            basketItem.setBasket(null);
+        });
+    }
+
+    @Override
     public Basket findBasketByUserId(Long userId) {
         Optional<Basket> optionalBasket = basketRepository.findByUserId(userId);
         return optionalBasket.orElseGet(() -> {
