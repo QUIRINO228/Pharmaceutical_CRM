@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/authenticate","/images/**", "/registration","/products", "/activate/**", "/forgot", "/changePassword/{link}").permitAll()
-                        .requestMatchers("/users", "/add", "delete/**","basket/**","basket/delete/**","/my-tasks/**","/addToBasket","/storage","task/update/**", "update/**", "/product/**", "/user/**", "/tasks", "task/**", "task/delete/**", "/create-order").authenticated())
+                        .requestMatchers("/users", "/orders","/add", "delete/**","basket/**","basket/delete/**","/my-tasks/**","/addToBasket","/storage","task/update/**", "update/**", "/product/**", "/user/**", "/tasks", "task/**", "task/delete/**", "/create-order").authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationManager(authenticationManager);
 

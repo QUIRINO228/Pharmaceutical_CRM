@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import com.example.backend.dto.CreateOrderDTO;
 import com.example.backend.dto.OrderDTO;
 import com.example.backend.models.Order;
 import com.example.backend.sevices.order.OrderService;
@@ -18,9 +19,9 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/create-order")
-    public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
-        log.info("Received OrderDTO: {}", orderDTO);
-        Order order = orderService.createOrder(orderDTO);
+    public ResponseEntity<Order> createOrder(@RequestBody CreateOrderDTO createOrderDTO) {
+        log.info("Received OrderDTO: {}", createOrderDTO);
+        Order order = orderService.createOrder(createOrderDTO);
         return ResponseEntity.ok(order);
     }
 }

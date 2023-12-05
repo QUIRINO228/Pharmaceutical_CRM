@@ -1,9 +1,6 @@
 package com.example.backend.controllers;
 
-import com.example.backend.dto.ChangeUserDTO;
-import com.example.backend.dto.TaskDTO;
-import com.example.backend.dto.UpdateTaskDTO;
-import com.example.backend.dto.UserDto;
+import com.example.backend.dto.*;
 import com.example.backend.models.Task;
 import com.example.backend.sevices.admin.AdminService;
 import lombok.AllArgsConstructor;
@@ -65,5 +62,10 @@ public class AdminController {
     private ResponseEntity<String> addTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
         adminService.updateTask(id, taskDTO);
         return ResponseEntity.ok("Task added successfully");
+    }
+
+    @GetMapping("/orders")
+    private ResponseEntity<List<OrderDTO>> getAllOrders(){
+        return ResponseEntity.ok(adminService.getAllOrders());
     }
 }

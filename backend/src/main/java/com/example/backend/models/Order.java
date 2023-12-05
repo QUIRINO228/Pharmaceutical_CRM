@@ -1,5 +1,8 @@
 package com.example.backend.models;
 
+import com.example.backend.models.enums.OrderEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,9 +26,12 @@ public class Order {
     private Date completedDate;
     private String address;
     private String comment;
+    private OrderEnum status;
+    @JsonManagedReference
     @ManyToOne
     private User user;
     @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<OrderItem> orderItems;
 }
 
