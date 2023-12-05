@@ -59,6 +59,5 @@ export class AppComponent implements OnInit {
   logout() {
     StorageService.logout();
     this.router.navigate(["/login"]);
-    location.reload()
   }
 }
