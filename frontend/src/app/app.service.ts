@@ -130,4 +130,8 @@ export class AppService {
   createOrder(orderDTO: OrderDTO): Observable<any> {
     return this.http.post(`${this.url}/create-order`, orderDTO, {headers: this.createAuthorizationHeader()});
   }
+
+  getAllTasks(): Observable<any> {
+    return this.http.get(`${this.url}/orders`, {headers: this.createAuthorizationHeader()} )
+  }
 }

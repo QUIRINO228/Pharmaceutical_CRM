@@ -1,10 +1,12 @@
 package com.example.backend.sevices.admin;
 
 import com.example.backend.dto.*;
+import com.example.backend.models.Order;
 import com.example.backend.models.Task;
 import com.example.backend.models.User;
 import com.example.backend.models.enums.Role;
 import com.example.backend.models.enums.TaskEnum;
+import com.example.backend.repositories.OrderRepository;
 import com.example.backend.repositories.TasksRepository;
 import com.example.backend.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
@@ -25,6 +27,7 @@ public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
     private final TasksRepository tasksRepository;
+    private final OrderRepository orderRepository;
 
     @PostConstruct
     public void createAdminAccount() {
@@ -132,4 +135,25 @@ public class AdminServiceImpl implements AdminService {
         User user = userOptional.get();
         return user.getTasks();
     }
+
+    @Override
+    public List<OrderDTO> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream()
+                .map(this::convertToOrderDTO)
+                .collect(Collectors.toList());
+    }
+
+    private OrderDTO convertToOrderDTO(Order order) {
+        return OrderDTO.builder()
+                .id(order.getId())
+                .address(order.getAddress())
+                .comment(order.getComment())
+                .createDate(order.getCreateDate())
+                .completedDate(order.getCompletedDate())
+                .userEmail(order.getUser().getEmail())
+                .status(order.getStatus())
+                .build();
+    }
+
 }
