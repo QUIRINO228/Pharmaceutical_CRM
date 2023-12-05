@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 import com.example.backend.dto.ChangeUserDTO;
 import com.example.backend.dto.TaskDTO;
+import com.example.backend.dto.UpdateTaskDTO;
 import com.example.backend.dto.UserDto;
 import com.example.backend.models.Task;
 import com.example.backend.sevices.admin.AdminService;
@@ -37,15 +38,15 @@ public class AdminController {
     }
 
     @GetMapping("/tasks")
-    private ResponseEntity<List<Task>> getTasks() {
-        List<Task> tasks = adminService.getTasks();
-        return ResponseEntity.ok(tasks);
+    private List<TaskDTO> getTasks() {
+        List<TaskDTO> tasks = adminService.getTasks();
+        return tasks;
     }
 
     @GetMapping("/task/{id}")
-    private ResponseEntity<Optional<Task>> getTasksById(@PathVariable Long id) {
-        Optional<Task> task = adminService.getTasksById(id);
-        return ResponseEntity.ok(task);
+    private UpdateTaskDTO getTasksById(@PathVariable Long id) {
+        UpdateTaskDTO task = adminService.getTasksById(id);
+        return task;
     }
 
     @DeleteMapping("/task/delete/{id}")

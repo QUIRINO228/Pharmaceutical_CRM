@@ -71,9 +71,9 @@ export class ViewproductsComponent implements OnInit {
     if (isConfirmed) {
       this.service.deleteProduct(id).subscribe(() => {
         this.products = this.products?.filter(product => product.id !== id);
+        location.reload();
       });
     }
-    location.reload();
   }
 
   updateProduct(id: number): void {
@@ -83,9 +83,5 @@ export class ViewproductsComponent implements OnInit {
   private updateUserLoggedStatus(): void {
     this.isManagerLoggedIn = StorageService.isManagerLoggedIn();
     this.isAdminLoggedIn = StorageService.isAdminLoggedIn();
-  }
-
-  openUpdateProductDialog(id: number) {
-    this.service.openUpdateProductDialog();
   }
 }

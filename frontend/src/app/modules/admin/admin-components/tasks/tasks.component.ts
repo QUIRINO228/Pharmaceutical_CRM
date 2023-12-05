@@ -17,7 +17,7 @@ export class TasksComponent implements OnInit {
   isEditing: boolean | undefined;
   editedItem: any;
   users: any[] = [];
-  private form: FormGroup<{ header: FormControl<string | null>; description: FormControl<string | null>; user: FormControl<any> }>;
+  private form: FormGroup;
   private yourData: any;
   userFormControl: FormControl<string | null>;
 
@@ -25,6 +25,7 @@ export class TasksComponent implements OnInit {
     this.form = new FormGroup({
       header: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
+      taskStatus: new FormControl('', Validators.required),
       user: new FormControl('', Validators.required),
     });
 

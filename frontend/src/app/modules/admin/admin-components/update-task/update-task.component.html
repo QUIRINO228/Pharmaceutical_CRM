@@ -1,40 +1,35 @@
 <div class="my-5">
-    <div class="mx-auto w-75">
-        <h2 class="text-center mb-3">Update Task</h2>
-        <form [formGroup]="form" (ngSubmit)="submit()">
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="header" class="form-label">Header</label>
-                    <input id="header" type="text" formControlName="header" class="form-control"  required>
-                </div>
-            </div>
+  <div class="mx-auto w-75">
+    <h2 class="text-center mb-3">Update Task</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-md-12 form-group mb-3">
+          <label for="header" class="form-label">Header</label>
+          <input id="header" type="text" formControlName="header" class="form-control" required>
+        </div>
+      </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea id="description" formControlName="description" class="form-control" rows="3" required></textarea>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-md-12 form-group mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" formControlName="description" class="form-control" rows="3" required></textarea>
+        </div>
+      </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group mb-3">
-                    <label for="taskStatus" class="form-label">Task Status</label>
-                    <select id="taskStatus" formControlName="taskStatus" class="form-control">
-                        <option *ngFor="let status of taskStatus" [value]="status">{{ status }}</option>
-                    </select>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-md-12 form-group mb-3">
+          <label for="taskStatus" class="form-label">Task Status</label>
+          <select id="taskStatus" formControlName="taskStatus" class="form-control">
+            <option *ngFor="let status of taskStatus" [value]="status">{{ status }}</option>
+          </select>
+        </div>
+      </div>
 
-            <div class="col-md-12 form-group mb-3">
-                <label for="user" class="form-label">Selected User</label>
-                <div>{{ selectedUser?.email }}</div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <button [disabled]="!form.valid" class="btn btn-primary w-100" type="submit">Update</button>
-                </div>
-            </div>
-        </form>
-    </div>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <button [disabled]="!form.valid" class="btn btn-primary w-100" type="submit">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
