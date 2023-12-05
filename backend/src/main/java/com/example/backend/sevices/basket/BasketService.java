@@ -1,7 +1,7 @@
 package com.example.backend.sevices.basket;
 
 import com.example.backend.dto.BasketItemDTO;
-import com.example.backend.models.BasketItem;
+import com.example.backend.models.Basket;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,4 +14,6 @@ public interface BasketService {
     List<BasketItemDTO> getBasketById(Long id);
 
     void deleteBasketById(Long id);
+
+    Basket findBasketByUserId(Long userId);
 }

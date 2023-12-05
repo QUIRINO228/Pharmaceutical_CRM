@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,7 +42,9 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "user")
     private Basket basket;
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            mappedBy = "user")
+    private List<Order> orders;
     public UserDto userDto(){
         UserDto userDto = new UserDto();
         userDto.setId(id);

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 @Slf4j
-public class BasketServiceImpl implements BasketService{
+public class BasketServiceImpl implements BasketService {
 
     private final BasketItemRepository basketItemRepository;
     private final ProductService productService;
@@ -49,13 +49,11 @@ public class BasketServiceImpl implements BasketService{
 
     @Override
     public List<BasketItemDTO> getBasketById(Long id) {
-        Basket basket = findBasketByUserId(id);
-        return Optional.ofNullable(basket)
-                .map(Basket::getBasketItems)
-                .orElse(Collections.emptyList())
-                .stream()
-                .map(basketItem -> new BasketItemDTO(basketItem.getProduct(), basketItem.getQuantity()))
-                .collect(Collectors.toList());
+        return Optional.ofNullable(findBasketByUserId(id))
+                .map(basket -> basket.getBasketItems().stream()
+                        .map(basketItem -> new BasketItemDTO(basketItem.getProduct(), basketItem.getQuantity()))
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
     }
 
     @Override
@@ -71,7 +69,7 @@ public class BasketServiceImpl implements BasketService{
         basketRepository.save(basket);
     }
 
-
+    @Override
     public Basket findBasketByUserId(Long userId) {
         Optional<Basket> optionalBasket = basketRepository.findByUserId(userId);
         return optionalBasket.orElseGet(() -> {
@@ -83,9 +81,6 @@ public class BasketServiceImpl implements BasketService{
             return basketRepository.save(newBasket);
         });
     }
-
-
-
 
 
 }

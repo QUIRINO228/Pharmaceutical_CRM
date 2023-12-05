@@ -10,6 +10,7 @@ import {AddproductComponent} from "./components/addproduct/addproduct.component"
 import {UpdateproductComponent} from "./components/updateproduct/updateproduct.component";
 import {StorageService} from "./services/storage/storage.service";
 import {ForgotMessageComponent} from "./components/forgot-message/forgot-message.component";
+import {OrderDTO} from "./OrderDTO";
 
 
 @Injectable({
@@ -124,5 +125,9 @@ export class AppService {
 
   clearBasket(userId: number | null) {
     return this.http.delete(`${this.url}/basket/delete/${userId}`, {headers: this.createAuthorizationHeader()} )
+  }
+
+  createOrder(orderDTO: OrderDTO): Observable<any> {
+    return this.http.post(`${this.url}/create-order`, orderDTO, {headers: this.createAuthorizationHeader()});
   }
 }

@@ -15,6 +15,7 @@ import {UpdateproductComponent} from "./components/updateproduct/updateproduct.c
 import {MyTasksComponent} from "./components/my-tasks/my-tasks.component";
 import {StorageComponent} from "./components/storage/storage.component";
 import {OrdersComponent} from "./components/orders/orders.component";
+import {CreateOrderComponent} from "./components/create-order/create-order.component";
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'my-tasks', component: MyTasksComponent},
   {path: 'storage', component: StorageComponent},
   {path: 'orders', component: OrdersComponent},
+  {path: 'create-order', component: CreateOrderComponent},
   {path: 'admin', loadChildren: () => import("./modules/admin/admin.module").then(m =>m.AdminModule)},
   {path: 'user', loadChildren: () => import("./modules/user/user.module").then(m =>m.UserModule)},
   {path: 'manager', loadChildren: () => import("./modules/manager/manager.module").then(m =>m.ManagerModule)},

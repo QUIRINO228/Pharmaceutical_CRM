@@ -26,6 +26,7 @@
     </tfoot>
   </table>
   <button class="btn btn-danger" (click)="clearBasket()">Clear Basket</button>
+  <button class="btn btn-close-white" (click)="createOrder()">Create Order</button>
 </div>
 <div *ngIf="!items || items.length === 0">
   <p>Your order is empty.</p>

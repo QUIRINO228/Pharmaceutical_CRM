@@ -31,6 +31,8 @@ import {StorageComponent} from "./components/storage/storage.component";
 import {MatTableModule} from "@angular/material/table";
 import {MatInputModule} from "@angular/material/input";
 import { BasketComponent } from './components/basket/basket.component';
+import { OrderComponent } from './components/order/order.component';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { BasketComponent } from './components/basket/basket.component';
     MyTasksComponent,
     StorageComponent,
     OrdersComponent,
-    BasketComponent
+    BasketComponent,
+    OrderComponent,
+    CreateOrderComponent
   ],
   imports: [
     MatTableModule,

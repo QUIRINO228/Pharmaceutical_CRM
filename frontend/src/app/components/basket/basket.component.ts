@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../app.service";
-import { StorageService } from '../../services/storage/storage.service';;
+import {StorageService} from '../../services/storage/storage.service';
 import {BasketItem} from "../../BasketItem";
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-basket',
@@ -14,7 +16,8 @@ export class BasketComponent implements OnInit {
 
   constructor(
     private service: AppService,
-    private storage: StorageService
+    private storage: StorageService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -57,5 +60,9 @@ export class BasketComponent implements OnInit {
       (error) =>{
         console.error('Error clearing basket:', error);
       })
+  }
+
+  createOrder() {
+    this.router.navigateByUrl('create-order');
   }
 }
