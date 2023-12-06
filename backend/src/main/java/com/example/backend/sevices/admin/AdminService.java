@@ -28,4 +28,6 @@ public interface AdminService {
     List<Task> getAllTasksId(Long id);
 
     List<OrderDTO> getAllOrders();
+
+    OrderDTO getOrderById(Long Id);
 }

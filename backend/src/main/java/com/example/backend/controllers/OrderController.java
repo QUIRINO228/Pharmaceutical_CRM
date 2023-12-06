@@ -3,13 +3,14 @@ package com.example.backend.controllers;
 import com.example.backend.dto.CreateOrderDTO;
 import com.example.backend.dto.OrderDTO;
 import com.example.backend.models.Order;
+import com.example.backend.sevices.admin.AdminService;
 import com.example.backend.sevices.order.OrderService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -17,11 +18,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     private final OrderService orderService;
+    private final AdminService adminService;
 
     @PostMapping("/create-order")
     public ResponseEntity<Order> createOrder(@RequestBody CreateOrderDTO createOrderDTO) {
         log.info("Received OrderDTO: {}", createOrderDTO);
         Order order = orderService.createOrder(createOrderDTO);
         return ResponseEntity.ok(order);
+    }
+
+    @GetMapping("/order/{id}")
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long id) {
+        OrderDTO order = adminService.getOrderById(id);
+        return ResponseEntity.ok(order);
+    }
+
+    @GetMapping("/orders/{id}")
+    public ResponseEntity<List<OrderDTO>> getOrdersByUserId(@PathVariable Long id) {
+        List<OrderDTO> orders = orderService.getOrdersByUserId(id);
+        return ResponseEntity.ok(orders);
     }
 }

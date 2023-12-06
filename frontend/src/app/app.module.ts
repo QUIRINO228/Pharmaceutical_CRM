@@ -33,7 +33,9 @@ import {MatInputModule} from "@angular/material/input";
 import { BasketComponent } from './components/basket/basket.component';
 import { OrderComponent } from './components/order/order.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import {NgxMaskDirective} from "ngx-mask";
+
 
 
 
@@ -54,7 +56,8 @@ import {NgxMaskDirective} from "ngx-mask";
     OrdersComponent,
     BasketComponent,
     OrderComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    MyOrdersComponent
   ],
     imports: [
         MatTableModule,

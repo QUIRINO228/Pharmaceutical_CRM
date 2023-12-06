@@ -2,10 +2,7 @@ package com.example.backend.sevices.order;
 
 import com.example.backend.dto.CreateOrderDTO;
 import com.example.backend.dto.OrderDTO;
-import com.example.backend.models.Basket;
-import com.example.backend.models.BasketItem;
-import com.example.backend.models.Order;
-import com.example.backend.models.OrderItem;
+import com.example.backend.models.*;
 import com.example.backend.models.enums.OrderEnum;
 import com.example.backend.repositories.OrderItemRepository;
 import com.example.backend.repositories.OrderRepository;
@@ -14,6 +11,7 @@ import com.example.backend.sevices.basket.BasketService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
                 .address(createOrderDTO.getAddress())
                 .comment(createOrderDTO.getComment())
                 .status(OrderEnum.CREATED)
-                .createDate(new Date())
+                .createDate(LocalDate.now())
                 .build();
         List<OrderItem> orderItems = basketItems.stream()
                 .map(basketItem -> OrderItem.builder()
@@ -54,4 +52,24 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
+    @Override
+    public List<OrderDTO> getOrdersByUserId(Long userId) {
+        User user = userRepository.findById(userId).get();
+        List<Order> orders= user.getOrders();
+        return orders.stream()
+                .map(this::convertToOrderDTO)
+                .collect(Collectors.toList());
+    }
+
+    private OrderDTO convertToOrderDTO(Order order) {
+        return OrderDTO.builder()
+                .id(order.getId())
+                .address(order.getAddress())
+                .comment(order.getComment())
+                .createDate(order.getCreateDate())
+                .completedDate(order.getCompletedDate())
+                .userEmail(order.getUser().getEmail())
+                .status(order.getStatus())
+                .build();
+    }
 }
