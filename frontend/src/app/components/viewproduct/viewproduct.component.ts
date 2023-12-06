@@ -69,7 +69,6 @@ export class ViewproductsComponent implements OnInit {
     return /^[0-9]+$/.test(quantity);
   }
 
-
   deleteProduct(id: number): void {
     const isConfirmed = window.confirm('Are you sure you want to delete this product?');
     if (isConfirmed) {

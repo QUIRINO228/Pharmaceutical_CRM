@@ -3,6 +3,8 @@ import {AppService} from "../../app.service";
 import {StorageService} from '../../services/storage/storage.service';
 import {BasketItem} from "../../BasketItem";
 import {Router} from "@angular/router";
+import { Product } from "../../Product";
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -13,36 +15,48 @@ import {Router} from "@angular/router";
 export class BasketComponent implements OnInit {
   items: BasketItem[] = [];
   totalCost: number = 0;
+  products: Product[] = [];
 
   constructor(
     private service: AppService,
     private storage: StorageService,
     private router: Router,
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit(): void {
     this.getBasket();
   }
 
-  getBasket() {
-    const userId = StorageService.getUserId();
-    this.service.getBasket(userId).subscribe(
-      (data: any) => {
-        console.log(data);
-        if (data && Array.isArray(data) && data.length > 0 && data[0].product) {
-          this.items = data.map((item: any) => ({ product: item.product, quantity: item.quantity }));
-          this.calculateTotalCost();
-        } else {
+    getBasket() {
+        const userId = StorageService.getUserId();
+        this.service.getBasket(userId).subscribe(
+            (data: any) => {
+                console.log(data);
+                if (data && Array.isArray(data) && data.length > 0 && data[0].product) {
+                    this.items = data.map((item: any) => {
+                        const product = item.product;
+                        const imageUrl = product.image ? `http://localhost:8080/images/${product.image.id}` : '';
+                        const sanitizedImage = imageUrl ? this.sanitizer.bypassSecurityTrustUrl(imageUrl) : null;
+                        return {
+                            ...item,
+                            product: {
+                                ...product,
+                                sanitizedImage: sanitizedImage
+                            }
+                        };
+                    });
+                    this.calculateTotalCost();
+                } else {
+                    console.error('Invalid data structure:', data);
+                }
+            },
+            (error) => {
+                console.error('Error fetching basket:', error);
+            }
+        );
+    }
 
-          console.error('Invalid data structure:', data);
-        }
-      },
-      (error) => {
-        console.error('Error fetching basket:', error);
-
-      }
-    );
-  }
 
 
   calculateTotalCost() {
@@ -70,4 +84,8 @@ export class BasketComponent implements OnInit {
   createOrder() {
     this.router.navigateByUrl('create-order');
   }
+
+    updateTotalCost() {
+        this.calculateTotalCost();
+    }
 }
