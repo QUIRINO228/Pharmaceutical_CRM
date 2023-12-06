@@ -41,7 +41,7 @@
 
         <div class="col-md-6 form-group mb-3">
           <label for="expiration_date" class="form-label">Expiration_date</label>
-          <input id="expiration_date" type="date" formControlName="expiration_date" name="expiration_date" class="form-control" required>
+          <input id="expiration_date" type="date" formControlName="expiration_date" name="expiration_date" class="form-control" [min]="currentDate()" required>
         </div>
       </div>
 
