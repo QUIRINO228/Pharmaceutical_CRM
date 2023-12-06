@@ -37,6 +37,10 @@ th {
     width: 80%;
     margin: auto;
 }
+.img-fluid-small {
+    max-width: 50px;
+    max-height: 50px;
+}
 
 .black-icon-button:hover {
     background-color: transparent;
@@ -68,4 +72,7 @@ th {
 .custom-icon {
     font-size: 16px;
     vertical-align: middle;
+}
+.narrow-input {
+    width: 50px;
 }

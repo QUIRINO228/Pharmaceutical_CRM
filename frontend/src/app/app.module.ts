@@ -33,6 +33,10 @@ import {MatInputModule} from "@angular/material/input";
 import { BasketComponent } from './components/basket/basket.component';
 import { OrderComponent } from './components/order/order.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import {NgxMaskDirective} from "ngx-mask";
+
+
+
 
 @NgModule({
   declarations: [
@@ -52,32 +56,33 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     OrderComponent,
     CreateOrderComponent
   ],
-  imports: [
-    MatTableModule,
-    MatInputModule,
-    MatIconModule,
-    MatDialogModule,
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    NgOptimizedImage,
-    NgbModule,
-    MatSnackBarModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    RouterModule.forRoot([
-      {path: '', component: ViewproductsComponent},
-      {path: 'products/:productId', component: ViewproductsComponent},
-      { path: 'basket', component: BasketComponent },
-    ]),
-    FormsModule
-  ],
+    imports: [
+        MatTableModule,
+        MatInputModule,
+        MatIconModule,
+        MatDialogModule,
+        BrowserModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        NgOptimizedImage,
+        NgbModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatListModule,
+        RouterModule.forRoot([
+            {path: '', component: ViewproductsComponent},
+            {path: 'products/:productId', component: ViewproductsComponent},
+            {path: 'basket', component: BasketComponent},
+        ]),
+        FormsModule,
+        NgxMaskDirective,
+    ],
   providers: [AuthService],
   bootstrap: [AppComponent]
 })
