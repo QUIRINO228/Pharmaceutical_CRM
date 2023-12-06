@@ -7,28 +7,28 @@
   color: #fff;
 }
 .price {
-   font-size: 1.5em; /* розмір шрифту */
-   font-family: 'Your Chosen Font', sans-serif; /* шрифт (замініть 'Your Chosen Font' на вибраний вами шрифт) */
-   font-weight: bold; /* товщина шрифту */
-   color: black; /* колір шрифту */
-   /* Додайте інші стилі, які вам потрібні */
+   font-size: 1.5em;
+   font-family: 'Your Chosen Font', sans-serif;
+   font-weight: bold;
+   color: black;
+
  }
 .name {
-  font-size: 1.5em; /* розмір шрифту */
-  font-family: 'Your Chosen Font', sans-serif; /* шрифт (замініть 'Your Chosen Font' на вибраний вами шрифт) */
-  font-weight: bold; /* товщина шрифту */
-  color: black; /* колір шрифту */
-  /* Додайте інші стилі, які вам потрібні */
+  font-size: 1.5em;
+  font-family: 'Your Chosen Font', sans-serif;
+  font-weight: bold;
+  color: black;
+
 }
 .card {
   border: none;
-  background-color: transparent;/* встановлення ободку на нуль для всіх карток */
+  background-color: transparent;
 }
 .card-text.price::after {
   content: '$';
-  font-size: 0.7em; /* Розмір, який вам потрібен */
+  font-size: 0.7em;
   display: inline-block;
-  margin-right: 4px; /* опціонально, для відступу між символом і ціною */
+  margin-right: 4px;
 }
 .card:hover {
   cursor: pointer;
@@ -41,5 +41,11 @@
 .btn{
     margin-top: 12px;
     justify-content: center;
+    text-align: center;
+}
+
+.mat-simple-snackbar {
+    background: #d9534f;
+    color: white;
     text-align: center;
 }

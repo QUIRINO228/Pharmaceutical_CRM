@@ -52,16 +52,21 @@ export class BasketComponent implements OnInit {
     }, 0);
   }
 
-  clearBasket() {
-    const userId = StorageService.getUserId();
-    this.service.clearBasket(userId).subscribe(()=>{
-      location.reload()
-    },
-      (error) =>{
-        console.error('Error clearing basket:', error);
-      })
-  }
+    removeFromBasket(item: BasketItem): void {
+        console.log('Removing from basket:', item);
+        const userId = StorageService.getUserId();
+        this.service.removeFromBasket(userId, item.product.id).subscribe(() => {
+            console.log('Item removed from basket successfully');
+        });
+    }
 
+    clearBasket(): void {
+        console.log('Clearing basket');
+        const userId = StorageService.getUserId();
+        this.service.clearBasket(userId).subscribe(() => {
+            console.log('Basket cleared successfully');
+        });
+    }
   createOrder() {
     this.router.navigateByUrl('create-order');
   }

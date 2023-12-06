@@ -1,4 +1,4 @@
-<div *ngIf="items && items.length > 0">
+<div *ngIf="items && items.length > 0" class="basket-container">
   <table class="table">
     <thead>
     <tr>
@@ -15,7 +15,12 @@
       <td>{{ item.product.description }}</td>
       <td>{{ item.quantity }}</td>
       <td>{{ item.product.price | currency }}</td>
-      <td>{{ item.quantity * item.product.price | currency }}</td>
+      <td class="custom-cell">
+        {{ item.quantity * item.product.price | currency }}
+        <button class="btn btn-danger btn-sm black-icon-button custom-button" (click)="removeFromBasket(item)">
+          <mat-icon class="custom-icon">close</mat-icon>
+        </button>
+      </td>
     </tr>
     </tbody>
     <tfoot>
@@ -25,9 +30,10 @@
     </tr>
     </tfoot>
   </table>
-  <button class="btn btn-danger" (click)="clearBasket()">Clear Basket</button>
-  <button class="btn btn-close-white" (click)="createOrder()">Create Order</button>
+  <button class="btn btn-custom1" (click)="clearBasket()">Clear Basket</button>
+  <button class="btn btn-custom" (click)="createOrder()">Create Order</button>
 </div>
-<div *ngIf="!items || items.length === 0">
-  <p>Your order is empty.</p>
+<div *ngIf="!items || items.length === 0" class="empty-order-container">
+  <p>Oops, your basket is empty...</p>
+  <mat-icon>mood_bad</mat-icon>
 </div>
