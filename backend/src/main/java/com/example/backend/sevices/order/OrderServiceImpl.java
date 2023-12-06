@@ -25,6 +25,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final UserRepository userRepository;
+
     @Override
     public Order createOrder(CreateOrderDTO createOrderDTO) {
         Basket basket = basketService.findBasketByUserId(createOrderDTO.getUserId());
@@ -39,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
                 .status(OrderEnum.CREATED)
                 .createDate(LocalDate.now())
                 .build();
+        orderRepository.save(order);
         List<OrderItem> orderItems = basketItems.stream()
                 .map(basketItem -> OrderItem.builder()
                         .order(order)
@@ -46,16 +48,20 @@ public class OrderServiceImpl implements OrderService {
                         .quantity(basketItem.getQuantity())
                         .build())
                 .collect(Collectors.toList());
+        for (OrderItem orderItem : orderItems) {
+            orderItem.setOrder(order);
+        }
         orderItemRepository.saveAll(orderItems);
         order.setOrderItems(orderItems);
         orderRepository.save(order);
+
         return order;
     }
 
     @Override
     public List<OrderDTO> getOrdersByUserId(Long userId) {
         User user = userRepository.findById(userId).get();
-        List<Order> orders= user.getOrders();
+        List<Order> orders = user.getOrders();
         return orders.stream()
                 .map(this::convertToOrderDTO)
                 .collect(Collectors.toList());

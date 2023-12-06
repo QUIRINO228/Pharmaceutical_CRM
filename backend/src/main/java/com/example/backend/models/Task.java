@@ -24,6 +24,5 @@ public class Task {
     private TaskEnum taskEnum;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private User user;
 }

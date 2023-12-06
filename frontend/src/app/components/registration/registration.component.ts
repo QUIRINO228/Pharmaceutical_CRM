@@ -18,8 +18,12 @@ export class RegistrationComponent {
   constructor(private fb: FormBuilder, private appService: AppService, private router: Router) {
     this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      firstName: ['', Validators.required, Validators.pattern(/^[a-zA-Z-]{2,}$/)],
-      lastName: ['', Validators.required,Validators.pattern(/^[a-zA-Z-]{2,}$/)],
+      firstName: ['', Validators.required,
+        // Validators.pattern(/^[a-zA-Z-]{2,}$/)
+      ],
+      lastName: ['', Validators.required,
+        // Validators.pattern(/^[a-zA-Z-]{2,}$/)
+        ],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }

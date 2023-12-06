@@ -1,11 +1,10 @@
 package com.example.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -20,14 +19,21 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "order_id")
-    @JsonIgnore
-    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
     private BigDecimal quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    @JsonIgnore
+    private Order order;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private User user;
 }

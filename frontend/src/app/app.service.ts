@@ -48,12 +48,12 @@ export class AppService {
         return this.http.delete(`${this.url}/delete/${id}`, {headers: this.createAuthorizationHeader()});
     }
 
-    registerUser(user: User): Observable<User> {
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-        });
-        return this.http.post<User>(`${this.url}/registration`, user, {headers});
-    }
+  registerUser(user: User): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<any>(`${this.url}/registration`, user, { headers });
+  }
 
     addProduct(formData: FormData): Observable<Product> {
         return this.http.post<Product>(`${this.url}/add`, formData, {headers: this.createAuthorizationHeader()});

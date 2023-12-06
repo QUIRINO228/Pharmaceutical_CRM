@@ -36,14 +36,11 @@ public class User {
     private Integer forgotCode;
     private Boolean isActive;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    @JsonManagedReference
     private List<Task> tasks;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "user")
     private Basket basket;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "user")
-    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private List<Order> orders;
     public UserDto userDto(){
         UserDto userDto = new UserDto();

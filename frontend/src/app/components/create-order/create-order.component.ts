@@ -3,6 +3,7 @@ import { StorageService } from "../../services/storage/storage.service";
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AppService } from "../../app.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-order',
@@ -12,7 +13,8 @@ import { AppService } from "../../app.service";
 export class CreateOrderComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private service: AppService) {
+  constructor(private fb: FormBuilder, private service: AppService,
+  private router: Router) {
     this.form = this.fb.group({
       address: ['', Validators.required],
       comment: ['', Validators.required],
@@ -38,10 +40,11 @@ export class CreateOrderComponent {
     }
 
       this.service.clearBasket(StorageService.getUserId()).subscribe(()=>{
-          location.reload()
+
         },
         (error) =>{
           console.error('Error clearing basket:', error);
+          this.router.navigateByUrl('/my-orders');
         })
   }
 
