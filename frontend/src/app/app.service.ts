@@ -126,6 +126,7 @@ export class AppService {
   createOrder(orderDTO: OrderDTO): Observable<any> {
     return this.http.post(`${this.url}/create-order`, orderDTO, {headers: this.createAuthorizationHeader()});
   }
+
   removeFromBasket(userId: number | null, productId: number): Observable<any> {
         return this.http.delete(`${this.url}/basket/remove/${userId}/${productId}`, { headers: this.createAuthorizationHeader() });
     }
@@ -133,4 +134,10 @@ export class AppService {
   clearBasket(userId: number | null): Observable<any> {
         return this.http.delete(`${this.url}/basket/delete/${userId}`, { headers: this.createAuthorizationHeader() });
     }
+
+
+  getAllTasks(): Observable<any> {
+    return this.http.get(`${this.url}/orders`, {headers: this.createAuthorizationHeader()} )
+  }
+
 }

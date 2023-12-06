@@ -75,9 +75,9 @@ export class ViewproductsComponent implements OnInit {
     if (isConfirmed) {
       this.service.deleteProduct(id).subscribe(() => {
         this.products = this.products?.filter(product => product.id !== id);
+        location.reload();
       });
     }
-    location.reload();
   }
 
   updateProduct(id: number): void {

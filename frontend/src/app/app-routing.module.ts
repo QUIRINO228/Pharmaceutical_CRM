@@ -30,6 +30,7 @@ const routes: Routes = [
   {path: 'storage', component: StorageComponent},
   {path: 'orders', component: OrdersComponent},
   {path: 'create-order', component: CreateOrderComponent},
+  {path: 'orders', component: OrdersComponent},
   {path: 'admin', loadChildren: () => import("./modules/admin/admin.module").then(m =>m.AdminModule)},
   {path: 'user', loadChildren: () => import("./modules/user/user.module").then(m =>m.UserModule)},
   {path: 'manager', loadChildren: () => import("./modules/manager/manager.module").then(m =>m.ManagerModule)},

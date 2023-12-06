@@ -1,9 +1,8 @@
 package com.example.backend.sevices.admin;
 
-import com.example.backend.dto.ChangeUserDTO;
-import com.example.backend.dto.TaskDTO;
-import com.example.backend.dto.UserDto;
+import com.example.backend.dto.*;
 import com.example.backend.models.Task;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,15 +15,17 @@ public interface AdminService {
 
     void userDeleteById(Long id);
 
-    List<Task> getTasks();
+    List<TaskDTO> getTasks();
 
     void addTask(TaskDTO taskDTO);
 
     void userTaskById(Long id);
 
-    Optional<Task> getTasksById(Long id);
+    UpdateTaskDTO getTasksById(Long id);
 
     void updateTask(Long id, TaskDTO taskDTO);
 
     List<Task> getAllTasksId(Long id);
+
+    List<OrderDTO> getAllOrders();
 }

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="my-3">
       <!-- Add Product Button -->
-      <button type="button" (click)="addProduct()" class="btn btn-custom">
+      <button type="button" (click)="openAddProductDialog()" class="btn btn-custom">
         <i class="bi bi-plus-circle-fill"></i> Add Product
       </button>
     </div>
@@ -31,7 +31,7 @@
         <!-- Price Column -->
         <ng-container matColumnDef="price">
           <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
-          <mat-cell *matCellDef="let element">{{ element.price }}</mat-cell>
+          <mat-cell *matCellDef="let element">${{ element.price }}</mat-cell>
         </ng-container>
 
         <!-- Availability Quantity Column -->
@@ -57,10 +57,10 @@
           <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <ng-container>
-              <button mat-icon-button (click)="editProduct(element)" color="primary">
+              <button mat-icon-button (click)="updateProduct(element.id)" color="primary">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="deleteProduct(element)" color="warn">
+              <button mat-icon-button (click)="deleteProduct(element.id)" color="warn">
                 <mat-icon>delete</mat-icon>
               </button>
             </ng-container>

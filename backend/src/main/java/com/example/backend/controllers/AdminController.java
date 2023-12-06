@@ -1,8 +1,6 @@
 package com.example.backend.controllers;
 
-import com.example.backend.dto.ChangeUserDTO;
-import com.example.backend.dto.TaskDTO;
-import com.example.backend.dto.UserDto;
+import com.example.backend.dto.*;
 import com.example.backend.models.Task;
 import com.example.backend.sevices.admin.AdminService;
 import lombok.AllArgsConstructor;
@@ -37,15 +35,15 @@ public class AdminController {
     }
 
     @GetMapping("/tasks")
-    private ResponseEntity<List<Task>> getTasks() {
-        List<Task> tasks = adminService.getTasks();
-        return ResponseEntity.ok(tasks);
+    private List<TaskDTO> getTasks() {
+        List<TaskDTO> tasks = adminService.getTasks();
+        return tasks;
     }
 
     @GetMapping("/task/{id}")
-    private ResponseEntity<Optional<Task>> getTasksById(@PathVariable Long id) {
-        Optional<Task> task = adminService.getTasksById(id);
-        return ResponseEntity.ok(task);
+    private UpdateTaskDTO getTasksById(@PathVariable Long id) {
+        UpdateTaskDTO task = adminService.getTasksById(id);
+        return task;
     }
 
     @DeleteMapping("/task/delete/{id}")
@@ -64,5 +62,10 @@ public class AdminController {
     private ResponseEntity<String> addTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
         adminService.updateTask(id, taskDTO);
         return ResponseEntity.ok("Task added successfully");
+    }
+
+    @GetMapping("/orders")
+    private ResponseEntity<List<OrderDTO>> getAllOrders(){
+        return ResponseEntity.ok(adminService.getAllOrders());
     }
 }

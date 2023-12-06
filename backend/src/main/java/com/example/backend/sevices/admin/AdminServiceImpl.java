@@ -1,12 +1,12 @@
 package com.example.backend.sevices.admin;
 
-import com.example.backend.dto.ChangeUserDTO;
-import com.example.backend.dto.TaskDTO;
-import com.example.backend.dto.UserDto;
+import com.example.backend.dto.*;
+import com.example.backend.models.Order;
 import com.example.backend.models.Task;
 import com.example.backend.models.User;
 import com.example.backend.models.enums.Role;
 import com.example.backend.models.enums.TaskEnum;
+import com.example.backend.repositories.OrderRepository;
 import com.example.backend.repositories.TasksRepository;
 import com.example.backend.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
@@ -27,6 +27,7 @@ public class AdminServiceImpl implements AdminService {
 
     private final UserRepository userRepository;
     private final TasksRepository tasksRepository;
+    private final OrderRepository orderRepository;
 
     @PostConstruct
     public void createAdminAccount() {
@@ -64,13 +65,28 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Task> getTasks() {
-        return tasksRepository.findAll();
+    public List<TaskDTO> getTasks() {
+        List<Task> tasks = tasksRepository.findAll();
+
+        return tasks.stream()
+                .map(this::convertToTaskDTO)
+                .collect(Collectors.toList());
+    }
+
+    private TaskDTO convertToTaskDTO(Task task) {
+        return TaskDTO.builder()
+                .id(task.getId())
+                .header(task.getHeader())
+                .description(task.getDescription())
+                .email(task.getUser().getEmail())
+                .taskStatus(task.getTaskEnum().toString())
+                .user(new UserEmailRole(task.getUser().getEmail(), task.getUser().getRole()))
+                .build();
     }
 
     @Override
     public void addTask(TaskDTO taskDTO) {
-        log.info("taskDTO - {}",taskDTO);
+        log.info("taskDTO - {}", taskDTO);
         User user = userRepository.findByEmail(taskDTO.getEmail());
         Task task = new Task();
         task.setHeader(taskDTO.getHeader());
@@ -87,25 +103,29 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Optional<Task> getTasksById(Long id) {
-        return tasksRepository.findById(id);
+    public UpdateTaskDTO getTasksById(Long id) {
+        Optional<Task> taskOptional = tasksRepository.findById(id);
+        Task task = taskOptional.get();
+        return UpdateTaskDTO.builder()
+                .header(task.getHeader())
+                .description(task.getDescription())
+                .taskStatus(task.getTaskEnum().toString())
+                .build();
     }
 
     @Override
     public void updateTask(Long id, TaskDTO taskDTO) {
-        log.info("taskDTO - {},  id -{}",taskDTO, id);
-        Optional<Task> taskOptional = tasksRepository.findById(id);
+        log.info("taskDTO - {},  id -{}", taskDTO, id);
+        Optional<Task> taskOptional = tasksRepository.findById(taskDTO.getId());
         if (taskOptional.isPresent()) {
             Task task = taskOptional.get();
-
-            User user = userRepository.findByEmail(taskDTO.getEmail());
-            if (user != null) {
-                task.setHeader(taskDTO.getHeader());
-                task.setDescription(taskDTO.getDescription());
-                task.setUser(user);
-                task.setTaskEnum(TaskEnum.getTaskEnum(taskDTO.getTaskStatus()));
-                tasksRepository.save(task);
-            }
+            Optional<User> userOptional = userRepository.findById(task.getUser().getId());
+            User user = userOptional.get();
+            task.setHeader(taskDTO.getHeader());
+            task.setDescription(taskDTO.getDescription());
+            task.setUser(user);
+            task.setTaskEnum(TaskEnum.getTaskEnum(taskDTO.getTaskStatus()));
+            tasksRepository.save(task);
         }
     }
 
@@ -115,4 +135,25 @@ public class AdminServiceImpl implements AdminService {
         User user = userOptional.get();
         return user.getTasks();
     }
+
+    @Override
+    public List<OrderDTO> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream()
+                .map(this::convertToOrderDTO)
+                .collect(Collectors.toList());
+    }
+
+    private OrderDTO convertToOrderDTO(Order order) {
+        return OrderDTO.builder()
+                .id(order.getId())
+                .address(order.getAddress())
+                .comment(order.getComment())
+                .createDate(order.getCreateDate())
+                .completedDate(order.getCompletedDate())
+                .userEmail(order.getUser().getEmail())
+                .status(order.getStatus())
+                .build();
+    }
+
 }

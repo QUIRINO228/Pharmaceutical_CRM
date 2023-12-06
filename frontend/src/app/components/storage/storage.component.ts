@@ -45,18 +45,24 @@ export class StorageComponent implements OnInit {
         );
     }
 
-    editProduct(element: any): void {
+  updateProduct(id: number): void {
+    this.router.navigate(['update', id]);
+  }
 
+
+
+  deleteProduct(id: number): void {
+    const isConfirmed = window.confirm('Are you sure you want to delete this product?');
+    if (isConfirmed) {
+      this.service.deleteProduct(id).subscribe(() => {
+        this.products = this.products?.filter(product => product.id !== id);
+        location.reload();
+      });
     }
+  }
 
 
-    deleteProduct(id: number): void {
-        console.log(id);
-
-    }
-
-
-    addProduct() {
-
-    }
+  openAddProductDialog(): void {
+    this.service.openAddProductDialog();
+  }
 }

@@ -5,6 +5,7 @@ import com.example.backend.dto.UserDto;
 import com.example.backend.models.enums.Role;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,16 +35,15 @@ public class User {
     private String forgotLink;
     private Integer forgotCode;
     private Boolean isActive;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "user")
-    @JsonBackReference
-    @JsonIgnoreProperties("user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonManagedReference
     private List<Task> tasks;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "user")
     private Basket basket;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "user")
+    @JsonManagedReference
     private List<Order> orders;
     public UserDto userDto(){
         UserDto userDto = new UserDto();
