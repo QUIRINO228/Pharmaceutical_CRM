@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class OrderDTO {
     private Long userId;
     private String address;
     private String comment;
-    private Date createDate;
-    private Date completedDate;
+    private LocalDate createDate;
+    private LocalDate completedDate;
     private OrderEnum status;
     private String userEmail;
     private List<OrderItem> orderItems;

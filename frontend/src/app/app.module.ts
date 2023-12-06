@@ -33,6 +33,7 @@ import {MatInputModule} from "@angular/material/input";
 import { BasketComponent } from './components/basket/basket.component';
 import { OrderComponent } from './components/order/order.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     OrdersComponent,
     BasketComponent,
     OrderComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    MyOrdersComponent
   ],
   imports: [
     MatTableModule,

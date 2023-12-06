@@ -140,4 +140,11 @@ export class AppService {
     return this.http.get(`${this.url}/orders`, {headers: this.createAuthorizationHeader()} )
   }
 
+  getOrderById(orderId: number): Observable<any> {
+    return this.http.get(`${this.url}/order/`+orderId, {headers: this.createAuthorizationHeader()})
+  }
+
+  getOrdersByUserId(userId: number | null) {
+    return this.http.get(`${this.url}/orders/`+userId, {headers: this.createAuthorizationHeader()})
+  }
 }

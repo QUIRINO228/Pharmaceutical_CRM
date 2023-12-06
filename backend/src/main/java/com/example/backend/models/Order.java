@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date createDate;
-    private Date completedDate;
+    private LocalDate  createDate;
+    private LocalDate completedDate;
     private String address;
     private String comment;
     private OrderEnum status;

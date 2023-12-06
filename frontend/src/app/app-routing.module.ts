@@ -16,6 +16,8 @@ import {MyTasksComponent} from "./components/my-tasks/my-tasks.component";
 import {StorageComponent} from "./components/storage/storage.component";
 import {OrdersComponent} from "./components/orders/orders.component";
 import {CreateOrderComponent} from "./components/create-order/create-order.component";
+import {OrderComponent} from "./components/order/order.component";
+import {MyOrdersComponent} from "./components/my-orders/my-orders.component";
 
 
 const routes: Routes = [
@@ -29,8 +31,9 @@ const routes: Routes = [
   {path: 'my-tasks', component: MyTasksComponent},
   {path: 'storage', component: StorageComponent},
   {path: 'orders', component: OrdersComponent},
+  {path: 'order/:id', component: OrderComponent},
+  {path: 'my-orders', component: MyOrdersComponent},
   {path: 'create-order', component: CreateOrderComponent},
-  {path: 'orders', component: OrdersComponent},
   {path: 'admin', loadChildren: () => import("./modules/admin/admin.module").then(m =>m.AdminModule)},
   {path: 'user', loadChildren: () => import("./modules/user/user.module").then(m =>m.UserModule)},
   {path: 'manager', loadChildren: () => import("./modules/manager/manager.module").then(m =>m.ManagerModule)},

@@ -1,1 +1,75 @@
-<p>orders works!</p>
+<div class="mt-5">
+  <div class="container">
+    <div class="my-3">
+    </div>
+    <div class="row">
+      <mat-table [dataSource]="addressDataSource" class="mat-table table table-striped">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{ element.id }}</mat-cell>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef>Address</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.address }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Comment Column -->
+        <ng-container matColumnDef="comment">
+          <mat-header-cell *matHeaderCellDef>Comment</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.comment }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- CreateDate Column -->
+        <ng-container matColumnDef="createDate">
+          <mat-header-cell *matHeaderCellDef>Create Date</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.createDate }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- CompletedDate Column -->
+        <ng-container matColumnDef="completedDate">
+          <mat-header-cell *matHeaderCellDef>Completed Date</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.completedDate }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- User Column -->
+        <ng-container matColumnDef="userEmail">
+          <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.userEmail }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.status }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="orderInfo(element.id)" color="warn">
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="addressDisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: addressDisplayedColumns"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

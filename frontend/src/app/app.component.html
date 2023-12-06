@@ -185,6 +185,12 @@
         <span *ngIf="!isCollapsed">Basket</span>
       </span>
         </a>
+        <a mat-list-item routerLink="/my-orders" routerLinkActive="active">
+      <span class="entry">
+        <mat-icon>list_alt</mat-icon>
+        <span *ngIf="!isCollapsed">Orders</span>
+      </span>
+        </a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
