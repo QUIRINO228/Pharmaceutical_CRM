@@ -34,6 +34,11 @@ import { BasketComponent } from './components/basket/basket.component';
 import { OrderComponent } from './components/order/order.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import {NgxMaskDirective} from "ngx-mask";
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -54,32 +59,33 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
     CreateOrderComponent,
     MyOrdersComponent
   ],
-  imports: [
-    MatTableModule,
-    MatInputModule,
-    MatIconModule,
-    MatDialogModule,
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    NgOptimizedImage,
-    NgbModule,
-    MatSnackBarModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    RouterModule.forRoot([
-      {path: '', component: ViewproductsComponent},
-      {path: 'products/:productId', component: ViewproductsComponent},
-      { path: 'basket', component: BasketComponent },
-    ]),
-    FormsModule
-  ],
+    imports: [
+        MatTableModule,
+        MatInputModule,
+        MatIconModule,
+        MatDialogModule,
+        BrowserModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        NgOptimizedImage,
+        NgbModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatListModule,
+        RouterModule.forRoot([
+            {path: '', component: ViewproductsComponent},
+            {path: 'products/:productId', component: ViewproductsComponent},
+            {path: 'basket', component: BasketComponent},
+        ]),
+        FormsModule,
+        NgxMaskDirective,
+    ],
   providers: [AuthService],
   bootstrap: [AppComponent]
 })

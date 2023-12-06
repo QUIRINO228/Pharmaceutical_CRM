@@ -161,7 +161,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^16.0.0", "@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^16.2.0", "@angular/common@>4.0.0", "@angular/common@16.2.12":
+"@angular/common@^16.0.0", "@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^16.2.0", "@angular/common@>=14.0.0", "@angular/common@>4.0.0", "@angular/common@16.2.12":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/common/-/common-16.2.12.tgz"
   integrity sha512-B+WY/cT2VgEaz9HfJitBmgdk4I333XG/ybC98CMC4Wz8E49T8yzivmmxXB3OD6qvjcOB6ftuicl6WBqLbZNg2w==
@@ -189,14 +189,14 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^16.0.0", "@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^16.2.0", "@angular/core@>4.0.0", "@angular/core@16.2.12":
+"@angular/core@^16.0.0", "@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^16.2.0", "@angular/core@>=14.0.0", "@angular/core@>4.0.0", "@angular/core@16.2.12":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/core/-/core-16.2.12.tgz"
   integrity sha512-GLLlDeke/NjroaLYOks0uyzFVo6HyLl7VOm0K1QpLXnYvW63W9Ql/T3yguRZa7tRkOAeFZ3jw+1wnBD4O8MoUA==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/forms@^16.0.0", "@angular/forms@^16.0.0 || ^17.0.0", "@angular/forms@^16.2.0", "@angular/forms@>4.0.0":
+"@angular/forms@^16.0.0", "@angular/forms@^16.0.0 || ^17.0.0", "@angular/forms@^16.2.0", "@angular/forms@>=14.0.0", "@angular/forms@>4.0.0":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/forms/-/forms-16.2.12.tgz"
   integrity sha512-1Eao89hlBgLR3v8tU91vccn21BBKL06WWxl7zLpQmG6Hun+2jrThgOE4Pf3os4fkkbH4Apj0tWL2fNIWe/blbw==
@@ -2703,6 +2703,22 @@ ajv@^8.0.0, ajv@^8.8.2, ajv@^8.9.0, ajv@8.12.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
+angular-input-masks@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.npmjs.org/angular-input-masks/-/angular-input-masks-4.4.1.tgz"
+  integrity sha512-gY1rhev/07EO82UU6H1ENdYdI2yzfYXIb04JOW9Un4pWXhQ7sfsLp/jx10D8QZs7qwEa3/vHU3RdHLhpBtkjYA==
+  dependencies:
+    br-validations "^0.3.1"
+    date-fns "2.0.0-alpha.7"
+    string-mask "^0.3.0"
+
+angular2-text-mask@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.npmjs.org/angular2-text-mask/-/angular2-text-mask-9.0.0.tgz"
+  integrity sha512-iALcnhJPS1zvX48d86rgUgDe/crX6XfhZrXC4Gdlo2/YwZW7u7KJZY6/b3ieSCIWVq/E6p+wDCzeo3E6leRjDA==
+  dependencies:
+    text-mask-core "^5.0.0"
+
 ansi-colors@4.1.3:
   version "4.1.3"
   resolved "https://registry.npmjs.org/ansi-colors/-/ansi-colors-4.1.3.tgz"
@@ -2958,6 +2974,11 @@ bootstrap@^5.3.2:
   version "5.3.2"
   resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.3.2.tgz"
   integrity sha512-D32nmNWiQHo94BKHLmOrdjlL05q1c8oxbtBphQFb9Z5to6eGRDCm0QgeaZ4zFBHzfg2++rqa2JkqCcxDy0sH0g==
+
+br-validations@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/br-validations/-/br-validations-0.3.1.tgz"
+  integrity sha512-8ncHlnsMwz15kqAyc2mN9b6yb/WXhlwq3itKJK9L1tdIPCzqmYReBjmmvdAmGQAo3/A7IWHUFe0O/9c/hfNpIw==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -3475,6 +3496,11 @@ data-urls@^2.0.0:
     abab "^2.0.3"
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
+
+date-fns@2.0.0-alpha.7:
+  version "2.0.0-alpha.7"
+  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.0.0-alpha.7.tgz"
+  integrity sha512-TrWCl5daN+rdOjg72LQE9OVtAz3FgIDUYoAoSQFHdRUAx/vggWvstDuSBeBlwqf2uMBrtWyY5ZB1NsbFOFb4fQ==
 
 date-format@^4.0.14:
   version "4.0.14"
@@ -5493,6 +5519,13 @@ ngx-img@^10.19.3:
     cropperjs "^1.5.7"
     tslib "~1.13.0"
 
+ngx-mask@^17.0.4:
+  version "17.0.4"
+  resolved "https://registry.npmjs.org/ngx-mask/-/ngx-mask-17.0.4.tgz"
+  integrity sha512-Rfox/zLIcuEc+t8xGvDYL83KYw0P80Ctvx+uy3v/F901XLhzEXKEgPOEFRKNkQu4Eu5Y7SjnX44mGdk/1cqh3w==
+  dependencies:
+    tslib "^2.3.0"
+
 node-forge@^1:
   version "1.3.1"
   resolved "https://registry.npmjs.org/node-forge/-/node-forge-1.3.1.tgz"
@@ -6763,6 +6796,11 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
+string-mask@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/string-mask/-/string-mask-0.3.0.tgz"
+  integrity sha512-YR93J2lCJyA9GYDHoPk2Yzykw6zc/A2KkcRchSMuLo9tTKDfawqrU/sGf2kxGelPyYTAgQ4j5MLWob/7tJ68bg==
+
 "string-width-cjs@npm:string-width@^4.2.0":
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
@@ -6898,6 +6936,11 @@ test-exclude@^6.0.0:
     "@istanbuljs/schema" "^0.1.2"
     glob "^7.1.4"
     minimatch "^3.0.4"
+
+text-mask-core@^5.0.0:
+  version "5.1.2"
+  resolved "https://registry.npmjs.org/text-mask-core/-/text-mask-core-5.1.2.tgz"
+  integrity sha512-VfkCMdmRRZqXgQZFlDMiavm3hzsMzBM23CxHZsaeAYg66ZhXCNJWrFmnJwNy8KF9f74YvAUAuQenxsMCfuvhUw==
 
 text-table@0.2.0:
   version "0.2.0"
