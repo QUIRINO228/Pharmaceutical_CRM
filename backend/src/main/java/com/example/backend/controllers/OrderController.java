@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
-    private final AdminService adminService;
+
 
     @PostMapping("/create-order")
     public ResponseEntity<Order> createOrder(@RequestBody CreateOrderDTO createOrderDTO) {
@@ -29,7 +29,7 @@ public class OrderController {
 
     @GetMapping("/order/{id}")
     public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long id) {
-        OrderDTO order = adminService.getOrderById(id);
+        OrderDTO order = orderService.getOrderById(id);
         return ResponseEntity.ok(order);
     }
 

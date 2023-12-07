@@ -1,0 +1,43 @@
+<div class="order-details">
+  <p><strong>Address:</strong> {{ order.address }}</p>
+  <p><strong>Comment:</strong> {{ order.comment }}</p>
+  <p><strong>Create Date:</strong> {{ order.createDate | date: 'yyyy-MM-dd' }}</p>
+  <p><strong>Status:</strong> {{ order.status }}</p>
+  <p><strong>User Email:</strong> {{ order.userEmail }}</p>
+</div>
+<div class="order-container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of order.orderItems">
+      <td>
+        <img
+          [src]="item.product.sanitizedImage"
+          class="img-fluid img-fluid-small"
+          alt=""
+        />
+      </td>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.product.price | currency }}</td>
+      <td class="custom-cell">
+        {{ item.quantity * item.product.price | currency }}
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="4" class="text-right">Total Cost:</td>
+      <td>{{ totalCost | currency }}</td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

@@ -155,24 +155,4 @@ public class AdminServiceImpl implements AdminService {
                 .status(order.getStatus())
                 .build();
     }
-
-    @Override
-    public OrderDTO getOrderById(Long id) {
-        Order order = orderRepository.findById(id).get();
-        return convertToOrderDTOWithItems(order);
-    }
-
-    private OrderDTO convertToOrderDTOWithItems(Order order) {
-        return OrderDTO.builder()
-                .id(order.getId())
-                .address(order.getAddress())
-                .comment(order.getComment())
-                .createDate(order.getCreateDate())
-                .completedDate(order.getCompletedDate())
-                .userEmail(order.getUser().getEmail())
-                .orderItems(order.getOrderItems())
-                .status(order.getStatus())
-                .build();
-    }
-
 }

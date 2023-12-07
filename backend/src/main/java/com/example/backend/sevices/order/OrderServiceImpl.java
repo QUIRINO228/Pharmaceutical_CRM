@@ -32,9 +32,10 @@ public class OrderServiceImpl implements OrderService {
         if (basket == null) {
             return null;
         }
+        User user = userRepository.findById(createOrderDTO.getUserId()).get();
         List<BasketItem> basketItems = basket.getBasketItems();
         Order order = Order.builder()
-                .user(userRepository.findById(createOrderDTO.getUserId()).get())
+                .user(user)
                 .address(createOrderDTO.getAddress())
                 .comment(createOrderDTO.getComment())
                 .status(OrderEnum.CREATED)
@@ -67,6 +68,12 @@ public class OrderServiceImpl implements OrderService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public OrderDTO getOrderById(Long id) {
+        Order order = orderRepository.findById(id).get();
+        return convertToOrderDTO(order);
+    }
+
     private OrderDTO convertToOrderDTO(Order order) {
         return OrderDTO.builder()
                 .id(order.getId())
@@ -75,6 +82,7 @@ public class OrderServiceImpl implements OrderService {
                 .createDate(order.getCreateDate())
                 .completedDate(order.getCompletedDate())
                 .userEmail(order.getUser().getEmail())
+                .orderItems(order.getOrderItems())
                 .status(order.getStatus())
                 .build();
     }

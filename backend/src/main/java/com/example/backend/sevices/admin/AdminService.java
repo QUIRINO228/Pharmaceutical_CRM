@@ -29,5 +29,5 @@ public interface AdminService {
 
     List<OrderDTO> getAllOrders();
 
-    OrderDTO getOrderById(Long Id);
+
 }
