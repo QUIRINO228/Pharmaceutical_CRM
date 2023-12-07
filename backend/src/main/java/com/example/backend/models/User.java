@@ -25,6 +25,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @Column(unique = true)
     private String email;
     private String firstName;
     private String lastName;
@@ -36,6 +37,7 @@ public class User {
     private Integer forgotCode;
     private Boolean isActive;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonManagedReference
     private List<Task> tasks;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "user")

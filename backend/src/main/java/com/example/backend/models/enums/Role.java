@@ -1,6 +1,6 @@
 package com.example.backend.models.enums;
 
 public enum Role {
-    ADMIN, MANAGER, USER, WORKER;
+    ADMIN, MANAGER, USER;
 
 }

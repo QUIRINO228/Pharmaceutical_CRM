@@ -147,4 +147,12 @@ export class AppService {
   getOrdersByUserId(userId: number | null) {
     return this.http.get(`${this.url}/orders/`+userId, {headers: this.createAuthorizationHeader()})
   }
+
+  updateOrderUser(orderId: number | undefined, userId: string):Observable<any> {
+    return this.http.post(`${this.url}/confirm/`+orderId, userId,{headers: this.createAuthorizationHeader()})
+  }
+
+  cancelOrder(orderId: number | undefined) {
+      return this.http.post(`${this.url}/cancel`, orderId,{headers: this.createAuthorizationHeader()})
+  }
 }

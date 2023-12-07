@@ -2,13 +2,14 @@ package com.example.backend.sevices.order;
 
 import com.example.backend.dto.CreateOrderDTO;
 import com.example.backend.dto.OrderDTO;
+import com.example.backend.dto.TaskDTO;
 import com.example.backend.models.*;
 import com.example.backend.models.enums.OrderEnum;
-import com.example.backend.repositories.OrderItemRepository;
-import com.example.backend.repositories.OrderRepository;
-import com.example.backend.repositories.UserRepository;
+import com.example.backend.models.enums.TaskEnum;
+import com.example.backend.repositories.*;
 import com.example.backend.sevices.basket.BasketService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     private final BasketService basketService;
@@ -25,6 +27,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final UserRepository userRepository;
+    private final ProductRepository productRepository;
+    private final TasksRepository tasksRepository;
 
     @Override
     public Order createOrder(CreateOrderDTO createOrderDTO) {
@@ -72,6 +76,40 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO getOrderById(Long id) {
         Order order = orderRepository.findById(id).get();
         return convertToOrderDTO(order);
+    }
+
+    @Override
+    public void cancelOrder(Long id) {
+        log.info("{}", id);
+        Order order = orderRepository.findById(id).get();
+        order.setStatus(OrderEnum.CANCEL);
+        orderRepository.save(order);
+    }
+
+    @Override
+    public void confirmOrder(Long orderId, Long userId) {
+        Order order = orderRepository.findById(orderId).get();
+        List<OrderItem> orderItems = order.getOrderItems();
+        for (OrderItem orderItem : orderItems) {
+            Product product = orderItem.getProduct();
+            product.setAvailability_quantity(product.getAvailability_quantity().subtract(orderItem.getQuantity()));
+            productRepository.save(product);
+        }
+        addTask(userId, orderId);
+        order.setStatus(OrderEnum.WAITING_PAYMENT);
+        orderRepository.save(order);
+    }
+
+
+    public void addTask(Long userId, Long orderId) {
+        User user = userRepository.findById(userId).get();
+        Task task = new Task();
+        task.setHeader("Complete the order");
+        task.setDescription("Complete the order with id "+ orderId);
+        task.setTaskEnum(TaskEnum.GIVEN);
+        task.setUser(user);
+        user.addTask(task);
+        userRepository.save(user);
     }
 
     private OrderDTO convertToOrderDTO(Order order) {

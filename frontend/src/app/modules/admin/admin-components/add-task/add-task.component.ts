@@ -28,7 +28,7 @@ export class AddTaskComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAllUsers().subscribe((users: any[]) => {
-      this.users = users.filter(user => user.role === 'MANAGER' || user.role === 'WORKER');
+      this.users = users.filter(user => user.role === 'MANAGER');
       console.log(this.users);
       if (this.yourData && this.yourData.user) {
         this.selectedUser = this.users.find(user => user.id === this.yourData.user.id);

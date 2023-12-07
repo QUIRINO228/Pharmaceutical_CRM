@@ -22,7 +22,6 @@ public class OrderController {
 
     @PostMapping("/create-order")
     public ResponseEntity<Order> createOrder(@RequestBody CreateOrderDTO createOrderDTO) {
-        log.info("Received OrderDTO: {}", createOrderDTO);
         Order order = orderService.createOrder(createOrderDTO);
         return ResponseEntity.ok(order);
     }
@@ -37,5 +36,17 @@ public class OrderController {
     public ResponseEntity<List<OrderDTO>> getOrdersByUserId(@PathVariable Long id) {
         List<OrderDTO> orders = orderService.getOrdersByUserId(id);
         return ResponseEntity.ok(orders);
+    }
+
+    @PostMapping("/cancel")
+    public ResponseEntity<String> cancelOrder(@RequestBody Long id) {
+        orderService.cancelOrder(id);
+        return ResponseEntity.ok("Order was canceled");
+    }
+
+    @PostMapping("/confirm/{orderId}")
+    public ResponseEntity<String> confirmOrder(@PathVariable Long orderId, @RequestBody Long userId) {
+        orderService.confirmOrder(orderId,userId);
+        return ResponseEntity.ok("Order was canceled");
     }
 }

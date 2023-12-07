@@ -34,7 +34,6 @@ export class OrdersComponent implements OnInit {
     this.breakpointObserver
         .observe([Breakpoints.Handset])
         .subscribe(result => {
-          // Update the isMobile variable based on the screen size
           this.isMobile = result.matches;
         });
     this.getAllOrders();

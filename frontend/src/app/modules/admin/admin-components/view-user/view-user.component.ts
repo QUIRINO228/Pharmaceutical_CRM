@@ -18,7 +18,7 @@ export class ViewUserComponent implements OnInit {
   element: any;
   isEditing: boolean = false;
   editedItem: any;
-  roles: string[] = ['ADMIN', 'MANAGER', 'USER', 'WORKER'];
+  roles: string[] = ['ADMIN', 'MANAGER', 'USER'];
   isMobile = false;
   constructor(private service: AdminService, private snackBar: MatSnackBar,private breakpointObserver: BreakpointObserver) {}
 

@@ -13,11 +13,7 @@ export class noAuthGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (StorageService.hasToken() && StorageService.isUserLoggedIn()) {
-      this.router.navigateByUrl("/worker/dashboard");
-      return false;
-    }
-    if (StorageService.hasToken() && StorageService.isAdminLoggedIn()) {
+        if (StorageService.hasToken() && StorageService.isAdminLoggedIn()) {
       this.router.navigateByUrl("/admin/dashboard");
       return false;
     }

@@ -16,7 +16,7 @@ export class ViewproductsComponent implements OnInit {
   isManagerLoggedIn: boolean = false;
   isAdminLoggedIn: boolean = false;
   isUserLoggedIn: boolean = false;
-  isWorkerLoggedIn: boolean = false;
+
 
   constructor(
       private service: AppService,

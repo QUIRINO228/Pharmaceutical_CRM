@@ -47,7 +47,7 @@ public class SecurityConfig {
                         .requestMatchers("/users","/order/**", "/orders","/add", "delete/**",
                                 "basket/**","basket/delete/**","/my-tasks/**","/addToBasket",
                                 "/storage","task/update/**", "update/**", "/product/**", "/user/**",
-                                "/tasks", "task/**", "/orders/**","task/delete/**", "/create-order").authenticated())
+                                "/tasks", "task/**", "/orders/**", "cancel/**","task/delete/**","/confirm/**", "/create-order").authenticated())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationManager(authenticationManager);
 

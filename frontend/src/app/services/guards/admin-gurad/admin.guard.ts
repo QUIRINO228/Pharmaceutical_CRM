@@ -15,11 +15,6 @@ export class AdminGuard implements CanActivate {
   }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (StorageService.isWorkerLoggedIn()){
-      this.router.navigateByUrl("/worker/dashboard");
-      this.snackbar.open("You dont have access to this page", "Close",{duration: 5000})
-      return false;
-    }
     if (StorageService.isManagerLoggedIn()){
       this.router.navigateByUrl("/manager/dashboard");
       this.snackbar.open("You dont have access to this page", "Close",{duration: 5000})

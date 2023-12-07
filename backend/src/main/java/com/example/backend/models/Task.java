@@ -22,7 +22,8 @@ public class Task {
     private String header;
     private String description;
     private TaskEnum taskEnum;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 }

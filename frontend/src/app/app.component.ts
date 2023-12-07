@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   isAdminLoggedIn: boolean = false;
   isUserLoggedIn: boolean = false;
   isManagerLoggedIn: boolean = false;
-  isWorkerLoggedIn: boolean = false;
+
 
   constructor(private router: Router, private observer: BreakpointObserver) {}
 
@@ -43,7 +43,6 @@ export class AppComponent implements OnInit {
     this.isAdminLoggedIn = StorageService.isAdminLoggedIn();
     this.isUserLoggedIn = StorageService.isUserLoggedIn();
     this.isManagerLoggedIn = StorageService.isManagerLoggedIn();
-    this.isWorkerLoggedIn = StorageService.isWorkerLoggedIn();
   }
 
   toggleMenu() {
