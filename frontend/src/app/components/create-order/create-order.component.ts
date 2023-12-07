@@ -1,8 +1,8 @@
-import { OrderDTO } from "../../OrderDTO";
-import { StorageService } from "../../services/storage/storage.service";
-import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AppService } from "../../app.service";
+import {OrderDTO} from "../../OrderDTO";
+import {StorageService} from "../../services/storage/storage.service";
+import {Component} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,7 +14,7 @@ export class CreateOrderComponent {
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private service: AppService,
-  private router: Router) {
+              private router: Router) {
     this.form = this.fb.group({
       address: ['', Validators.required],
       comment: ['', Validators.required],
@@ -31,7 +31,13 @@ export class CreateOrderComponent {
       this.service.createOrder(orderDTO).subscribe(
         (response: any) => {
           console.log('Order created successfully', response);
-          // You can handle the success response here
+          this.service.clearBasket(StorageService.getUserId()).subscribe(() => {
+
+            },
+            (error) => {
+              console.error('Error clearing basket:', error);
+              this.router.navigateByUrl('/my-orders');
+            })
         },
         (error) => {
           console.error('Error creating order', error);
@@ -39,13 +45,7 @@ export class CreateOrderComponent {
         });
     }
 
-      this.service.clearBasket(StorageService.getUserId()).subscribe(()=>{
 
-        },
-        (error) =>{
-          console.error('Error clearing basket:', error);
-          this.router.navigateByUrl('/my-orders');
-        })
   }
 
 }

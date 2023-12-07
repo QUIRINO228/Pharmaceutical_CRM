@@ -28,7 +28,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    @JsonIgnore
+    @JsonManagedReference
     private Order order;
 
 

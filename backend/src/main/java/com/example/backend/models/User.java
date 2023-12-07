@@ -41,6 +41,7 @@ public class User {
             mappedBy = "user")
     private Basket basket;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonManagedReference
     private List<Order> orders;
     public UserDto userDto(){
         UserDto userDto = new UserDto();
