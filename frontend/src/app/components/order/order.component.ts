@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DomSanitizer } from '@angular/platform-browser';
 import { AdminService } from "../../modules/admin/admin-service/admin.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {StorageService} from "../../services/storage/storage.service";
 
 @Component({
     selector: 'app-order',
@@ -18,7 +19,17 @@ export class OrderComponent implements OnInit {
     users: any[] = [];
     selectedUser: string = '';
     form: FormGroup;
+    created = false
     private formBuilder: FormBuilder;
+
+    isAdminLoggedIn: boolean = false;
+    isUserLoggedIn: boolean = false;
+    isManagerLoggedIn: boolean = false;
+    private updateUserLoggedStatus(): void {
+        this.isAdminLoggedIn = StorageService.isAdminLoggedIn();
+        this.isUserLoggedIn = StorageService.isUserLoggedIn();
+        this.isManagerLoggedIn = StorageService.isManagerLoggedIn();
+    }
 
     constructor(
         private service: AppService,
@@ -35,6 +46,7 @@ export class OrderComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.updateUserLoggedStatus();
         this.getOrder();
         this.loadUsers();
     }
@@ -52,7 +64,8 @@ export class OrderComponent implements OnInit {
                         },
                         0
                     );
-
+                    if (this.order.status == "CREATED")
+                        this.created = false
                     this.order = {
                         ...data,
                         totalCost: orderTotal,
@@ -104,12 +117,11 @@ export class OrderComponent implements OnInit {
         console.log(this.orderId, this.selectedUser);
         this.service.updateOrderUser(this.orderId, this.selectedUser).subscribe(
             (data: any) => {
-                // Handle success
                 console.log('Order updated successfully:', data);
-                this.router.navigate(['/orders']); // Navigate to the orders page or another appropriate page
+                this.router.navigate(['/orders']);
             },
             (error) => {
-                // Handle error
+                this.router.navigate(['/orders']);
                 console.error('Error updating order:', error);
             }
         );
@@ -118,12 +130,24 @@ export class OrderComponent implements OnInit {
     onCancel() {
         this.service.cancelOrder(this.orderId).subscribe(
             (data: any) => {
-                // Handle success
                 console.log('Order updated successfully:', data);
-                this.router.navigate(['/orders']); // Navigate to the orders page or another appropriate page
+                this.router.navigate(['/orders']);
             },
             (error) => {
-                // Handle error
+                this.router.navigate(['/orders']);
+                console.error('Error updating order:', error);
+            }
+        );
+    }
+
+    onComplete() {
+        this.service.completeOrder(this.orderId).subscribe(
+            (data: any) => {
+                console.log('Order updated successfully:', data);
+                this.router.navigate(['/orders']);
+            },
+            (error) => {
+                this.router.navigate(['/orders']);
                 console.error('Error updating order:', error);
             }
         );

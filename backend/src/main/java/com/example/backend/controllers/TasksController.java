@@ -4,9 +4,7 @@ import com.example.backend.models.Task;
 import com.example.backend.sevices.admin.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +21,11 @@ public class TasksController {
         List<Task> task = adminService.getAllTasksId(id);
         return ResponseEntity.ok(task);
     }
+
+    @PostMapping("/complete")
+    private ResponseEntity<String> completeTaskById(@RequestBody Long id) {
+        Task task = adminService.completeTaskById(id);
+        return ResponseEntity.ok("Task complete");
+    }
+
 }

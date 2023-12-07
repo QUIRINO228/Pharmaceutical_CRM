@@ -100,6 +100,13 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
 
+    @Override
+    public void completeOrder(Long id) {
+        Order order = orderRepository.findById(id).get();
+        order.setStatus(OrderEnum.COMPLETED);
+        orderRepository.save(order);
+    }
+
 
     public void addTask(Long userId, Long orderId) {
         User user = userRepository.findById(userId).get();

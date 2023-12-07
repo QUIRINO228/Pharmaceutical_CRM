@@ -30,4 +30,5 @@ public interface AdminService {
     List<OrderDTO> getAllOrders();
 
 
+    Task completeTaskById(Long id);
 }

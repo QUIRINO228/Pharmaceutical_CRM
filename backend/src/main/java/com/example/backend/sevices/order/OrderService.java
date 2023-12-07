@@ -19,4 +19,6 @@ public interface OrderService {
     void cancelOrder(Long id);
 
     void confirmOrder(Long orderId, Long userId);
+
+    void completeOrder(Long id);
 }

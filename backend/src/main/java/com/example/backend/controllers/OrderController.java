@@ -49,4 +49,10 @@ public class OrderController {
         orderService.confirmOrder(orderId,userId);
         return ResponseEntity.ok("Order was canceled");
     }
+
+    @PostMapping("/complete-order")
+    public ResponseEntity<String> completeOrder(@RequestBody Long id) {
+        orderService.completeOrder(id);
+        return ResponseEntity.ok("Order was complete");
+    }
 }

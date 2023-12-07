@@ -8,6 +8,9 @@
             <h2 class="card-title">{{ task.header }}</h2>
             <p class="card-text">{{ task.description }}</p>
           </div>
+          <div class="card">
+            <button type="button" class="btn btn-custom" (click)="onComplete(task.id)">Complete</button>
+          </div>
         </div>
       </div>
     </div>

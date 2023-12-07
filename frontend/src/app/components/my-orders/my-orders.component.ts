@@ -29,6 +29,9 @@ export class MyOrdersComponent implements OnInit {
   ngOnInit(): void {
     this.getMyOrder();
   }
+  orderInfo(id: number) {
+    this.router.navigateByUrl('/order/' + id);
+  }
 
   getMyOrder() {
     // @ts-ignore

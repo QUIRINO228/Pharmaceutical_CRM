@@ -155,4 +155,12 @@ export class AppService {
   cancelOrder(orderId: number | undefined) {
       return this.http.post(`${this.url}/cancel`, orderId,{headers: this.createAuthorizationHeader()})
   }
+
+    CompleteTask(id: number) {
+        return this.http.post(`${this.url}/complete`, id,{headers: this.createAuthorizationHeader()})
+    }
+
+    completeOrder(orderId: number | undefined) {
+        return this.http.post(`${this.url}/complete-order`, orderId,{headers: this.createAuthorizationHeader()})
+    }
 }

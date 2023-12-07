@@ -144,6 +144,14 @@ public class AdminServiceImpl implements AdminService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Task completeTaskById(Long id) {
+        Task task = tasksRepository.findById(id).get();
+        task.setTaskEnum(TaskEnum.DONE);
+        tasksRepository.save(task);
+        return task;
+    }
+
     private OrderDTO convertToOrderDTO(Order order) {
         return OrderDTO.builder()
                 .id(order.getId())

@@ -8,7 +8,7 @@
         <p>Order Date: {{ order.createDate | date: 'medium' }}</p>
         <p>Address: {{ order.address }}</p>
         <p>Comment: {{ order.comment }}</p>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="orderInfo(order.id)">
           <mat-icon>more_horiz</mat-icon>
         </button>
       </div>

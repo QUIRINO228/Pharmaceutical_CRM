@@ -1,70 +1,82 @@
 <div class="order-details">
-  <p><strong>Address:</strong> {{ order.address }}</p>
-  <p><strong>Comment:</strong> {{ order.comment }}</p>
-  <p><strong>Create Date:</strong> {{ order.createDate | date: 'yyyy-MM-dd' }}</p>
-  <p><strong>Status:</strong> {{ order.status }}</p>
-  <p><strong>User Email:</strong> {{ order.userEmail }}</p>
+    <p><strong>Address:</strong> {{ order.address }}</p>
+    <p><strong>Comment:</strong> {{ order.comment }}</p>
+    <p><strong>Create Date:</strong> {{ order.createDate | date: 'yyyy-MM-dd' }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>User Email:</strong> {{ order.userEmail }}</p>
 </div>
 <div class="order-container">
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Photo</th>
-      <th>Name</th>
-      <th>Quantity</th>
-      <th>Quantity on storage</th>
-      <th>Price</th>
-      <th>Total</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let item of order.orderItems">
-      <td>
-        <img
-          [src]="item.product.sanitizedImage"
-          class="img-fluid img-fluid-small"
-          alt=""
-        />
-      </td>
-      <td>{{ item.product.name }}</td>
-      <td>{{ item.quantity }}</td>
-      <td>{{ item.product.availability_quantity}}</td>
-      <td>{{ item.product.price | currency }}</td>
-      <td class="custom-cell">
-        {{ item.quantity * item.product.price | currency }}
-      </td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr>
-      <td colspan="5" class="text-right">Total Cost:</td>
-      <td>{{ totalCost | currency }}</td>
-    </tr>
-    </tfoot>
-  </table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th *ngIf="isAdminLoggedIn || isManagerLoggedIn">Quantity on storage</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of order.orderItems">
+            <td>
+                <img
+                        [src]="item.product.sanitizedImage"
+                        class="img-fluid img-fluid-small"
+                        alt=""
+                />
+            </td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td *ngIf="isAdminLoggedIn || isManagerLoggedIn">{{ item.product.availability_quantity}}</td>
+            <td>{{ item.product.price | currency }}</td>
+            <td class="custom-cell">
+                {{ item.quantity * item.product.price | currency }}
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <ng-container *ngIf="isManagerLoggedIn || isAdminLoggedIn; else userLoggedIn">
+                <td colspan="5" class="text-right">Total Cost:</td>
+            </ng-container>
+            <ng-template #userLoggedIn>
+                <td colspan="4" class="text-right">Total Cost:</td>
+            </ng-template>
+            <td>{{ totalCost | currency }}</td>
+        </tr>
+        </tfoot>
+    </table>
 </div>
-<div class="order-container container-fluid">
-  <!-- Existing order container code -->
+<div class="order-container container-fluid" *ngIf=" isAdminLoggedIn">
 
-  <form [formGroup]="form"> <!-- Add this form element -->
-    <div class="col-md-12 form-group mb-3">
-      <label for="user" class="form-label">Appoint an executor</label>
-      <select id="user" formControlName="user" name="user" class="form-control" required (change)="onUserSelected()">
-        <option *ngFor="let user of users" [ngValue]="user">
-          {{ user.role }} - {{ user.email }}
-        </option>
-      </select>
+
+    <form [formGroup]="form">
+        <div class="col-md-12 form-group mb-3">
+            <label for="user" class="form-label">Appoint an executor</label>
+            <select id="user" formControlName="user" name="user" class="form-control" required
+                    (change)="onUserSelected()">
+                <option *ngFor="let user of users" [ngValue]="user">
+                    {{ user.role }} - {{ user.email }}
+                </option>
+            </select>
+        </div>
+    </form>
+
+    <div *ngIf="created == true">
+        <!-- Confirm Button -->
+        <div class="col-md-12 form-group mb-3">
+            <button type="button" class="btn btn-custom" (click)="onConfirm()">Confirm</button>
+        </div>
+        <!-- Cancel Button -->
+        <div class="col-md-12 form-group mb-3">
+            <button type="button" class="btn btn-custom" (click)="onCancel()">Canceled</button>
+        </div>
     </div>
-  </form>
 
-  <!-- Confirm button -->
+    <div>
+    </div>
 
-  <div class="col-md-12 form-group mb-3">
-    <button type="button" class="btn btn-custom" (click)="onConfirm()">Confirm</button>
-  </div>
-
-  <div class="col-md-12 form-group mb-3">
-    <button type="button" class="btn btn-custom" (click)="onCancel()">Canceled</button>
-  </div>
-
-</div>
+    <div *ngIf=" isManagerLoggedIn" class="col-md-12 form-group mb-3">
+        <button type="button" class="btn btn-custom" (click)="onComplete()">Complete</button>
+    </div>

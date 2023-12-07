@@ -8,7 +8,7 @@ import { AppService } from "../../app.service";
 })
 export class MyTasksComponent implements OnInit {
   userTasks: any[] = [];
-  userId: number | undefined; // Assuming user ID is a number
+  userId: number | undefined;
 
   constructor(private service: AppService) {}
 
@@ -23,8 +23,9 @@ export class MyTasksComponent implements OnInit {
     if (this.userId) {
       this.service.getUserTasks(this.userId).subscribe(
         (tasks: any[]) => {
-          console.log(tasks)
-          this.userTasks = tasks;
+
+          this.userTasks = tasks.filter(task => task.taskEnum !== 'DONE');
+          console.log(this.userTasks)
         },
         (error: any) => {
           console.error('Error fetching user tasks:', error);
@@ -34,4 +35,11 @@ export class MyTasksComponent implements OnInit {
       console.error('User ID not found in localStorage.');
     }
   }
+
+    onComplete(id: number) {
+        this.service.CompleteTask(id).subscribe(
+          (data: any) => {
+            console.log(data)
+          })
+    }
 }
