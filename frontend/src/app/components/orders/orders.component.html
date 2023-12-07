@@ -13,8 +13,8 @@
       <p>Status: {{ element.status }}</p>
 
 
-      <button mat-icon-button (click)="orderInfo(element.id)" color="warn">
-        <mat-icon>search</mat-icon>
+      <button mat-icon-button (click)="orderInfo(element.id)">
+        <mat-icon>more_horiz</mat-icon>
       </button>
     </mat-expansion-panel>
   </mat-accordion>
@@ -80,13 +80,12 @@
             {{ element.status }}
           </mat-cell>
         </ng-container>
-
         <!-- Actions Column -->
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <button mat-icon-button (click)="orderInfo(element.id)" color="warn">
-              <mat-icon>search</mat-icon>
+              <mat-icon>more_horiz</mat-icon>
             </button>
           </mat-cell>
         </ng-container>
