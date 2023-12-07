@@ -1,3 +1,63 @@
+
+<div class="mobile-view" *ngIf="isMobile">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let element of taskDataSource.data">
+      <mat-expansion-panel-header>
+        {{ element.header }}
+      </mat-expansion-panel-header>
+
+      <ng-container *ngIf="!isEditing || editedItem.id !== element.id; else editMode">
+
+        <div class="mobile-info">
+          <p><strong>ID:</strong> {{ element.id }}</p>
+          <p><strong>Description:</strong> {{ element.description }}</p>
+          <p><strong>Task Enum:</strong> {{ element.taskStatus }}</p>
+          <p><strong>User:</strong> {{ element.user.email }}</p>
+        </div>
+        <div class="mobile-actions">
+          <button mat-icon-button (click)="eDitTask(element)" color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteTask(element)" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-template #editMode>
+        <!-- Edit mode content -->
+        <mat-form-field appearance="fill">
+          <mat-label>Header</mat-label>
+          <input matInput [(ngModel)]="editedItem.header" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput [(ngModel)]="editedItem.description" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Task Enum</mat-label>
+          <input matInput [(ngModel)]="editedItem.taskStatus" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>User</mat-label>
+          <input matInput [(ngModel)]="editedItem.user.email" />
+        </mat-form-field>
+
+        <div class="mobile-actions">
+          <button mat-icon-button (click)="saveChanges()" color="primary">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-icon-button (click)="cancelEdit()" color="warn">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+
+<div class="desktop-view" *ngIf="!isMobile">
 <div class="mt-5">
   <div class="container">
     <div class="my-3">
@@ -73,4 +133,5 @@
       </mat-table>
     </div>
   </div>
+</div>
 </div>

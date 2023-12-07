@@ -15,6 +15,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {TasksComponent} from './admin-components/tasks/tasks.component';
 import {AddTaskComponent} from './admin-components/add-task/add-task.component';
 import {UpdateTaskComponent} from './admin-components/update-task/update-task.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {UpdateTaskComponent} from './admin-components/update-task/update-task.co
         FormsModule,
         MatInputModule,
         MatSelectModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatExpansionModule
     ]
 })
 export class AdminModule { }

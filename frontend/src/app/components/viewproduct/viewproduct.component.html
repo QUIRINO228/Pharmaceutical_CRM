@@ -1,4 +1,3 @@
-<!-- viewproduct.component.html -->
 <div class="mt-5">
   <div class="container">
     <a type="button" *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" routerLink="/basket" class="btn btn-custom"><i class="bi bi-cart"></i> Basket</a>
@@ -20,15 +19,17 @@
             <p *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-text">{{product.supplier}}</p>
             <p class="card-text price">{{product.price}}</p>
             <p *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-text">Expiration Date: {{product.expiration_date}}</p>
-            <input *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="number" class="inp" [(ngModel)]="product.quantity" min="0" >
-            <button *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="button" (click)="addToBasket(product)" class="btn btn-custom2">Add to basket</button>
-          </div>
-          <div *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="card-footer d-flex justify-content-between">
-            <i class="bi bi-pencil-square" (click)="updateProduct(product.id)" type="button"></i>
-            <i class="bi bi-trash3" (click)="deleteProduct(product.id)" type="button"></i>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex flex-column">
+                <input *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="number" class="inp mb-2" [(ngModel)]="product.quantity" min="0">
+                <button *ngIf="!isAdminLoggedIn && !isManagerLoggedIn" type="button" (click)="addToBasket(product)" class="btn btn-custom2">Add to basket</button>
+              </div>
+              <div *ngIf="isManagerLoggedIn || isAdminLoggedIn" class="ml-auto d-none d-md-flex justify-content-between card-footer">
+                <i class="bi bi-pencil-square" (click)="updateProduct(product.id)" type="button"></i>
+                <i class="bi bi-trash3" (click)="deleteProduct(product.id)" type="button"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AppService} from '../../app.service';
 import {MatTableDataSource} from '@angular/material/table';
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
     selector: 'app-storage',
@@ -17,8 +18,9 @@ export class StorageComponent implements OnInit {
     editedItem: any;
     private form: FormGroup;
     products: any[] | undefined;
+    isMobile = false;
 
-    constructor(private service: AppService, private router: Router, private snackBar: MatSnackBar) {
+    constructor(private service: AppService, private router: Router, private snackBar: MatSnackBar,private breakpointObserver: BreakpointObserver) {
         this.form = new FormGroup({
             name: new FormControl('', Validators.required),
             description: new FormControl('', Validators.required),
@@ -30,6 +32,12 @@ export class StorageComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.breakpointObserver
+            .observe([Breakpoints.Handset])
+            .subscribe(result => {
+                // Update the isMobile variable based on the screen size
+                this.isMobile = result.matches;
+            });
         this.loadProducts();
     }
 

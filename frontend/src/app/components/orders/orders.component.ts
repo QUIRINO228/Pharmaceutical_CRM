@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 
 interface Order {
@@ -21,14 +22,21 @@ interface Order {
 export class OrdersComponent implements OnInit {
 
   addressDataSource: Order[] = [];
+  isMobile = false;
 
   addressDisplayedColumns: string[] = ['id', 'address', 'comment', 'createDate', 'completedDate', 'userEmail', 'status', 'actions'];
 
 
-  constructor(private service: AppService,
+  constructor(private service: AppService,private breakpointObserver: BreakpointObserver,
   private router: Router) {}
 
   ngOnInit(): void {
+    this.breakpointObserver
+        .observe([Breakpoints.Handset])
+        .subscribe(result => {
+          // Update the isMobile variable based on the screen size
+          this.isMobile = result.matches;
+        });
     this.getAllOrders();
       }
 
@@ -38,7 +46,7 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  orderInfo(id: string) {
+  orderInfo(id: number) {
     this.router.navigateByUrl('/order/'+id);
   }
 }

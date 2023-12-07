@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../admin-service/admin.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 
 @Component({
@@ -18,9 +19,16 @@ export class ViewUserComponent implements OnInit {
   isEditing: boolean = false;
   editedItem: any;
   roles: string[] = ['ADMIN', 'MANAGER', 'USER', 'WORKER'];
-  constructor(private service: AdminService, private snackBar: MatSnackBar) {}
+  isMobile = false;
+  constructor(private service: AdminService, private snackBar: MatSnackBar,private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit() {
+    this.breakpointObserver
+        .observe([Breakpoints.Handset])
+        .subscribe(result => {
+          // Update the isMobile variable based on the screen size
+          this.isMobile = result.matches;
+        });
     this.getAllUsers();
   }
 

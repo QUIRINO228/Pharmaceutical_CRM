@@ -3,3 +3,11 @@
     color: #fff;
     border-color: transparent;
 }
+input.form-control:focus {
+    border-color: #bfc0bf;
+    box-shadow: 0 0 0 0.1rem #bfc0bf;
+}
+textarea.form-control:focus {
+    border-color: #bfc0bf;
+    box-shadow: 0 0 0 0.1rem #bfc0bf;
+}

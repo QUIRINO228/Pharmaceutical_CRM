@@ -50,7 +50,6 @@ export class LoginComponent {
     this.appService.openForgotPasswordDialog();
 
   }
-
   onSubmit() {
     this.service.login(
       this.loginForm.get(['email'])!.value,

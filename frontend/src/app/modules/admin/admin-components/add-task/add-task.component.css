@@ -3,3 +3,19 @@
   font-weight: bold;
   margin-top: 10px;
 }
+.btn-custom {
+  background-color: #696969;
+  color: #fff;
+}
+input.form-control:focus {
+  border-color: #bfc0bf;
+  box-shadow: 0 0 0 0.1rem #bfc0bf;
+}
+textarea.form-control:focus {
+  border-color: #bfc0bf;
+  box-shadow: 0 0 0 0.1rem #bfc0bf;
+}
+select.form-control:focus {
+  border-color: #bfc0bf;
+  box-shadow: 0 0 0 0.1rem #bfc0bf;
+}
