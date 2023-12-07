@@ -5,6 +5,7 @@ import {BasketItem} from "../../BasketItem";
 import {Router} from "@angular/router";
 import { Product } from "../../Product";
 import {DomSanitizer} from "@angular/platform-browser";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 
 @Component({
@@ -16,15 +17,23 @@ export class BasketComponent implements OnInit {
   items: BasketItem[] = [];
   totalCost: number = 0;
   products: Product[] = [];
+    isMobile = false;
 
   constructor(
     private service: AppService,
     private storage: StorageService,
     private router: Router,
     private sanitizer: DomSanitizer,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
+      this.breakpointObserver
+          .observe([Breakpoints.Handset])
+          .subscribe(result => {
+              // Update the isMobile variable based on the screen size
+              this.isMobile = result.matches;
+          });
     this.getBasket();
   }
 

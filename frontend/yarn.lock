@@ -128,7 +128,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/cdk@^16.2.12", "@angular/cdk@16.2.12":
+"@angular/cdk@^16.2.12", "@angular/cdk@>=15.0.0", "@angular/cdk@16.2.12":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-16.2.12.tgz"
   integrity sha512-wT8/265zm2WKY0BDaRoYbrAT4kadrmejTRLjuimQIEUKnw4vBsJMWCwQkpFo3s6zr6eznGqYVAFb8KKPVLKGBg==
@@ -161,7 +161,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^16.0.0", "@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^16.2.0", "@angular/common@>=14.0.0", "@angular/common@>4.0.0", "@angular/common@16.2.12":
+"@angular/common@^16.0.0", "@angular/common@^16.0.0 || ^17.0.0", "@angular/common@^16.2.0", "@angular/common@>=14.0.0", "@angular/common@>=15.0.2", "@angular/common@>4.0.0", "@angular/common@16.2.12":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/common/-/common-16.2.12.tgz"
   integrity sha512-B+WY/cT2VgEaz9HfJitBmgdk4I333XG/ybC98CMC4Wz8E49T8yzivmmxXB3OD6qvjcOB6ftuicl6WBqLbZNg2w==
@@ -189,10 +189,17 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^16.0.0", "@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^16.2.0", "@angular/core@>=14.0.0", "@angular/core@>4.0.0", "@angular/core@16.2.12":
+"@angular/core@^16.0.0", "@angular/core@^16.0.0 || ^17.0.0", "@angular/core@^16.2.0", "@angular/core@>=14.0.0", "@angular/core@>=15.0.2", "@angular/core@>4.0.0", "@angular/core@16.2.12":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/core/-/core-16.2.12.tgz"
   integrity sha512-GLLlDeke/NjroaLYOks0uyzFVo6HyLl7VOm0K1QpLXnYvW63W9Ql/T3yguRZa7tRkOAeFZ3jw+1wnBD4O8MoUA==
+  dependencies:
+    tslib "^2.3.0"
+
+"@angular/flex-layout@^15.0.0-beta.42":
+  version "15.0.0-beta.42"
+  resolved "https://registry.npmjs.org/@angular/flex-layout/-/flex-layout-15.0.0-beta.42.tgz"
+  integrity sha512-cTAPVMMxnyIFwpZwdq0PL5mdP9Qh+R8MB7ZBezVaN3Rz2fRrkagzKpLvPX3TFzepXrvHBdpKsU4b8u+NxEC/6g==
   dependencies:
     tslib "^2.3.0"
 
@@ -273,7 +280,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/platform-browser@^16.0.0 || ^17.0.0", "@angular/platform-browser@^16.2.0", "@angular/platform-browser@16.2.12":
+"@angular/platform-browser@^16.0.0 || ^17.0.0", "@angular/platform-browser@^16.2.0", "@angular/platform-browser@>=15.0.2", "@angular/platform-browser@16.2.12":
   version "16.2.12"
   resolved "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-16.2.12.tgz"
   integrity sha512-NnH7ju1iirmVEsUq432DTm0nZBGQsBrU40M3ZeVHMQ2subnGiyUs3QyzDz8+VWLL/T5xTxWLt9BkDn65vgzlIQ==

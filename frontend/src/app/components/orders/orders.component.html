@@ -1,3 +1,26 @@
+<div class="mobile-view" *ngIf="isMobile">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let element of addressDataSource">
+      <mat-expansion-panel-header>
+        {{ element.address }}
+      </mat-expansion-panel-header>
+
+      <p>ID: {{ element.id }}</p>
+      <p>Comment: {{ element.comment }}</p>
+      <p>Create Date: {{ element.createDate }}</p>
+      <p>Completed Date: {{ element.completedDate }}</p>
+      <p>User: {{ element.userEmail }}</p>
+      <p>Status: {{ element.status }}</p>
+
+      <!-- Actions in mobile view -->
+      <button mat-icon-button (click)="orderInfo(element.id)" color="warn">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div class="desktop-view" *ngIf="!isMobile">
 <div class="mt-5">
   <div class="container">
     <div class="my-3">
@@ -72,4 +95,5 @@
       </mat-table>
     </div>
   </div>
+</div>
 </div>

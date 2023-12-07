@@ -1,4 +1,64 @@
+
+<div class="mobile-view" *ngIf="isMobile">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let element of dataSource.data">
+      <mat-expansion-panel-header>
+        {{ element.email }}
+      </mat-expansion-panel-header>
+
+      <ng-container *ngIf="!isEditing || editedItem.id !== element.id; else editMode">
+
+        <p>First Name: {{ element.firstName }}</p>
+        <p>Last Name: {{ element.lastName }}</p>
+        <p>Role: {{ element.role }}</p>
+        <p>Active: {{ element.isActive ? 'Yes' : 'No' }}</p>
+        <!-- Actions in mobile view -->
+        <button mat-icon-button (click)="editItem(element)" color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteItem(element)" color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #editMode>
+        <!-- Edit mode content -->
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="editedItem.email" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput [(ngModel)]="editedItem.firstName" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput [(ngModel)]="editedItem.lastName" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Select Role</mat-label>
+          <mat-select [(ngModel)]="editedItem.role">
+            <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-icon-button (click)="saveChanges()" color="primary">
+          <mat-icon>check</mat-icon>
+        </button>
+        <button mat-icon-button (click)="cancelEdit()" color="warn">
+          <mat-icon>close</mat-icon>
+        </button>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+
+<div class="desktop-view" *ngIf="!isMobile">
+  <div class="mt-5">
+    <div class="container">
+      <div class="row">
 <mat-table [dataSource]="dataSource" class="mat-table table table-striped">
+
   <!-- ID Column -->
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
@@ -105,3 +165,7 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
+</div>
+    </div>
+  </div>
+</div>

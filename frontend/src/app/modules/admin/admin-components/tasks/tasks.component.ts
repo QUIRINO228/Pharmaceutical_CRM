@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {MatTableDataSource} from "@angular/material/table";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
   selector: 'app-tasks',
@@ -20,8 +21,9 @@ export class TasksComponent implements OnInit {
   private form: FormGroup;
   private yourData: any;
   userFormControl: FormControl<string | null>;
+  isMobile = false;
 
-  constructor(private service: AdminService, private router: Router, private  snackBar: MatSnackBar) {
+  constructor(private service: AdminService, private router: Router, private  snackBar: MatSnackBar,private breakpointObserver: BreakpointObserver) {
     this.form = new FormGroup({
       header: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
@@ -33,6 +35,12 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.breakpointObserver
+        .observe([Breakpoints.Handset])
+        .subscribe(result => {
+          // Update the isMobile variable based on the screen size
+          this.isMobile = result.matches;
+        });
     this.loadTasks();
   }
 

@@ -5,43 +5,43 @@
       <div class="row">
         <div class="col-md-6 form-group mb-3">
           <label for="name" class="form-label">Name</label>
-          <input id="name" type="text" formControlName="name" name="name" class="form-control" required>
+          <input id="name" type="text" formControlName="name" name="name" class="form-control" >
         </div>
 
         <div class="col-md-6 form-group mb-3">
           <label for="photo" class="form-label">Photo</label>
-          <input id="photo" type="file" (change)="onFileChange($event)" formControlName="photo" name="photo" accept="image/*" class="form-control" multiple placeholder="Upload an Image" required/>
+          <input id="photo" type="file" (change)="onFileChange($event)" formControlName="photo" name="photo" accept="image/*" class="form-control" multiple placeholder="Upload an Image" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-12 form-group mb-3">
           <label for="description" class="form-label">Description</label>
-          <textarea id="description" formControlName="description" name="description" class="form-control" rows="3" required></textarea>
+          <textarea id="description" formControlName="description" name="description" class="form-control" rows="3" ></textarea>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 form-group mb-3">
           <label for="price" class="form-label">Price</label>
-          <input id="price" type="text" formControlName="price" name="price" class="form-control" required>
+          <input id="price" type="text" formControlName="price" name="price" class="form-control" >
         </div>
 
         <div class="col-md-6 form-group mb-3">
           <label for="availability_quantity" class="form-label">Availability_quantity</label>
-          <input id="availability_quantity" type="text" formControlName="availability_quantity" name="availability_quantity" class="form-control" required>
+          <input id="availability_quantity" type="text" formControlName="availability_quantity" name="availability_quantity" class="form-control" >
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-6 form-group mb-3">
           <label for="supplier" class="form-label">Supplier</label>
-          <input id="supplier" type="text" formControlName="supplier" name="supplier" class="form-control" required>
+          <input id="supplier" type="text" formControlName="supplier" name="supplier" class="form-control" >
         </div>
 
         <div class="col-md-6 form-group mb-3">
           <label for="expiration_date" class="form-label">Expiration_date</label>
-          <input id="expiration_date" type="date" formControlName="expiration_date" name="expiration_date" class="form-control" required>
+          <input id="expiration_date" type="date" formControlName="expiration_date" name="expiration_date" class="form-control" [min]="currentDate()" required>
         </div>
       </div>
 

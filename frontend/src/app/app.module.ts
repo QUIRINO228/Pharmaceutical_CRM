@@ -35,6 +35,8 @@ import { OrderComponent } from './components/order/order.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import {NgxMaskDirective} from "ngx-mask";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 
@@ -78,6 +80,8 @@ import {NgxMaskDirective} from "ngx-mask";
         MatButtonModule,
         MatSidenavModule,
         MatListModule,
+        FlexLayoutModule,
+        MatExpansionModule,
         RouterModule.forRoot([
             {path: '', component: ViewproductsComponent},
             {path: 'products/:productId', component: ViewproductsComponent},

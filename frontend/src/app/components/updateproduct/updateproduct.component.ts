@@ -38,6 +38,14 @@ export class UpdateproductComponent implements OnInit {
 
   constructor(private service: AppService, private route: ActivatedRoute, private router : Router) { }
 
+  currentDate(): string {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
     this.service.getProductById(id).subscribe(data => {
