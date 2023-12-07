@@ -1,0 +1,24 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.order-details {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.order-details h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.order-details p {
+  margin: 5px 0;
+}
+
+#noOrders {
+  color: #888;
+}
